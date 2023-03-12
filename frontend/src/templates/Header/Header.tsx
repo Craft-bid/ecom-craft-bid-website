@@ -7,10 +7,14 @@ export function Header()
   const them = useTheme();
     return(
     <Box
-    minHeight={500}>
+    maxHeight={100}>
       <AppBar
       >
         <Toolbar>
+          <Box
+          flexGrow={1}  
+          display="flex"     
+          >
         <IconButton
             size='small'
             edge='start'
@@ -21,10 +25,8 @@ export function Header()
     fill="white"
     />
             </IconButton>
+            </Box>
             <Button variant="text" color="inherit"
-          sx={{
-            marginLeft: 120
-          }}
           >
             <Typography
             variant='h6'
@@ -61,6 +63,7 @@ export function Header()
           <Button
           sx={{
             marginLeft: 10,
+            marginRight: 10,
             height: 40,
             width: 100,
           }}

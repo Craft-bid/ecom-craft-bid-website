@@ -1,4 +1,1 @@
-export function UserPage()
-{
-
-}
+export function UserPage() {}

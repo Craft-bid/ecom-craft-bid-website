@@ -1,5 +1,1 @@
-
-export function Footer()
-{
-    
-}
+export function Footer() {}

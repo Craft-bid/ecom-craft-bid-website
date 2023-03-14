@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, IconButton, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 // eslint-disable-next-line sort-imports
 import '@fontsource/roboto';
@@ -27,13 +27,7 @@ export function Header() {
             variant='text'
             color='inherit'
           >
-            <Typography
-              variant='h6'
-              component='div'
-              fontFamily={'Roboto'}
-            >
-              CONTACT US
-            </Typography>
+            CONTACT US
           </Button>
           <Button
             variant='text'
@@ -42,13 +36,7 @@ export function Header() {
               marginLeft: 10,
             }}
           >
-            <Typography
-              variant='h6'
-              component='div'
-              fontFamily={'Roboto'}
-            >
-              ENGLISH
-            </Typography>
+            ENGLISH
           </Button>
           <Button
             sx={{

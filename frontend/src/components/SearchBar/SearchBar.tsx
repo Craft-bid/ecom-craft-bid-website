@@ -1,5 +1,1 @@
-
-export function SearchBar()
-{
-    
-}
+export function SearchBar() {}

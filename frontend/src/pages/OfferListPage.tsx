@@ -1,5 +1,1 @@
-
-export function OfferListPage()
-{
-    
-}
+export function OfferListPage() {}

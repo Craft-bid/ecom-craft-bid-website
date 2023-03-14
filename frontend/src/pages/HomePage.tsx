@@ -1,5 +1,1 @@
-
-export function HomePage()
-{
-    
-}
+export function HomePage() {}

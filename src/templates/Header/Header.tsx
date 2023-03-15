@@ -1,6 +1,5 @@
 import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
-// eslint-disable-next-line sort-imports
 import '@fontsource/roboto';
 
 export function Header() {

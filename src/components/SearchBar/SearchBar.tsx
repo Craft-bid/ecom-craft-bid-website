@@ -1,7 +1,8 @@
-import { TextField } from '@mui/material';
+import { Button, TextField } from '@mui/material';
 import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
+import styles from './SearchBar.module.scss';
 
 export function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
@@ -20,8 +21,16 @@ export function SearchBar() {
       }}
       InputProps={{
         endAdornment: (
-          <InputAdornment position='end'>
-            <SearchIcon onClick={handleClickShowSearch} />
+          <InputAdornment
+            className={styles.button}
+            position='end'
+          >
+            <Button className={styles.button}>
+              <SearchIcon
+                className={styles.button}
+                onClick={handleClickShowSearch}
+              />
+            </Button>
           </InputAdornment>
         ),
       }}

@@ -15,6 +15,7 @@ export function SearchBar() {
     <TextField
       label='Search'
       value={searchValue}
+      fullWidth={true}
       onChange={(event) => {
         console.log(event.target.value);
         return setSearchValue(event.target.value);

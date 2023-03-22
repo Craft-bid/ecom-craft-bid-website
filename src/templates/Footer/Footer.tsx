@@ -8,6 +8,7 @@ export function Footer() {
       alignItems={'center'}
       height={160}
       bgcolor={'#17252A'}
+      columnGap={8}
     >
       <Typography color={'white'}>Our links:</Typography>
       <Typography color={'white'}>About us</Typography>

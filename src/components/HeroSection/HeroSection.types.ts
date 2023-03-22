@@ -1,6 +1,6 @@
 export interface HeroSectionProps {
-  imageHeight: number;
   image: string;
+  imageHeight: number;
   title: string;
   searchBar: boolean;
 }

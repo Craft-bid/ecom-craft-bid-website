@@ -1,16 +1,14 @@
-import { Header } from './templates/Header/Header';
-import { Grid } from '@mui/material';
-import { HeroSection } from './components/HeroSection/HeroSection';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './pages/HomePage';
+import '@fontsource/montserrat';
+
 export function App() {
   return (
-    <Grid
-      container
-      justifyContent={'center'}
-      alignItems={'flex-end'}
-      height={'100vh'}
-    >
-      <Header />
-      <HeroSection />
-    </Grid>
+    <Routes>
+      <Route
+        path='/'
+        element={<HomePage />}
+      />
+    </Routes>
   );
 }

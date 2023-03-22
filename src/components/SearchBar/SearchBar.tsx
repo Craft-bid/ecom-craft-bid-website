@@ -7,20 +7,26 @@ import styles from './SearchBar.module.scss';
 export function SearchBar() {
   const [searchValue, setSearchValue] = useState('');
 
+  const inputStyle = {
+    backgroundColor: '#F5FBFB',
+    height: '48px',
+  };
+
   const handleClickShowSearch: () => void = () => {
     return console.log('search');
   };
 
   return (
     <TextField
-      label='Search'
       value={searchValue}
       fullWidth={true}
       onChange={(event) => {
         console.log(event.target.value);
         return setSearchValue(event.target.value);
       }}
+      InputLabelProps={{ shrink: false }}
       InputProps={{
+        style: inputStyle,
         endAdornment: (
           <InputAdornment
             className={styles.button}
@@ -35,6 +41,6 @@ export function SearchBar() {
           </InputAdornment>
         ),
       }}
-    ></TextField>
+    />
   );
 }

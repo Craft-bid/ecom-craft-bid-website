@@ -40,6 +40,7 @@ export function HeroSection(props: HeroSectionProps) {
       >
         <Box
           width={480}
+          paddingLeft={10}
           sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}
         >
           <Typography style={textStyleObj}>{title}</Typography>

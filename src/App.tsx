@@ -1,6 +1,6 @@
 import { Header } from './templates/Header/Header';
-import { SearchBar } from './components/SearchBar/SearchBar';
 import { Grid } from '@mui/material';
+import { HeroSection } from './components/HeroSection/HeroSection';
 export function App() {
   return (
     <Grid
@@ -10,7 +10,7 @@ export function App() {
       height={'100vh'}
     >
       <Header />
-      <SearchBar />
+      <HeroSection />
     </Grid>
   );
 }

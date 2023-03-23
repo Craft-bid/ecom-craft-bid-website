@@ -4,7 +4,7 @@ import '@fontsource/roboto';
 
 export function Header() {
   return (
-    <AppBar>
+    <AppBar position='sticky'>
       <Toolbar>
         <Grid
           container
@@ -12,6 +12,7 @@ export function Header() {
           justifyContent='flex-start'
           alignItems='center'
           flexWrap='nowrap'
+          spacing={1}
         >
           <Grid
             item
@@ -50,24 +51,21 @@ export function Header() {
             <Button
               variant='text'
               color='inherit'
-              sx={{
-                marginLeft: 10,
-              }}
             >
               ENGLISH
             </Button>
           </Grid>
           <Grid
             item
-            minWidth={100}
+            maxWidth={100}
             marginLeft={2}
             mobile={1}
           >
             <Button
               sx={{
-                marginLeft: 10,
                 height: 40,
-                width: 100,
+                width: 1,
+                maxWidth: 100,
               }}
               variant='outlined'
               color='inherit'
@@ -84,10 +82,9 @@ export function Header() {
           >
             <Button
               sx={{
-                marginLeft: 10,
-                marginRight: 10,
                 height: 40,
-                width: 100,
+                maxWidth: 100,
+                width: 1,
               }}
               variant='outlined'
               color='inherit'

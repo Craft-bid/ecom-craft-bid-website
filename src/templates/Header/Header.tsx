@@ -1,22 +1,25 @@
-import { AppBar, Button, Grid, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Button, Grid, IconButton, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
 
 export function Header() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
   return (
     <AppBar position='sticky'>
       <Toolbar>
         <Grid
           container
           direction='row'
-          justifyContent='flex-start'
+          justifyContent={isMobile ? 'space-between' : 'flex-start'}
           alignItems='center'
           flexWrap='nowrap'
           spacing={1}
         >
           <Grid
             item
-            mobile={8}
+            mobile={6}
+            desktop={8}
             textAlign='left'
           >
             <IconButton
@@ -25,54 +28,50 @@ export function Header() {
             >
               <Logo
                 height={100}
-                width={400}
+                width={isMobile ? 300 : 400}
                 fill='white'
               />
             </IconButton>
           </Grid>
-          <Grid
-            item
-            minWidth={50}
-            mobile={1}
-            justifyItems={'flex-end'}
-          >
-            <Button
-              variant='text'
-              color='inherit'
-            >
-              CONTACT US
-            </Button>
-          </Grid>
-          <Grid
-            item
-            minWidth={50}
-            mobile={1}
-          >
-            <Button
-              variant='text'
-              color='inherit'
-            >
-              ENGLISH
-            </Button>
-          </Grid>
-          <Grid
-            item
-            maxWidth={100}
-            marginLeft={2}
-            mobile={1}
-          >
-            <Button
-              sx={{
-                height: 40,
-                width: 1,
-                maxWidth: 100,
-              }}
-              variant='outlined'
-              color='inherit'
-            >
-              SIGN IN
-            </Button>
-          </Grid>
+          {!isMobile && (
+            <>
+              <Grid
+                item
+                minWidth={100}
+                mobile={1}
+              >
+                <Button
+                  sx={{
+                    minWidth: 100,
+                  }}
+                  variant='text'
+                  color='inherit'
+                >
+                  ENGLISH
+                </Button>
+              </Grid>
+              <Grid
+                item
+                minWidth={100}
+                maxWidth={100}
+                marginLeft={2}
+                mobile={1}
+              >
+                <Button
+                  sx={{
+                    height: 40,
+                    width: 1,
+                    maxWidth: 100,
+                    minWidth: 100,
+                  }}
+                  variant='outlined'
+                  color='inherit'
+                >
+                  SIGN UP
+                </Button>
+              </Grid>
+            </>
+          )}
           <Grid
             mobile={1}
             item
@@ -85,11 +84,12 @@ export function Header() {
                 height: 40,
                 maxWidth: 100,
                 width: 1,
+                minWidth: 100,
               }}
               variant='outlined'
               color='inherit'
             >
-              SIGN UP
+              SIGN IN
             </Button>
           </Grid>
         </Grid>

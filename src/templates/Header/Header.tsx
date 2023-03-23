@@ -1,4 +1,4 @@
-import { AppBar, Box, Button, Grid, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Button, Grid, IconButton, Toolbar } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
 
@@ -15,7 +15,7 @@ export function Header() {
         >
           <Grid
             item
-            xs={8}
+            mobile={8}
             textAlign='left'
           >
             <IconButton
@@ -32,7 +32,7 @@ export function Header() {
           <Grid
             item
             minWidth={50}
-            xs={1}
+            mobile={1}
             justifyItems={'flex-end'}
           >
             <Button
@@ -45,7 +45,7 @@ export function Header() {
           <Grid
             item
             minWidth={50}
-            xs={1}
+            mobile={1}
           >
             <Button
               variant='text'
@@ -61,7 +61,7 @@ export function Header() {
             item
             minWidth={100}
             marginLeft={2}
-            xs={1}
+            mobile={1}
           >
             <Button
               sx={{
@@ -76,7 +76,7 @@ export function Header() {
             </Button>
           </Grid>
           <Grid
-            xs={1}
+            mobile={1}
             item
             minWidth={100}
             marginLeft={2}

@@ -13,11 +13,16 @@ export function HomePage() {
     title: 'Find the best suited offer for your skills',
     searchBar: true,
   };
+
+  const homePageSxObj = {
+    backgroundColor: '#E8F6F6',
+  };
   return (
     <Grid
       container
       justifyContent={'center'}
       height={'100vh'}
+      sx={homePageSxObj}
     >
       <Header />
       <HeroSection {...heroSectionProps} />

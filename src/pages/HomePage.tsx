@@ -4,6 +4,8 @@ import { HeroSection } from '../components/HeroSection/HeroSection';
 import heroImage from '../assets/main-hero.png';
 import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
 import { Footer } from '../templates/Footer/Footer';
+import { HomePageContent } from '../templates/HomePageContent/HomePageContent';
+
 export function HomePage() {
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
@@ -20,6 +22,7 @@ export function HomePage() {
     >
       <Header />
       <HeroSection {...heroSectionProps} />
+      <HomePageContent />
       <Footer />
     </Grid>
   );

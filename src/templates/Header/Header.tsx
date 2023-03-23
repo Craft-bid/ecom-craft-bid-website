@@ -1,15 +1,22 @@
-import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Box, Button, Grid, IconButton, Toolbar } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
 
 export function Header() {
   return (
-    <Box maxHeight={100}>
-      <AppBar>
-        <Toolbar>
-          <Box
-            flexGrow={1}
-            display='flex'
+    <AppBar>
+      <Toolbar>
+        <Grid
+          container
+          direction='row'
+          justifyContent='flex-start'
+          alignItems='center'
+          flexWrap='nowrap'
+        >
+          <Grid
+            item
+            xs={8}
+            textAlign='left'
           >
             <IconButton
               size='small'
@@ -21,47 +28,75 @@ export function Header() {
                 fill='white'
               />
             </IconButton>
-          </Box>
-          <Button
-            variant='text'
-            color='inherit'
+          </Grid>
+          <Grid
+            item
+            minWidth={50}
+            xs={1}
+            justifyItems={'flex-end'}
           >
-            CONTACT US
-          </Button>
-          <Button
-            variant='text'
-            color='inherit'
-            sx={{
-              marginLeft: 10,
-            }}
+            <Button
+              variant='text'
+              color='inherit'
+            >
+              CONTACT US
+            </Button>
+          </Grid>
+          <Grid
+            item
+            minWidth={50}
+            xs={1}
           >
-            ENGLISH
-          </Button>
-          <Button
-            sx={{
-              marginLeft: 10,
-              height: 40,
-              width: 100,
-            }}
-            variant='outlined'
-            color='inherit'
+            <Button
+              variant='text'
+              color='inherit'
+              sx={{
+                marginLeft: 10,
+              }}
+            >
+              ENGLISH
+            </Button>
+          </Grid>
+          <Grid
+            item
+            minWidth={100}
+            marginLeft={2}
+            xs={1}
           >
-            SIGN IN
-          </Button>
-          <Button
-            sx={{
-              marginLeft: 10,
-              marginRight: 10,
-              height: 40,
-              width: 100,
-            }}
-            variant='outlined'
-            color='inherit'
+            <Button
+              sx={{
+                marginLeft: 10,
+                height: 40,
+                width: 100,
+              }}
+              variant='outlined'
+              color='inherit'
+            >
+              SIGN IN
+            </Button>
+          </Grid>
+          <Grid
+            xs={1}
+            item
+            minWidth={100}
+            marginLeft={2}
+            marginRight={10}
           >
-            SIGN UP
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+            <Button
+              sx={{
+                marginLeft: 10,
+                marginRight: 10,
+                height: 40,
+                width: 100,
+              }}
+              variant='outlined'
+              color='inherit'
+            >
+              SIGN UP
+            </Button>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 }

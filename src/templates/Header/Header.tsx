@@ -1,15 +1,26 @@
-import { AppBar, Box, Button, IconButton, Toolbar } from '@mui/material';
+import { AppBar, Button, Grid, IconButton, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
 
 export function Header() {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
   return (
-    <Box maxHeight={100}>
-      <AppBar>
-        <Toolbar>
-          <Box
-            flexGrow={1}
-            display='flex'
+    <AppBar position='sticky'>
+      <Toolbar>
+        <Grid
+          container
+          direction='row'
+          justifyContent={isMobile ? 'space-between' : 'flex-start'}
+          alignItems='center'
+          flexWrap='nowrap'
+          spacing={1}
+        >
+          <Grid
+            item
+            mobile={6}
+            desktop={8}
+            textAlign='left'
           >
             <IconButton
               size='small'
@@ -17,51 +28,72 @@ export function Header() {
             >
               <Logo
                 height={100}
-                width={400}
+                width={isMobile ? 300 : 400}
                 fill='white'
               />
             </IconButton>
-          </Box>
-          <Button
-            variant='text'
-            color='inherit'
+          </Grid>
+          {!isMobile && (
+            <>
+              <Grid
+                item
+                minWidth={100}
+                mobile={1}
+              >
+                <Button
+                  sx={{
+                    minWidth: 100,
+                  }}
+                  variant='text'
+                  color='inherit'
+                >
+                  ENGLISH
+                </Button>
+              </Grid>
+              <Grid
+                item
+                minWidth={100}
+                maxWidth={100}
+                marginLeft={2}
+                mobile={1}
+              >
+                <Button
+                  sx={{
+                    height: 40,
+                    width: 1,
+                    maxWidth: 100,
+                    minWidth: 100,
+                  }}
+                  variant='outlined'
+                  color='inherit'
+                >
+                  SIGN UP
+                </Button>
+              </Grid>
+            </>
+          )}
+          <Grid
+            mobile={1}
+            item
+            minWidth={100}
+            marginLeft={2}
+            marginRight={10}
           >
-            CONTACT US
-          </Button>
-          <Button
-            variant='text'
-            color='inherit'
-            sx={{
-              marginLeft: 10,
-            }}
-          >
-            ENGLISH
-          </Button>
-          <Button
-            sx={{
-              marginLeft: 10,
-              height: 40,
-              width: 100,
-            }}
-            variant='outlined'
-            color='inherit'
-          >
-            SIGN IN
-          </Button>
-          <Button
-            sx={{
-              marginLeft: 10,
-              marginRight: 10,
-              height: 40,
-              width: 100,
-            }}
-            variant='outlined'
-            color='inherit'
-          >
-            SIGN UP
-          </Button>
-        </Toolbar>
-      </AppBar>
-    </Box>
+            <Button
+              sx={{
+                height: 40,
+                maxWidth: 100,
+                width: 1,
+                minWidth: 100,
+              }}
+              variant='outlined'
+              color='inherit'
+            >
+              SIGN IN
+            </Button>
+          </Grid>
+        </Grid>
+      </Toolbar>
+    </AppBar>
   );
 }

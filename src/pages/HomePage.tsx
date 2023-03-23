@@ -1,7 +1,7 @@
 import { Header } from '../templates/Header/Header';
 import { Grid } from '@mui/material';
 import { HeroSection } from '../components/HeroSection/HeroSection';
-import heroImage from '../assets/main-hero2.png';
+import heroImage from '../assets/main-hero.png';
 import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
 export function HomePage() {
   const heroSectionProps: HeroSectionProps = {

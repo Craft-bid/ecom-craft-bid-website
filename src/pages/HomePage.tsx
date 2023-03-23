@@ -3,6 +3,7 @@ import { Grid } from '@mui/material';
 import { HeroSection } from '../components/HeroSection/HeroSection';
 import heroImage from '../assets/main-hero.png';
 import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
+import { Footer } from '../templates/Footer/Footer';
 export function HomePage() {
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
@@ -19,6 +20,7 @@ export function HomePage() {
     >
       <Header />
       <HeroSection {...heroSectionProps} />
+      <Footer />
     </Grid>
   );
 }

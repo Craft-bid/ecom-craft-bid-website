@@ -8,6 +8,7 @@ export function HomePageContent() {
     <Grid
       paddingTop={100}
       paddingBottom={100}
+      height={'100vh'}
       sx={homePageSxObj}
     >
       <Grid

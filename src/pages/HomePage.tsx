@@ -17,7 +17,6 @@ export function HomePage() {
     <Grid
       container
       justifyContent={'center'}
-      alignItems={'flex-end'}
       height={'100vh'}
     >
       <Header />

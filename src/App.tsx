@@ -1,14 +1,14 @@
-import { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import './App.css';
-import { Box, Button, SvgIcon } from '@mui/material';
-import { ReactComponent as Logo } from './assets/logo.svg';
-import { Header } from './templates/Header/Header';
+import { Route, Routes } from 'react-router-dom';
+import { HomePage } from './pages/HomePage';
+import '@fontsource/montserrat';
 
-function App() {
-  const [count, setCount] = useState(0);
-
-  return <Header />;
+export function App() {
+  return (
+    <Routes>
+      <Route
+        path='/'
+        element={<HomePage />}
+      />
+    </Routes>
+  );
 }
-
-export default App;

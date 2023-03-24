@@ -1,8 +1,12 @@
 import { Card, Grid, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import { useMediaQuery, useTheme } from '@mui/material';
+import { useEffect } from 'react';
+import { Category } from './HomePage'
 
 export function HomePageContent() {
+  // const [categories, setCategories] = useState([]);
+
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
@@ -21,6 +25,20 @@ export function HomePageContent() {
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
+  const fetchUrl = '../src/templates/HomePageContent/testCategories.json';
+
+  // useEffect(() => {
+  //   fetch(fetchUrl)
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((data: []) => {
+  //       return setRows(data);
+  //     })
+  //     .catch((error) => {
+  //       throw error;
+  //     });
+  // });
 
   return (
     <Grid
@@ -85,7 +103,7 @@ export function HomePageContent() {
         alignItems={'center'}
       >
         <Card sx={{ width: 100, borderRadius: 10 }}>
-          <CardContent>a</CardContent>
+          <CardContent>Test test Test test Test test Test test </CardContent>
         </Card>
       </Grid>
     </Grid>

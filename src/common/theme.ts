@@ -30,4 +30,24 @@ export const customTheme = createTheme({
       tablet: 768,
     },
   },
+  typography: {
+    h1: {
+      fontFamily: 'Lato',
+    },
+    h2: {
+      fontFamily: 'Lato',
+    },
+    h3: {
+      fontFamily: 'Lato',
+    },
+    h4: {
+      fontFamily: 'Lato',
+    },
+    h5: {
+      fontFamily: 'Lato',
+    },
+    h6: {
+      fontFamily: 'Lato',
+    },
+  },
 });

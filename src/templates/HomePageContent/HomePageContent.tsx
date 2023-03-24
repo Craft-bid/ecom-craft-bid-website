@@ -1,15 +1,10 @@
 import { Card, Grid, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
+import { useMediaQuery, useTheme } from '@mui/material';
 
 export function HomePageContent() {
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
-  };
-
-  const headingSxObj = {
-    fontSize: '4rem',
-    fontFamily: 'Lato',
-    fontWeight: 200,
   };
 
   const subHeadingSxObj = {
@@ -24,17 +19,19 @@ export function HomePageContent() {
     fontWeight: 500,
   };
 
+  const theme = useTheme();
+  const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
+
   return (
     <Grid
       container
-      height={'100vh'}
-      width={'100vw'}
+      height={'auto'}
       sx={homePageSxObj}
-      justifyContent={'center'}
+      justifyContent={'flex-start'}
       alignItems={'center'}
       flexDirection={'column'}
     >
-      <Typography sx={headingSxObj}>Looking to use the skills you have?</Typography>
+      <Typography variant={'h2'}>Looking to use the skills you have?</Typography>
       <Grid
         item
         container
@@ -68,7 +65,8 @@ export function HomePageContent() {
           </CardContent>
         </Card>
       </Grid>
-      <Typography sx={headingSxObj}>Check out our available categories.</Typography>
+      <Typography variant={'h2'}>Check out our available categories.</Typography>
+
       <Grid
         item
         justifyContent={'center'}

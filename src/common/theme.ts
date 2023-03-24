@@ -49,5 +49,17 @@ export const customTheme = createTheme({
     h6: {
       fontFamily: 'Lato',
     },
+    subtitle1: {
+      fontFamily: 'Montserrat',
+    },
+    subtitle2: {
+      fontFamily: 'Montserrat',
+    },
+    body1: {
+      fontFamily: 'Montserrat',
+    },
+    body2: {
+      fontFamily: 'Montserrat',
+    },
   },
 });

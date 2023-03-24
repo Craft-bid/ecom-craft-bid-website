@@ -31,7 +31,13 @@ export function HomePageContent() {
       alignItems={'center'}
       flexDirection={'column'}
     >
-      <Typography variant={'h2'}>Looking to use the skills you have?</Typography>
+      <Typography
+        variant={'h2'}
+        paddingTop={10}
+        paddingBottom={10}
+      >
+        Looking to use the skills you have?
+      </Typography>
       <Grid
         item
         container
@@ -65,13 +71,23 @@ export function HomePageContent() {
           </CardContent>
         </Card>
       </Grid>
-      <Typography variant={'h2'}>Check out our available categories.</Typography>
+      <Typography
+        variant={'h2'}
+        paddingTop={10}
+        paddingBottom={10}
+      >
+        Check out our available categories.
+      </Typography>
 
       <Grid
         item
         justifyContent={'center'}
         alignItems={'center'}
-      ></Grid>
+      >
+        <Card sx={{ width: 100, borderRadius: 10 }}>
+          <CardContent>a</CardContent>
+        </Card>
+      </Grid>
     </Grid>
   );
 }

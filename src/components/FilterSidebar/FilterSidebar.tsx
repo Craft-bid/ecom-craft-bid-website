@@ -1,5 +1,21 @@
-import { Card } from '@mui/material';
+import { Formik } from 'formik';
 
 export function FilterSidebar() {
-  return <Card sx={{ width: 400, height: 850, backgroundColor: '#F5FBFB' }}></Card>;
+  const validate = () => {
+    return {};
+  };
+
+  return (
+    <Formik
+      enableReinitialize
+      validateOnMount={true}
+      validateOnChange={true}
+      validateOnBlur={true}
+      validate={validate}
+      initialValues={{ priceMin: '', priceMax: '' }}
+      onSubmit={function () {
+        throw new Error('Function not implemented.');
+      }}
+    ></Formik>
+  );
 }

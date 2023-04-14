@@ -3,6 +3,7 @@ import { HomePage } from './pages/HomePage';
 import { OfferPage } from './pages/OfferPage';
 import '@fontsource/montserrat';
 import '@fontsource/lato';
+import { OfferListPage } from './pages/OfferListPage';
 
 export function App() {
   return (
@@ -14,6 +15,10 @@ export function App() {
       <Route
         path='/submit_offer'
         element={<OfferPage />}
+      />
+      <Route
+        path='/offers'
+        element={<OfferListPage></OfferListPage>}
       />
     </Routes>
   );

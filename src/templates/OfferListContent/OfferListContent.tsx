@@ -1,5 +1,5 @@
 import { Grid } from '@mui/material';
-import { FilterContainer } from '../../components/FilterContainer/FilterContainer';
+import { FilterSidebar } from '../../components/FilterSidebar/FilterSidebar';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { OfferCollection } from '../OfferCollection/OfferCollection';
 
@@ -31,7 +31,7 @@ export function OfferListContent() {
           justifyContent={'space-between'}
           paddingTop={10}
         >
-          <FilterContainer></FilterContainer>
+          <FilterSidebar></FilterSidebar>
 
           <OfferCollection></OfferCollection>
         </Grid>

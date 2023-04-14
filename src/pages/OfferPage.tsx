@@ -11,7 +11,8 @@ export function OfferPage() {
     image: heroImage,
     imageHeight: 400,
     title: 'Submit your offer. Our team is ready to review your offer - submit it now and take the first step towards fulfilling your request.',
-    searchBar: false,
+    hasSearchBar: false,
+    isMiddleVariant: true,
   };
 
   const homePageSxObj = {

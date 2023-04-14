@@ -30,4 +30,36 @@ export const customTheme = createTheme({
       tablet: 768,
     },
   },
+  typography: {
+    h1: {
+      fontFamily: 'Lato',
+    },
+    h2: {
+      fontFamily: 'Lato',
+    },
+    h3: {
+      fontFamily: 'Lato',
+    },
+    h4: {
+      fontFamily: 'Lato',
+    },
+    h5: {
+      fontFamily: 'Lato',
+    },
+    h6: {
+      fontFamily: 'Lato',
+    },
+    subtitle1: {
+      fontFamily: 'Montserrat',
+    },
+    subtitle2: {
+      fontFamily: 'Montserrat',
+    },
+    body1: {
+      fontFamily: 'Montserrat',
+    },
+    body2: {
+      fontFamily: 'Montserrat',
+    },
+  },
 });

@@ -4,6 +4,8 @@ import { HeroSection } from '../components/HeroSection/HeroSection';
 import heroImage from '../assets/main-hero.png';
 import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
 import { Footer } from '../templates/Footer/Footer';
+import { HomePageContent } from '../templates/HomePageContent/HomePageContent';
+
 export function HomePage() {
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
@@ -11,15 +13,20 @@ export function HomePage() {
     title: 'Find the best suited offer for your skills',
     searchBar: true,
   };
+
+  const homePageSxObj = {
+    backgroundColor: '#E8F6F6',
+  };
   return (
     <Grid
       container
       justifyContent={'center'}
-      alignItems={'flex-end'}
       height={'100vh'}
+      sx={homePageSxObj}
     >
       <Header />
       <HeroSection {...heroSectionProps} />
+      <HomePageContent />
       <Footer />
     </Grid>
   );

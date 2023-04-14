@@ -1,11 +1,11 @@
 import { Card, Grid, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import { useMediaQuery, useTheme } from '@mui/material';
-import { useEffect } from 'react';
-import { Category } from './HomePage'
+import { useEffect, useState } from 'react';
+import { Category } from './HomePageContent.types';
 
 export function HomePageContent() {
-  // const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
@@ -27,18 +27,24 @@ export function HomePageContent() {
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
   const fetchUrl = '../src/templates/HomePageContent/testCategories.json';
 
-  // useEffect(() => {
-  //   fetch(fetchUrl)
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((data: []) => {
-  //       return setRows(data);
-  //     })
-  //     .catch((error) => {
-  //       throw error;
-  //     });
-  // });
+  const startIndex = 0;
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+  const secondPartIndex = Math.floor(categories.length / 3);
+  // eslint-disable-next-line @typescript-eslint/no-magic-numbers
+  const thirdPartIndex = Math.floor((categories.length * 2) / 3);
+
+  useEffect(() => {
+    fetch(fetchUrl)
+      .then((res) => {
+        return res.json();
+      })
+      .then((data: []) => {
+        return setCategories(data);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }, []);
 
   return (
     <Grid
@@ -101,9 +107,74 @@ export function HomePageContent() {
         item
         justifyContent={'center'}
         alignItems={'center'}
+        gap={15}
+        paddingBottom={10}
+        container
       >
-        <Card sx={{ width: 100, borderRadius: 10 }}>
-          <CardContent>Test test Test test Test test Test test </CardContent>
+        <Card sx={{ width: 400, borderRadius: 10 }}>
+          <CardContent>
+            {categories
+              .map((category) => {
+                return category.name;
+              })
+              .slice(startIndex, secondPartIndex)
+              .map((name, index) => {
+                return (
+                  <Typography
+                    key={index}
+                    textAlign={'center'}
+                    sx={cardContentSxObj}
+                  >
+                    {' '}
+                    {name}{' '}
+                  </Typography>
+                );
+              })}
+          </CardContent>
+        </Card>
+
+        <Card sx={{ width: 400, borderRadius: 10 }}>
+          <CardContent>
+            {categories
+              .map((category) => {
+                return category.name;
+              })
+              .slice(secondPartIndex, thirdPartIndex)
+              .map((name, index) => {
+                return (
+                  <Typography
+                    key={index}
+                    textAlign={'center'}
+                    sx={cardContentSxObj}
+                  >
+                    {' '}
+                    {name}{' '}
+                  </Typography>
+                );
+              })}
+          </CardContent>
+        </Card>
+
+        <Card sx={{ width: 400, borderRadius: 10 }}>
+          <CardContent>
+            {categories
+              .map((category) => {
+                return category.name;
+              })
+              .slice(thirdPartIndex, categories.length)
+              .map((name, index) => {
+                return (
+                  <Typography
+                    key={index}
+                    textAlign={'center'}
+                    sx={cardContentSxObj}
+                  >
+                    {' '}
+                    {name}{' '}
+                  </Typography>
+                );
+              })}
+          </CardContent>
         </Card>
       </Grid>
     </Grid>

@@ -5,7 +5,6 @@ import heroImage from '../assets/main-hero.png';
 import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
 import { Footer } from '../templates/Footer/Footer';
 import { HomePageContent } from '../templates/HomePageContent/HomePageContent';
-import { LoginForm } from '../components/LoginForm/LoginForm';
 
 export function HomePage() {
   const heroSectionProps: HeroSectionProps = {
@@ -26,7 +25,10 @@ export function HomePage() {
       height={'100vh'}
       sx={homePageSxObj}
     >
-      <LoginForm />
+      <Header />
+      <HeroSection {...heroSectionProps} />
+      <HomePageContent />
+      <Footer />
     </Grid>
   );
 }

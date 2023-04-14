@@ -11,7 +11,8 @@ export function HomePage() {
     image: heroImage,
     imageHeight: 400,
     title: 'Find the best suited offer for your skills',
-    searchBar: true,
+    hasSearchBar: true,
+    isMiddleVariant: false,
   };
 
   const homePageSxObj = {

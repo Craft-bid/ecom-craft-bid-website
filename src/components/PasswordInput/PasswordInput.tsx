@@ -4,7 +4,7 @@ import { Field } from 'formik';
 import styles from './PasswordInput.module.scss';
 import { useState } from 'react';
 
-export function PasswordInput() {
+export function PasswordInput({ ...props }) {
   const [showPassword, setShowPassword] = useState(false);
   const toggleShowPassword = () => {
     return setShowPassword((currentState) => {
@@ -16,14 +16,13 @@ export function PasswordInput() {
     <Field
       as={TextField}
       className={styles.input}
-      label='Password'
       sx={{
         width: 1,
         backgroundColor: 'white',
       }}
       type={showPassword ? 'text' : 'password'}
-      name='password'
       required
+      {...props}
       InputProps={{
         endAdornment: (
           <InputAdornment position='end'>

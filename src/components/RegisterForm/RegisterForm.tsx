@@ -23,7 +23,6 @@ export function RegisterForm() {
     return errors;
   };
   return (
-    <>
       <Formik
         enableReinitialize
         validateOnMount={true}
@@ -35,9 +34,8 @@ export function RegisterForm() {
           throw new Error('Function not implemented.');
         }}
       >
-        {({ isValid }) => {
+        {({ isValid, submitForm }) => {
           return (
-            <form>
               <Box
                 padding={0}
                 boxShadow='0px 4px 4px rgba(0, 0, 0, 0.25)'
@@ -141,6 +139,7 @@ export function RegisterForm() {
                   </Grid>
                   <Grid
                     item
+                    marginTop={2}
                     mobile={8}
                   >
                     <Button
@@ -150,18 +149,16 @@ export function RegisterForm() {
                         padding: 1,
                         width: 1,
                       }}
-                      type='submit'
+                      onClick={submitForm}
                       disabled={!isValid}
                     >
-                      Login
+                      Register
                     </Button>
                   </Grid>
                 </Grid>
               </Box>
-            </form>
           );
         }}
       </Formik>
-    </>
   );
 }

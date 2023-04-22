@@ -18,9 +18,11 @@ export const customTheme = createTheme({
     primary: {
       main: '#2B7A78',
       contrastText: '#fff',
+      light: '#EEF9EB',
+      dark: '#17252A',
     },
     secondary: {
-      main: '#17252A',
+      main: '#2196F3',
     },
   },
   breakpoints: {

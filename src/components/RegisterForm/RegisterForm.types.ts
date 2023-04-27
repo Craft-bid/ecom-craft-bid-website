@@ -6,3 +6,5 @@ export type RegisterFormValues = {
 };
 
 export type RegisterFormErrors = Partial<Record<keyof RegisterFormValues, string>>;
+
+export type RegisterFormDTO = Omit<RegisterFormValues, 'repeatPassword'>;

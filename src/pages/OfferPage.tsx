@@ -10,6 +10,7 @@ import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { LoginForm } from '../components/LoginForm/LoginForm';
 import { Popup } from '../components/Popup/Popup';
 import { HeaderProps } from '../templates/Header/Header.types';
+import { FormProps } from '../common/types/FormProps.types';
 
 export function OfferPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
@@ -27,20 +28,13 @@ export function OfferPage() {
   };
 
   function renderPopup() {
+    const formProps: FormProps = {
+      onClose: handleClosePopup,
+    };
     if (isRegisterForm) {
-      return (
-        <Popup
-          onClose={handleClosePopup}
-          form={<RegisterForm />}
-        />
-      );
+      return <Popup form={<RegisterForm {...formProps} />} />;
     } else {
-      return (
-        <Popup
-          onClose={handleClosePopup}
-          form={<LoginForm />}
-        />
-      );
+      return <Popup form={<LoginForm {...formProps} />} />;
     }
   }
 

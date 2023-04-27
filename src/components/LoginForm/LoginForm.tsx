@@ -1,14 +1,14 @@
-import { Box, Button, Grid, TextField, Typography, useMediaQuery, useTheme } from '@mui/material';
+import { Box, Button, Grid, TextField, Typography, useTheme } from '@mui/material';
 import { Field, Formik, FormikHelpers } from 'formik';
 import { LoginFormDTO, LoginFormErrors, LoginFormValues } from './LoginForm.types';
 import '@fontsource/roboto';
 import { PasswordInput } from '../PasswordInput/PasswordInput';
-import { Link } from 'react-router-dom';
 import { loginUser } from '../../services/authService';
+import { FormProps } from '../../common/types/FormProps.types';
 
-export function LoginForm() {
+export function LoginForm(props: FormProps) {
+  const { onClose } = props;
   const theme = useTheme();
-  const isTablet = useMediaQuery(theme.breakpoints.up('tablet'));
   const minLength = 1;
   const validate = (values: { login: string; password: string }) => {
     const errors: LoginFormErrors = {};
@@ -108,28 +108,10 @@ export function LoginForm() {
                     label='Password'
                   />
                 </Grid>
-                {isTablet && (
-                  <Grid
-                    item
-                    mobile={11}
-                  >
-                    <Typography
-                      align='center'
-                      style={{
-                        fontFamily: 'Roboto',
-                        fontStyle: 'normal',
-                        fontWeight: 400,
-                        fontSize: 16,
-                        lineHeight: '24px',
-                        letterSpacing: '0.5px',
-                      }}
-                    >
-                      Don’t have an account? <Link to='/register'>Register</Link>
-                    </Typography>
-                  </Grid>
-                )}
                 <Grid
                   item
+                  container
+                  gap={2}
                   mobile={8}
                 >
                   <Button
@@ -143,6 +125,18 @@ export function LoginForm() {
                     disabled={!isValid || isSubmitting}
                   >
                     Login
+                  </Button>
+
+                  <Button
+                    variant='contained'
+                    color='info'
+                    sx={{
+                      padding: 1,
+                      width: 1,
+                    }}
+                    onClick={onClose}
+                  >
+                    Close
                   </Button>
                 </Grid>
               </Grid>

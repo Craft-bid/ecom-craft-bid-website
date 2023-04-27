@@ -1,5 +1,6 @@
 import { Grid } from '@mui/material';
 import { usePopup } from '../common/hooks/usePopup';
+import { FormProps } from '../common/types/FormProps.types';
 import { LoginForm } from '../components/LoginForm/LoginForm';
 import { Popup } from '../components/Popup/Popup';
 import { RegisterForm } from '../components/RegisterForm/RegisterForm';
@@ -16,20 +17,13 @@ export function UserPage() {
   };
 
   function renderPopup() {
+    const formProps: FormProps = {
+      onClose: handleClosePopup,
+    };
     if (isRegisterForm) {
-      return (
-        <Popup
-          onClose={handleClosePopup}
-          form={<RegisterForm />}
-        />
-      );
+      return <Popup form={<RegisterForm {...formProps} />} />;
     } else {
-      return (
-        <Popup
-          onClose={handleClosePopup}
-          form={<LoginForm />}
-        />
-      );
+      return <Popup form={<LoginForm {...formProps} />} />;
     }
   }
 

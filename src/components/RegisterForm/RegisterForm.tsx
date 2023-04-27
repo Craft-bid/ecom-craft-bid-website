@@ -3,10 +3,11 @@ import { Field, Formik, FormikHelpers } from 'formik';
 import '@fontsource/roboto';
 import { PasswordInput } from '../PasswordInput/PasswordInput';
 import { RegisterFormDTO, RegisterFormErrors, RegisterFormValues } from './RegisterForm.types';
-import { Link } from 'react-router-dom';
 import { registerUser } from '../../services/authService';
+import { FormProps } from '../../common/types/FormProps.types';
 
-export function RegisterForm() {
+export function RegisterForm(props: FormProps) {
+  const { onClose } = props;
   const theme = useTheme();
   const validate = (values: RegisterFormValues) => {
     const errors: RegisterFormErrors = {};
@@ -139,24 +140,12 @@ export function RegisterForm() {
                 <Grid
                   item
                   mobile={11}
-                >
-                  <Typography
-                    align='center'
-                    style={{
-                      fontFamily: 'Roboto',
-                      fontStyle: 'normal',
-                      fontWeight: 400,
-                      fontSize: 16,
-                      lineHeight: '24px',
-                      letterSpacing: '0.5px',
-                    }}
-                  >
-                    Already have an account? <Link to='/login'> Login</Link>
-                  </Typography>
-                </Grid>
+                ></Grid>
                 <Grid
                   item
+                  container
                   marginTop={2}
+                  gap={2}
                   mobile={8}
                 >
                   <Button
@@ -170,6 +159,18 @@ export function RegisterForm() {
                     disabled={!isValid || isSubmitting}
                   >
                     Register
+                  </Button>
+
+                  <Button
+                    variant='contained'
+                    color='info'
+                    sx={{
+                      padding: 1,
+                      width: 1,
+                    }}
+                    onClick={onClose}
+                  >
+                    Close
                   </Button>
                 </Grid>
               </Grid>

@@ -1,8 +1,10 @@
 import { AppBar, Button, Grid, IconButton, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
+import { HeaderProps } from './Header.types';
 
-export function Header() {
+export function Header(props: HeaderProps) {
+  const { onSignInClick, onSignUpClick } = props;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
   return (
@@ -66,6 +68,7 @@ export function Header() {
                   }}
                   variant='outlined'
                   color='inherit'
+                  onClick={onSignUpClick}
                 >
                   SIGN UP
                 </Button>
@@ -88,6 +91,7 @@ export function Header() {
               }}
               variant='outlined'
               color='inherit'
+              onClick={onSignInClick}
             >
               SIGN IN
             </Button>

@@ -5,8 +5,15 @@ import heroImage from '../assets/offer-hero.png';
 import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
 import { Footer } from '../templates/Footer/Footer';
 import { OfferContent } from '../templates/OfferContent/OfferContent';
+import { usePopup } from '../common/hooks/usePopup';
+import { RegisterForm } from '../components/RegisterForm/RegisterForm';
+import { LoginForm } from '../components/LoginForm/LoginForm';
+import { Popup } from '../components/Popup/Popup';
+import { HeaderProps } from '../templates/Header/Header.types';
 
 export function OfferPage() {
+  const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
+
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
     imageHeight: 400,
@@ -18,6 +25,30 @@ export function OfferPage() {
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
+
+  function renderPopup() {
+    if (isRegisterForm) {
+      return (
+        <Popup
+          onClose={handleClosePopup}
+          form={<RegisterForm />}
+        />
+      );
+    } else {
+      return (
+        <Popup
+          onClose={handleClosePopup}
+          form={<LoginForm />}
+        />
+      );
+    }
+  }
+
+  const headerProps: HeaderProps = {
+    onSignUpClick: handleSignUpClick,
+    onSignInClick: handleSignInClick,
+  };
+
   return (
     <Grid
       container
@@ -25,10 +56,11 @@ export function OfferPage() {
       height={'100vh'}
       sx={homePageSxObj}
     >
-      <Header />
+      <Header {...headerProps} />
       <HeroSection {...heroSectionProps} />
       <OfferContent />
       <Footer />
+      {showPopup && renderPopup()}
     </Grid>
   );
 }

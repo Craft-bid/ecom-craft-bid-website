@@ -7,6 +7,7 @@ export function OfferListContent() {
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
+
   return (
     <Grid
       container

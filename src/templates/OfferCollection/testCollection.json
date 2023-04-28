@@ -1,0 +1,30 @@
+[
+  {
+    "image": "https://picsum.photos/200/300",
+    "title": "CNC OPERATOR NEEDED",
+    "description": "Looking for a CNC operator with a machine to make a  metal part necessary for my  project.",
+    "bids": 32,
+    "avgBid": 120
+  },
+  {
+    "image": "https://picsum.photos/200/301",
+    "title": "PLUMBER NEEDED",
+    "description": "Looking for a Plumber to fix a leak in my bathroom.",
+    "bids": 12,
+    "avgBid": 250
+  },
+  {
+    "image": "https://picsum.photos/200/302",
+    "title": "CLAY SCULPTOR NEEDED",
+    "description": "Looking for a clay sculptor to make a sculpture of my dog.",
+    "bids": 52,
+    "avgBid": 620
+  },
+  {
+    "image": "https://picsum.photos/200/303",
+    "title": "WOODWORKER NEEDED",
+    "description": "Looking for a woodworker to make a wooden table.",
+    "bids": 42,
+    "avgBid": 320
+  }
+]

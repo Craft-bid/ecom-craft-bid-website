@@ -11,7 +11,7 @@ export function OfferCard(prop: OfferCardProps) {
       width={1000}
       height={280}
       margin='auto'
-      marginTop={20}
+      marginTop={5}
       paddingBottom={4}
       paddingTop={4}
     >

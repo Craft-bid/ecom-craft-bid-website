@@ -33,7 +33,7 @@ export function Header(props: HeaderProps) {
           justifyContent={isMobile ? 'space-between' : 'flex-start'}
           alignItems='center'
           flexWrap='nowrap'
-          spacing={1}
+          spacing={isMobile ? 0 : 1}
         >
           <Grid
             item
@@ -48,7 +48,7 @@ export function Header(props: HeaderProps) {
             >
               <Logo
                 height={100}
-                width={isMobile ? 300 : 400}
+                width={isMobile ? 250 : 400}
                 fill='white'
               />
             </IconButton>
@@ -98,7 +98,7 @@ export function Header(props: HeaderProps) {
             item
             minWidth={100}
             marginLeft={2}
-            marginRight={10}
+            marginRight={isMobile ? 2 : 10}
           >
             <Button
               sx={{

@@ -4,6 +4,8 @@ import { OfferPage } from './pages/OfferPage';
 import '@fontsource/montserrat';
 import '@fontsource/lato';
 import { OfferListPage } from './pages/OfferListPage';
+import { ProfilePage } from './components/ProfilePage/ProfilePage';
+import { UserPage } from './pages/UserPage';
 
 export function App() {
   return (
@@ -19,6 +21,10 @@ export function App() {
       <Route
         path='/offers'
         element={<OfferListPage></OfferListPage>}
+      />
+      <Route
+        path='/user-page'
+        element={<UserPage />}
       />
     </Routes>
   );

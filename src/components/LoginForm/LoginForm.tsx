@@ -10,10 +10,10 @@ export function LoginForm(props: FormProps) {
   const { onClose } = props;
   const theme = useTheme();
   const minLength = 1;
-  const validate = (values: { login: string; password: string }) => {
+  const validate = (values: { email: string; password: string }) => {
     const errors: LoginFormErrors = {};
-    if (values.login.length < minLength) {
-      errors.login = "Login can't be empty";
+    if (values.email.length < minLength) {
+      errors.email = "email can't be empty";
     }
     if (values.password.length < minLength) {
       errors.password = "Password can't be empty";
@@ -28,10 +28,10 @@ export function LoginForm(props: FormProps) {
       validateOnChange={true}
       validateOnBlur={true}
       validate={validate}
-      initialValues={{ login: '', password: '' }}
+      initialValues={{ email: '', password: '' }}
       onSubmit={(values: LoginFormValues, { setSubmitting }: FormikHelpers<LoginFormValues>) => {
         const dto: LoginFormDTO = {
-          login: values.login,
+          email: values.email,
           password: values.password,
         };
         loginUser(dto)
@@ -89,13 +89,13 @@ export function LoginForm(props: FormProps) {
                 >
                   <Field
                     as={TextField}
-                    label='Login'
+                    label='Email'
                     sx={{
                       width: 1,
                       backgroundColor: 'white',
                     }}
-                    type='login'
-                    name='login'
+                    type='email'
+                    name='email'
                     required
                   />
                 </Grid>

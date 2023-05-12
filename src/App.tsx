@@ -4,6 +4,7 @@ import { OfferPage } from './pages/OfferPage';
 import '@fontsource/montserrat';
 import '@fontsource/lato';
 import { OfferListPage } from './pages/OfferListPage';
+import { useState } from 'react';
 
 export function App() {
   return (

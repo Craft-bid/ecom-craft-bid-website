@@ -4,9 +4,24 @@ import '@fontsource/roboto';
 import { HeaderProps } from './Header.types';
 
 export function Header(props: HeaderProps) {
-  const { onSignInClick, onSignUpClick } = props;
+  const { onSignInClick, onSignUpClick, isAuthenticated, setAuthenticated } = props;
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
+
+  const onSignOutClick = () => {
+    localStorage.removeItem('token');
+    setAuthenticated(false);
+    window.location.reload();
+  };
+
+  const onLogoClick = () => {
+    window.location.href = '/';
+  };
+
+
+  const onUserClick = () => {
+    window.location.href = '/user';
+  };
   return (
     <AppBar position='sticky'>
       <Toolbar>
@@ -59,19 +74,21 @@ export function Header(props: HeaderProps) {
                 marginLeft={2}
                 mobile={1}
               >
-                <Button
-                  sx={{
-                    height: 40,
-                    width: 1,
-                    maxWidth: 100,
-                    minWidth: 100,
-                  }}
-                  variant='outlined'
-                  color='inherit'
-                  onClick={onSignUpClick}
-                >
-                  SIGN UP
-                </Button>
+                {!isAuthenticated && (
+                  <Button
+                    sx={{
+                      height: 40,
+                      width: 1,
+                      maxWidth: 100,
+                      minWidth: 100,
+                    }}
+                    variant='outlined'
+                    color='inherit'
+                    onClick={onSignUpClick}
+                  >
+                    {isAuthenticated ? 'USER' : 'SIGN UP'}
+                  </Button>
+                )}
               </Grid>
             </>
           )}
@@ -90,14 +107,7 @@ export function Header(props: HeaderProps) {
                 minWidth: 100,
               }}
               variant='outlined'
-              color='inherit'
-              onClick={onSignInClick}
-            >
-              SIGN IN
-            </Button>
-          </Grid>
-        </Grid>
-      </Toolbar>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </Toolbar>
     </AppBar>
   );
 }

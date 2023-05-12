@@ -11,9 +11,11 @@ import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { LoginForm } from '../components/LoginForm/LoginForm';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { FormProps } from '../common/types/FormProps.types';
+import { useIsAuthenticated } from '../common/hooks/useIsAuthenticated';
 
 export function HomePage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
+  const { isAuthenticated, setAuthenticated } = useIsAuthenticated();
 
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
@@ -41,6 +43,8 @@ export function HomePage() {
   const headerProps: HeaderProps = {
     onSignUpClick: handleSignUpClick,
     onSignInClick: handleSignInClick,
+    isAuthenticated: isAuthenticated,
+    setAuthenticated: setAuthenticated,
   };
 
   return (

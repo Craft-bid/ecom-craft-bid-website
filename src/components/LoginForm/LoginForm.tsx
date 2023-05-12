@@ -36,10 +36,13 @@ export function LoginForm(props: FormProps) {
         };
         loginUser(dto)
           .then(() => {
-            setSubmitting(false);
+            window.location.reload();
           })
           .catch((res) => {
             console.log(res);
+          })
+          .finally(() => {
+            setSubmitting(false);
           });
       }}
     >

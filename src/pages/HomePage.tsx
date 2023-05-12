@@ -11,7 +11,6 @@ import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { LoginForm } from '../components/LoginForm/LoginForm';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { FormProps } from '../common/types/FormProps.types';
-import { useState } from 'react';
 import { useIsAuthenticated } from '../common/hooks/useIsAuthenticated';
 
 export function HomePage() {

@@ -2,10 +2,13 @@ import { AppBar, Button, Grid, IconButton, Toolbar, useMediaQuery, useTheme } fr
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
 import { HeaderProps } from './Header.types';
+import { useNavigate } from 'react-router-dom';
 
 export function Header(props: HeaderProps) {
   const { onSignInClick, onSignUpClick, isAuthenticated, setAuthenticated } = props;
   const theme = useTheme();
+  const navigate = useNavigate();
+
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
 
   const onSignOutClick = () => {
@@ -15,12 +18,11 @@ export function Header(props: HeaderProps) {
   };
 
   const onLogoClick = () => {
-    window.location.href = '/';
+    navigate('/');
   };
 
-
   const onUserClick = () => {
-    window.location.href = '/user';
+    navigate('/user');
   };
   return (
     <AppBar position='sticky'>
@@ -42,6 +44,7 @@ export function Header(props: HeaderProps) {
             <IconButton
               size='small'
               edge='start'
+              onClick={onLogoClick}
             >
               <Logo
                 height={100}
@@ -74,21 +77,19 @@ export function Header(props: HeaderProps) {
                 marginLeft={2}
                 mobile={1}
               >
-                {!isAuthenticated && (
-                  <Button
-                    sx={{
-                      height: 40,
-                      width: 1,
-                      maxWidth: 100,
-                      minWidth: 100,
-                    }}
-                    variant='outlined'
-                    color='inherit'
-                    onClick={onSignUpClick}
-                  >
-                    {isAuthenticated ? 'USER' : 'SIGN UP'}
-                  </Button>
-                )}
+                <Button
+                  sx={{
+                    height: 40,
+                    width: 1,
+                    maxWidth: 100,
+                    minWidth: 100,
+                  }}
+                  variant='outlined'
+                  color='inherit'
+                  onClick={isAuthenticated ? onUserClick : onSignUpClick}
+                >
+                  {isAuthenticated ? 'USER' : 'SIGN UP'}
+                </Button>
               </Grid>
             </>
           )}
@@ -107,7 +108,14 @@ export function Header(props: HeaderProps) {
                 minWidth: 100,
               }}
               variant='outlined'
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </Toolbar>
+              color='inherit'
+              onClick={isAuthenticated ? onSignOutClick : onSignInClick}
+            >
+              {isAuthenticated ? 'SIGN OUT' : 'SIGN IN'}
+            </Button>
+          </Grid>
+        </Grid>
+      </Toolbar>
     </AppBar>
   );
 }

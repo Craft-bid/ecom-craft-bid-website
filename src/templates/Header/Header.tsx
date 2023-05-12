@@ -14,6 +14,7 @@ export function Header(props: HeaderProps) {
   const onSignOutClick = () => {
     localStorage.removeItem('token');
     setAuthenticated(false);
+    navigate('/');
     window.location.reload();
   };
 

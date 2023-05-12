@@ -4,7 +4,6 @@ import { OfferPage } from './pages/OfferPage';
 import '@fontsource/montserrat';
 import '@fontsource/lato';
 import { OfferListPage } from './pages/OfferListPage';
-import { ProfilePage } from './components/ProfilePage/ProfilePage';
 import { UserPage } from './pages/UserPage';
 
 export function App() {
@@ -23,7 +22,7 @@ export function App() {
         element={<OfferListPage></OfferListPage>}
       />
       <Route
-        path='/user-page'
+        path='/user'
         element={<UserPage />}
       />
     </Routes>

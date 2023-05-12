@@ -7,7 +7,6 @@ import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { Footer } from '../templates/Footer/Footer';
 import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
-import { OfferListContent } from '../templates/OfferListContent/OfferListContent';
 import { useIsAuthenticated } from '../common/hooks/useIsAuthenticated';
 import { ProfilePage } from '../components/ProfilePage/ProfilePage';
 import { ProfilePageProps } from '../components/ProfilePage/ProfilePage.types';

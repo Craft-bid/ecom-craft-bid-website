@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
-import TextareaAutosize from '@mui/base/TextareaAutosize';
 import { Autocomplete, Card, Chip, Grid, TextField, Typography } from '@mui/material';
+import { DatePicker } from '@mui/x-date-pickers';
 import { useState, useEffect } from 'react';
 import { Category } from '../../templates/HomePageContent/HomePageContent.types';
+import { CustomUploadDropzone } from '../CustomUploadDropzone/CustomUploadDropzone';
 
 export function SubmitOfferForm() {
+  const [date, setDate] = useState<Date | null>(new Date());
+  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
 
   const formSxObj = { backgroundColor: '#F5FBFB', width: '55rem', minHeight: 1400, borderRadius: 10 };
@@ -31,9 +34,15 @@ export function SubmitOfferForm() {
         marginLeft={2}
       >
         <Typography>Type in title</Typography>
-        <TextField></TextField>
+        <TextField sx={{ width: '100%' }}></TextField>
         <Typography>Description</Typography>
-        <TextareaAutosize></TextareaAutosize>
+        <TextField
+          multiline
+          sx={{ width: '100%' }}
+          rows={6}
+          variant='outlined'
+          label='Description'
+        ></TextField>
         <Typography>Choose categories</Typography>
         <Autocomplete
           multiple
@@ -43,7 +52,10 @@ export function SubmitOfferForm() {
           getOptionLabel={(option) => {
             return option.name;
           }}
-          defaultValue={categories.length > 0 ? [categories[0]] : []}
+          value={selectedCategories}
+          onChange={(event, newValue) => {
+            setSelectedCategories(newValue);
+          }}
           renderTags={(value, getTagProps) => {
             return value.map((option, index) => {
               return (
@@ -69,8 +81,27 @@ export function SubmitOfferForm() {
           }}
         />
         <Typography>Select your budget</Typography>
+        <TextField
+          label='Min'
+          name='min'
+          type='number'
+        ></TextField>
+        <TextField
+          label='Max'
+          name='max'
+          type='number'
+        ></TextField>
         <Typography>Upload your files</Typography>
+        <CustomUploadDropzone />
         <Typography>Choose deadline</Typography>
+
+        <DatePicker
+          label='Select Date'
+          value={date}
+          onChange={(newValue) => {
+            return setDate(newValue);
+          }}
+        />
         <Typography>Summary</Typography>
       </Grid>
     </Card>

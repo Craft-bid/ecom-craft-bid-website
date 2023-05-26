@@ -7,7 +7,7 @@ import { registerUser } from '../../services/authService';
 import { FormProps } from '../../common/types/FormProps.types';
 
 export function RegisterForm(props: FormProps) {
-  const { onClose } = props;
+  const { setOpenStatusModal, setStatusModalMessage, onClose } = props;
   const theme = useTheme();
   const validate = (values: RegisterFormValues) => {
     const errors: RegisterFormErrors = {};
@@ -40,10 +40,15 @@ export function RegisterForm(props: FormProps) {
         };
         registerUser(dto)
           .then(() => {
-            setSubmitting(false);
+            setOpenStatusModal(true);
+            setStatusModalMessage('Successfully registered!.');
           })
-          .catch((res) => {
-            console.log(res);
+          .catch(() => {
+            setOpenStatusModal(true);
+            setStatusModalMessage('Error. Please try again later.');
+          })
+          .finally(() => {
+            setSubmitting(false);
           });
       }}
     >

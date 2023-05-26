@@ -1,5 +1,5 @@
 import { Header } from '../templates/Header/Header';
-import { Grid } from '@mui/material';
+import { Box, Dialog, Grid, Typography } from '@mui/material';
 import { HeroSection } from '../components/HeroSection/HeroSection';
 import heroImage from '../assets/offer-hero.png';
 import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
@@ -12,10 +12,17 @@ import { Popup } from '../components/Popup/Popup';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { FormProps } from '../common/types/FormProps.types';
 import { useIsAuthenticated } from '../common/hooks/useIsAuthenticated';
+import { useState } from 'react';
 
 export function OfferPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
   const { isAuthenticated, setAuthenticated } = useIsAuthenticated();
+  const [openStatusModal, setOpenStatusModal] = useState(false);
+  const [statusModalMessage, setStatusModalMessage] = useState('');
+
+  const handleCloseStatusModal = () => {
+    setOpenStatusModal(false);
+  };
 
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
@@ -32,6 +39,8 @@ export function OfferPage() {
   function renderPopup() {
     const formProps: FormProps = {
       onClose: handleClosePopup,
+      setOpenStatusModal: setOpenStatusModal,
+      setStatusModalMessage: setStatusModalMessage,
     };
     if (isRegisterForm) {
       return <Popup form={<RegisterForm {...formProps} />} />;
@@ -59,6 +68,27 @@ export function OfferPage() {
       <OfferContent />
       <Footer />
       {showPopup && renderPopup()}
+      <Dialog
+        open={openStatusModal}
+        onClose={handleCloseStatusModal}
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'center',
+        }}
+        aria-labelledby='modal-modal-title'
+        aria-describedby='modal-modal-description'
+      >
+        <Box
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <Typography textAlign={'center'}> {statusModalMessage}</Typography>
+        </Box>
+      </Dialog>
     </Grid>
   );
 }

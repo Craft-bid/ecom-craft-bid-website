@@ -1,4 +1,3 @@
-import { useTheme } from '@emotion/react';
 import { Grid, Icon, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { ProfilePageProps } from './ProfilePage.types';

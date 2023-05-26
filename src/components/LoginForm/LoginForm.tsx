@@ -7,7 +7,7 @@ import { loginUser } from '../../services/authService';
 import { FormProps } from '../../common/types/FormProps.types';
 
 export function LoginForm(props: FormProps) {
-  const { onClose } = props;
+  const { setOpenStatusModal, setStatusModalMessage, onClose } = props;
   const theme = useTheme();
   const minLength = 1;
   const validate = (values: { email: string; password: string }) => {
@@ -38,8 +38,10 @@ export function LoginForm(props: FormProps) {
           .then(() => {
             window.location.reload();
           })
-          .catch((res) => {
-            console.log(res);
+          .catch(() => {
+            //open a dialog menu with error
+            setOpenStatusModal(true);
+            setStatusModalMessage('Error. Please check your login and password.');
           })
           .finally(() => {
             setSubmitting(false);

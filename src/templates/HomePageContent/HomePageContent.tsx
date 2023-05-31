@@ -2,10 +2,10 @@ import { Card, Grid, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { Category } from './HomePageContent.types';
+import { TagDTO, getTags } from '../../services/offerService';
 
 export function HomePageContent() {
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<TagDTO[]>([]);
 
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
@@ -25,24 +25,19 @@ export function HomePageContent() {
 
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('tablet'));
-  const fetchUrl = '../src/templates/HomePageContent/testCategories.json';
 
   const startIndex = 0;
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   const secondPartIndex = Math.floor(categories.length / 3);
   // eslint-disable-next-line @typescript-eslint/no-magic-numbers
   const thirdPartIndex = Math.floor((categories.length * 2) / 3);
-
   useEffect(() => {
-    fetch(fetchUrl)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data: []) => {
-        return setCategories(data);
+    getTags()
+      .then((data) => {
+        setCategories(data);
       })
       .catch((error) => {
-        throw error;
+        console.error(error);
       });
   }, []);
 

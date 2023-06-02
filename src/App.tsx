@@ -15,6 +15,7 @@ import { useEffect } from 'react';
 import { OfferPage } from './pages/OfferPage';
 import { DecodedToken } from './common/types/JWTResponse.types';
 import jwtDecode from 'jwt-decode';
+import { AdminPage } from './pages/AdminPage';
 
 export function App() {
   useEffect(() => {
@@ -63,6 +64,10 @@ export function App() {
       <Route
         path='/offer/:id'
         element={<OfferPage />}
+      />
+      <Route
+        path='/admin'
+        element={<AdminPage />}
       />
     </Routes>
   );

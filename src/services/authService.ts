@@ -3,7 +3,8 @@ import { LoginFormDTO } from '../components/LoginForm/LoginForm.types';
 import axios, { AxiosError } from 'axios';
 import { NetworkError } from '../common/exceptions/NetworkError';
 import { ResponseError } from '../common/exceptions/ResponseError';
-import { JWTResponse } from '../common/types/JWTResponse.types';
+import { DecodedToken, JWTResponse } from '../common/types/JWTResponse.types';
+import jwtDecode from 'jwt-decode';
 
 export const registerUser = async (user: RegisterFormDTO) => {
   try {
@@ -30,6 +31,8 @@ export const loginUser = async (user: LoginFormDTO) => {
     const { data } = await axios.post<JWTResponse>('http://localhost:8080/api/v1/auth/authenticate', user);
     const token: string = data.token;
     localStorage.setItem('token', token);
+    console.log(token);
+    return jwtDecode<DecodedToken>(token);
   } catch (error) {
     if (error instanceof AxiosError) {
       if (error.response) {

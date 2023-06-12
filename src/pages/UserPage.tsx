@@ -7,7 +7,6 @@ import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { Footer } from '../templates/Footer/Footer';
 import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
-import { useIsAuthenticated } from '../common/hooks/useIsAuthenticated';
 import { ProfilePage } from '../components/ProfilePage/ProfilePage';
 import { ProfilePageProps } from '../components/ProfilePage/ProfilePage.types';
 import { useState } from 'react';
@@ -32,7 +31,6 @@ const profilePageProps: ProfilePageProps = {
 
 export function UserPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
-  const { isAuthenticated, setAuthenticated } = useIsAuthenticated();
   const [openStatusModal, setOpenStatusModal] = useState(false);
   const [statusModalMessage, setStatusModalMessage] = useState('');
 
@@ -60,8 +58,6 @@ export function UserPage() {
   const headerProps: HeaderProps = {
     onSignUpClick: handleSignUpClick,
     onSignInClick: handleSignInClick,
-    isAuthenticated: isAuthenticated,
-    setAuthenticated: setAuthenticated,
   };
 
   return (

@@ -10,6 +10,7 @@ export function LoginForm(props: FormProps) {
   const { setOpenStatusModal, setStatusModalMessage, onClose } = props;
   const theme = useTheme();
   const minLength = 1;
+
   const validate = (values: { email: string; password: string }) => {
     const errors: LoginFormErrors = {};
     if (values.email.length < minLength) {

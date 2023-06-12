@@ -3,18 +3,37 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
 import { HeaderProps } from './Header.types';
 import { useNavigate } from 'react-router-dom';
+import { useContext, useEffect, useRef } from 'react';
+import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 
 export function Header(props: HeaderProps) {
-  const { onSignInClick, onSignUpClick, isAuthenticated, setAuthenticated } = props;
+  const { onSignInClick, onSignUpClick } = props;
   const theme = useTheme();
   const navigate = useNavigate();
 
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
+  const context = useContext(AuthenticationContext);
+  const isFirstRender = useRef(true);
+
+  if (!context) {
+    throw new Error('AuthenticationContext is null');
+  }
+
+  const { isAuthenticated, name, setAuthenticated } = context;
+
+  useEffect(() => {
+    if (isFirstRender.current) {
+      isFirstRender.current = false;
+      return;
+    }
+
+    if (!isAuthenticated) {
+      navigate('/');
+    }
+  }, [isAuthenticated]);
 
   const onSignOutClick = () => {
     localStorage.removeItem('token');
-    setAuthenticated(false);
-    navigate('/');
     window.location.reload();
   };
 
@@ -89,7 +108,7 @@ export function Header(props: HeaderProps) {
                   color='inherit'
                   onClick={isAuthenticated ? onUserClick : onSignUpClick}
                 >
-                  {isAuthenticated ? 'USER' : 'SIGN UP'}
+                  {isAuthenticated ? name?.substring(4).concat('...') : 'SIGN UP'}
                 </Button>
               </Grid>
             </>

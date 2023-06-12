@@ -5,18 +5,11 @@ import '@fontsource/roboto';
 import { PasswordInput } from '../PasswordInput/PasswordInput';
 import { loginUser } from '../../services/authService';
 import { FormProps } from '../../common/types/FormProps.types';
-import { useContext } from 'react';
-import { AuthenticationContext } from '../AuthenticationContext/AuthenticationContext';
 
 export function LoginForm(props: FormProps) {
   const { setOpenStatusModal, setStatusModalMessage, onClose } = props;
   const theme = useTheme();
   const minLength = 1;
-
-  const context = useContext(AuthenticationContext);
-  if (!context) {
-    throw new Error('AuthenticationContext is null');
-  }
 
   const validate = (values: { email: string; password: string }) => {
     const errors: LoginFormErrors = {};

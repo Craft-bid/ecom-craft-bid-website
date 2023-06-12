@@ -3,7 +3,7 @@ import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';
 import { HeaderProps } from './Header.types';
 import { useNavigate } from 'react-router-dom';
-import { useContext, useEffect, useRef } from 'react';
+import { useContext } from 'react';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 
 export function Header(props: HeaderProps) {
@@ -13,24 +13,12 @@ export function Header(props: HeaderProps) {
 
   const isMobile = useMediaQuery(theme.breakpoints.down('tablet'));
   const context = useContext(AuthenticationContext);
-  const isFirstRender = useRef(true);
 
   if (!context) {
     throw new Error('AuthenticationContext is null');
   }
 
-  const { isAuthenticated, name, setAuthenticated } = context;
-
-  useEffect(() => {
-    if (isFirstRender.current) {
-      isFirstRender.current = false;
-      return;
-    }
-
-    if (!isAuthenticated) {
-      navigate('/');
-    }
-  }, [isAuthenticated]);
+  const { isAuthenticated, name } = context;
 
   const onSignOutClick = () => {
     localStorage.removeItem('token');

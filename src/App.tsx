@@ -5,8 +5,30 @@ import '@fontsource/montserrat';
 import '@fontsource/lato';
 import { OfferListPage } from './pages/OfferListPage';
 import { UserPage } from './pages/UserPage';
+import axios from 'axios';
+import { useEffect } from 'react';
 
 export function App() {
+  useEffect(() => {
+    // Add a request interceptor
+    const interceptor = axios.interceptors.request.use(
+      (config) => {
+        const token = localStorage.getItem('token');
+        if (token) {
+          config.headers.Authorization = `Bearer ${token}`;
+        }
+        return config;
+      },
+      (error) => {
+        return Promise.reject(error);
+      }
+    );
+    // Remove the request interceptor on component unmount
+    return () => {
+      axios.interceptors.request.eject(interceptor);
+    };
+  }, []);
+
   return (
     <Routes>
       <Route

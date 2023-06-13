@@ -2,7 +2,7 @@ import { Card, Grid, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { TagDTO, getTags } from '../../services/offerService';
+import { TagDTO, getTags } from '../../services/tagService';
 
 export function HomePageContent() {
   const [categories, setCategories] = useState<TagDTO[]>([]);

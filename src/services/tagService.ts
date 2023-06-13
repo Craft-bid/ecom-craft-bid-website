@@ -1,8 +1,4 @@
 import axios from 'axios';
-export interface TagDTO {
-  id: number;
-  name: string;
-}
 
 export const getTags = async () => {
   return await axios

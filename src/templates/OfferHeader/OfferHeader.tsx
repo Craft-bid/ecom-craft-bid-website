@@ -1,5 +1,10 @@
 import { Grid } from '@mui/material';
 
 export function OfferHeader() {
-  return <Grid></Grid>;
+  return (
+    <Grid
+      justifyContent={'space-between'}
+      alignItems={'center'}
+    ></Grid>
+  );
 }

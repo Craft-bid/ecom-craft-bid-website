@@ -1,12 +1,13 @@
 import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { OfferPage } from './pages/CreateOfferPage';
+import { CreateOfferPage } from './pages/CreateOfferPage';
 import '@fontsource/montserrat';
 import '@fontsource/lato';
 import { OfferListPage } from './pages/OfferListPage';
 import { UserPage } from './pages/UserPage';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { OfferPage } from './pages/OfferPage';
 
 export function App() {
   useEffect(() => {
@@ -37,7 +38,7 @@ export function App() {
       />
       <Route
         path='/submit_offer'
-        element={<OfferPage />}
+        element={<CreateOfferPage />}
       />
       <Route
         path='/offers'

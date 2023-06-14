@@ -7,11 +7,11 @@ import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { Footer } from '../templates/Footer/Footer';
 import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
-import { ProfilePage } from '../components/ProfilePage/ProfilePage';
-import { ProfilePageProps } from '../components/ProfilePage/ProfilePage.types';
+import { UserContent } from '../templates/UserContent/UserContent';
+import { UserContentProps } from '../templates/UserContent/UserContent.types';
 import { useState } from 'react';
 
-const profilePageProps: ProfilePageProps = {
+const profilePageProps: UserContentProps = {
   image: 'https://picsum.photos/150/150',
   name: 'Jack',
   surname: 'Smith',
@@ -78,7 +78,7 @@ export function UserPage() {
         <Header {...headerProps} />
       </Grid>
       <Grid item>
-        <ProfilePage {...profilePageProps} />
+        <UserContent {...profilePageProps} />
       </Grid>
       <Grid
         item

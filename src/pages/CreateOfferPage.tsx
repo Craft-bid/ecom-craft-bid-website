@@ -13,7 +13,7 @@ import { HeaderProps } from '../templates/Header/Header.types';
 import { FormProps } from '../common/types/FormProps.types';
 import { useState } from 'react';
 
-export function OfferPage() {
+export function CreateOfferPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
   const [openStatusModal, setOpenStatusModal] = useState(false);
   const [statusModalMessage, setStatusModalMessage] = useState('');

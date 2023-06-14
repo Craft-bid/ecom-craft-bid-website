@@ -2,10 +2,11 @@ import { Card, Grid, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
 import { useMediaQuery, useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
-import { TagDTO, getTags } from '../../services/tagService';
+import { getTags } from '../../services/tagService';
+import { Tag } from '../../common/types/Tag.types';
 
 export function HomePageContent() {
-  const [categories, setCategories] = useState<TagDTO[]>([]);
+  const [categories, setCategories] = useState<Tag[]>([]);
 
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',

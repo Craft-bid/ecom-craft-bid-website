@@ -1,23 +1,16 @@
 import { Grid } from '@mui/material';
-import { SubmitOfferForm } from '../../components/SubmitOfferForm/SubmitOfferForm';
+import { OfferBidCreationForm } from '../OfferBidCreationForm/OfferBidCreationForm';
+import { OfferBidList } from '../OfferBidList/OfferBidList';
+import { OfferHeader } from '../OfferHeader/OfferHeader';
+import { OfferInfo } from '../OfferInfo/OfferInfo';
 
 export function OfferContent() {
-  const pageSxObj = {
-    backgroundColor: '#E8F6F6',
-  };
-
   return (
-    <Grid
-      container
-      height={'auto'}
-      sx={pageSxObj}
-      justifyContent={'center'}
-      alignItems={'center'}
-      flexDirection={'column'}
-      paddingTop={15}
-      paddingBottom={15}
-    >
-      <SubmitOfferForm />
+    <Grid>
+      <OfferHeader></OfferHeader>
+      <OfferInfo></OfferInfo>
+      <OfferBidList></OfferBidList>
+      <OfferBidCreationForm></OfferBidCreationForm>
     </Grid>
   );
 }

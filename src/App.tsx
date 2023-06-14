@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { OfferPage } from './pages/OfferPage';
+import { OfferPage } from './pages/CreateOfferPage';
 import '@fontsource/montserrat';
 import '@fontsource/lato';
 import { OfferListPage } from './pages/OfferListPage';
@@ -46,6 +46,10 @@ export function App() {
       <Route
         path='/user'
         element={<UserPage />}
+      />
+      <Route
+        path='/offer/:id'
+        element={<OfferPage />}
       />
     </Routes>
   );

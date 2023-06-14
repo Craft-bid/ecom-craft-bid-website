@@ -3,8 +3,10 @@ import { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import styles from './SearchBar.module.scss';
+import { Search } from 'react-router';
+import { SearchBarProps } from './SearchBar.types';
 
-export function SearchBar() {
+export function SearchBar({ handleSearch }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('');
 
   const inputStyle = {
@@ -13,7 +15,10 @@ export function SearchBar() {
   };
 
   const handleClickShowSearch: () => void = () => {
-    return console.log('search');
+    console.log('searchValue', searchValue);
+    if (handleSearch !== undefined) {
+      handleSearch(searchValue);
+    }
   };
 
   return (
@@ -21,7 +26,6 @@ export function SearchBar() {
       value={searchValue}
       fullWidth={true}
       onChange={(event) => {
-        console.log(event.target.value);
         return setSearchValue(event.target.value);
       }}
       InputLabelProps={{ shrink: false }}

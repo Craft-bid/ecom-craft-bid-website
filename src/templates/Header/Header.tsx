@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { AppBar, Button, Grid, IconButton, Toolbar, useMediaQuery, useTheme } from '@mui/material';
 import { ReactComponent as Logo } from '../../assets/logo.svg';
 import '@fontsource/roboto';

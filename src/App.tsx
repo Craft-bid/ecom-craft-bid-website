@@ -1,12 +1,17 @@
 import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
-import { OfferPage } from './pages/OfferPage';
+import { CreateOfferPage } from './pages/CreateOfferPage';
 import '@fontsource/montserrat';
+import '@fontsource/montserrat/500.css';
+import '@fontsource/montserrat/300.css';
 import '@fontsource/lato';
+import '@fontsource/roboto';
+import '@fontsource/libre-baskerville';
 import { OfferListPage } from './pages/OfferListPage';
 import { UserPage } from './pages/UserPage';
 import axios from 'axios';
 import { useEffect } from 'react';
+import { OfferPage } from './pages/OfferPage';
 
 export function App() {
   useEffect(() => {
@@ -37,7 +42,7 @@ export function App() {
       />
       <Route
         path='/submit_offer'
-        element={<OfferPage />}
+        element={<CreateOfferPage />}
       />
       <Route
         path='/offers'
@@ -46,6 +51,10 @@ export function App() {
       <Route
         path='/user'
         element={<UserPage />}
+      />
+      <Route
+        path='/offer/:id'
+        element={<OfferPage />}
       />
     </Routes>
   );

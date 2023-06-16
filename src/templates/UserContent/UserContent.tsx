@@ -1,10 +1,10 @@
 import { Grid, Icon, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { ProfilePageProps } from './ProfilePage.types';
+import { UserContentProps } from './UserContent.types';
 import '@fontsource/montserrat';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StarIcon from '@mui/icons-material/Star';
-export function ProfilePage(props: ProfilePageProps) {
+export function UserContent(props: UserContentProps) {
   const data = [
     {
       label: props.verified ? (

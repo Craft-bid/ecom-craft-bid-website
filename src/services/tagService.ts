@@ -1,8 +1,9 @@
 import axios from 'axios';
+import { Tag } from '../common/types/Tag.types';
 
 export const getTags = async () => {
   return await axios
-    .get<TagDTO>('http://localhost:8080/api/v1/public/tags')
+    .get<Tag[]>('http://localhost:8080/api/v1/public/tags')
     .then((response) => {
       console.log(response);
       return response.data;

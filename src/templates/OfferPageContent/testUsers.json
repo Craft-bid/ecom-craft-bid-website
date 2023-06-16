@@ -1,0 +1,17 @@
+[{
+  "id": 1,
+  "image": "https://picsum.photos/150/150",
+  "name": "Jack",
+  "surname": "Smith",
+  "country": "USA",
+  "city": "Detroit",
+  "verified": true,
+  "stars": "4.5",
+  "phoneNumber": 4.5,
+  "email": "example@example.pl",
+  "skills": [ "Woodworking", "Carpentry" ] ,
+  "aboutMe": "I like pineapples. Carpenter and woodworker.",
+  "joined": "2019-01-01T00:00:00.000Z",
+  "workedIn": 5,
+  "customerSatisfaction": 92
+}]

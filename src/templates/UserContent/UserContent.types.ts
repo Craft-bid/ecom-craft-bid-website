@@ -1,4 +1,5 @@
-export interface ProfilePageProps {
+export interface UserContentProps {
+  id: number;
   image: string;
   name: string;
   surname: string;

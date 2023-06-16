@@ -3,7 +3,7 @@ import { FilterContainer } from '../../components/FilterContainer/FilterContaine
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { OfferCollection } from '../OfferCollection/OfferCollection';
 
-export function OfferListContent() {
+export function OfferListPageContent() {
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };

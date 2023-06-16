@@ -1,22 +1,33 @@
-import { Grid, Dialog, Box, Typography } from '@mui/material';
-import { useState } from 'react';
-import { FormProps } from '../common/types/FormProps.types';
+import { Header } from '../templates/Header/Header';
+import { Box, Dialog, Grid, Typography } from '@mui/material';
+import { HeroSection } from '../components/HeroSection/HeroSection';
+import heroImage from '../assets/offer-hero.png';
+import { HeroSectionProps } from '../components/HeroSection/HeroSection.types';
+import { Footer } from '../templates/Footer/Footer';
+import { CreateOfferContent } from '../templates/CreateOfferContent/CreatreOfferContent';
 import { usePopup } from '../common/hooks/usePopup';
+import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { LoginForm } from '../components/LoginForm/LoginForm';
 import { Popup } from '../components/Popup/Popup';
-import { RegisterForm } from '../components/RegisterForm/RegisterForm';
-import { Footer } from '../templates/Footer/Footer';
-import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
-import { OfferPageContent } from '../templates/OfferPageContent/OfferPageContent';
+import { FormProps } from '../common/types/FormProps.types';
+import { useState } from 'react';
 
-export function OfferPage() {
+export function CreateOfferPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
   const [openStatusModal, setOpenStatusModal] = useState(false);
   const [statusModalMessage, setStatusModalMessage] = useState('');
 
   const handleCloseStatusModal = () => {
     setOpenStatusModal(false);
+  };
+
+  const heroSectionProps: HeroSectionProps = {
+    image: heroImage,
+    imageHeight: 400,
+    title: 'Submit your offer. Our team is ready to review your offer - submit it now and take the first step towards fulfilling your request.',
+    hasSearchBar: false,
+    isMiddleVariant: true,
   };
 
   const homePageSxObj = {
@@ -44,16 +55,13 @@ export function OfferPage() {
   return (
     <Grid
       container
-      justifyContent={'space-between'}
+      justifyContent={'center'}
       height={'100vh'}
-      minWidth={'100%'}
-      flexDirection={'column'}
-      flexWrap={'nowrap'}
-      alignItems={'center'}
       sx={homePageSxObj}
     >
       <Header {...headerProps} />
-      <OfferPageContent />
+      <HeroSection {...heroSectionProps} />
+      <CreateOfferContent />
       <Footer />
       {showPopup && renderPopup()}
       <Dialog

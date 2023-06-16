@@ -1,7 +1,7 @@
 import { Grid } from '@mui/material';
 import { SubmitOfferForm } from '../../components/SubmitOfferForm/SubmitOfferForm';
 
-export function OfferContent() {
+export function CreateOfferContent() {
   const pageSxObj = {
     backgroundColor: '#E8F6F6',
   };

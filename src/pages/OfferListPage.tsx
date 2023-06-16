@@ -7,7 +7,7 @@ import { RegisterForm } from '../components/RegisterForm/RegisterForm';
 import { Footer } from '../templates/Footer/Footer';
 import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
-import { OfferListContent } from '../templates/OfferListContent/OfferListContent';
+import { OfferListPageContent } from '../templates/OfferListPageContent/OfferListPageContent';
 import { useState } from 'react';
 
 export function OfferListPage() {
@@ -49,7 +49,7 @@ export function OfferListPage() {
       sx={homePageSxObj}
     >
       <Header {...headerProps} />
-      <OfferListContent />
+      <OfferListPageContent />
       <Footer />
       {showPopup && renderPopup()}
       <Dialog

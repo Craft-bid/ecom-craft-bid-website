@@ -1,14 +1,15 @@
-import { Listing } from './Listing.types';
-
-export interface Bid {
+export type BidDTO = {
   id: number;
-
   price: number;
   description: string;
   creationDate: Date;
   daysToDeliver: number;
+  bidderName: string;
 
-  bidder: User;
-  listing: Listing;
-}
-
+  bidderSurname: string;
+  bidderCountry: string;
+  bidderCity: string;
+  bidderRating: number;
+  photoURL: string;
+  UserID: number;
+};

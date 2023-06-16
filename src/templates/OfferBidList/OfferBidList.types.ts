@@ -1,12 +1,5 @@
-import { UserContentProps } from '../UserContent/UserContent.types';
+import { BidDTO } from '../../common/types/Bid.types';
 
 export interface OfferBidListProps {
-  bidList: {
-    id: number;
-    price: number;
-    description: string;
-    creationDate: Date;
-    daysToDeliver: number;
-    bidder: UserContentProps;
-  }[];
+  bidList: BidDTO[];
 }

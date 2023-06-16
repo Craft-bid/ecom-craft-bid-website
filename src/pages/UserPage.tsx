@@ -12,6 +12,7 @@ import { UserContentProps } from '../templates/UserContent/UserContent.types';
 import { useState } from 'react';
 
 const profilePageProps: UserContentProps = {
+  id: 1,
   image: 'https://picsum.photos/150/150',
   name: 'Jack',
   surname: 'Smith',

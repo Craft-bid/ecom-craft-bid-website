@@ -1,4 +1,5 @@
 export interface UserContentProps {
+  id: number;
   image: string;
   name: string;
   surname: string;

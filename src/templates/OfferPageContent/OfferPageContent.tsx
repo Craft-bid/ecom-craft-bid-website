@@ -1,20 +1,133 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Card, Grid } from '@mui/material';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import { BidDTO } from '../../common/types/Bid.types';
+import { Category } from '../HomePageContent/HomePageContent.types';
 import { OfferBidCreationForm } from '../OfferBidCreationForm/OfferBidCreationForm';
 import { OfferBidList } from '../OfferBidList/OfferBidList';
+import { OfferBidListProps } from '../OfferBidList/OfferBidList.types';
 import { OfferHeader } from '../OfferHeader/OfferHeader';
+import { OfferHeaderProps } from '../OfferHeader/OfferHeader.types';
 import { OfferInfo } from '../OfferInfo/OfferInfo';
+import { OfferInfoProps } from '../OfferInfo/OfferInfo.types';
+import { UserContentProps } from '../UserContent/UserContent.types';
+
+type OfferDTO = {
+  id: number;
+  title: string;
+  ended: boolean;
+  expirationDate: Date;
+  creationDate: Date;
+  description: string;
+  photos: string[];
+  bids: BidDTO[];
+  tags: Category[];
+  advertiserId: number;
+  winnerId: number;
+};
 
 export function OfferPageContent() {
   //Get offer status, offer title, offer description, get category
-  //Also get seller name and surname, his id(needs to link to his profile), all ratings of the seller, seller picture, seller status(verified, not verified))
+  //Also get seller name and surname, his id(needs to link to his profile), all ratings of the seller, seller status(verified, not verified))
   //Also get all bidders, their names, surnames, ratings, pictures, status(verified, not verified), their bids
-  useEffect(() => {}, []);
-  
+
+  const [offerStatus, setOfferStatus] = useState<string>('');
+  const [offerTitle, setOfferTitle] = useState<string>('');
+  const [offerDescription, setOfferDescription] = useState<string>('');
+  const [offerOwnerName, setOfferOwnerName] = useState<string>('');
+  const [offerOwnerSurname, setOfferOwnerSurname] = useState<string>('');
+  const [offerOwnerId, setOfferOwnerId] = useState<number>(0);
+  const [offerOwnerRating, setOfferOwnerRating] = useState<number>(0);
+  const [offerOwnerStatus, setOfferOwnerStatus] = useState<string>('');
+  const [offerImageUrls, setOfferImageUrls] = useState<string[]>([]);
+  const [offerCategories, setOfferCategories] = useState<Category[]>([]);
+  const [offerBids, setOfferBids] = useState<BidDTO[]>([]);
+
+  useEffect(() => {
+    //our url is /offer/:id
+    //get id from url
+    const pathname = window.location.pathname;
+    const rightPartIndex = 1;
+    const id = Number(pathname.split('/offer/')[rightPartIndex]); // Extract the ID from the URL
+    if (isNaN(id)) {
+      throw new Error('Invalid ID');
+    }
+
+    fetch('../src/templates/OfferPageContent/testOfferPageContent.json')
+      .then((response) => {
+        return response.json();
+      })
+      .then((data: OfferDTO) => {
+        setOfferStatus(data.ended ? 'Closed' : 'Open');
+        setOfferTitle(data.title);
+        setOfferDescription(data.description);
+        setOfferImageUrls(data.photos);
+        setOfferCategories(data.tags);
+        setOfferBids(data.bids);
+        fetch('../src/templates/OfferPageContent/testUsers.json')
+          .then((response) => {
+            return response.json();
+          })
+          .then((userData: UserContentProps[]) => {
+            const neededUser = userData.find((element) => {
+              return element.id === data.advertiserId;
+            });
+            if (!neededUser) {
+              throw new Error('User not found');
+            }
+            setOfferOwnerName(neededUser.name);
+            setOfferOwnerSurname(neededUser.surname);
+            setOfferOwnerId(neededUser.id);
+            setOfferOwnerRating(Number(neededUser.stars));
+            setOfferOwnerStatus(neededUser.verified ? 'Verified' : 'Not verified');
+          })
+          .catch((error) => {
+            throw error;
+          });
+      })
+      .catch((error) => {
+        throw error;
+      });
+  }, []);
+
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
 
+  const offerHeaderProps: OfferHeaderProps = {
+    bidHighestPrice:
+      offerBids.length > 0
+        ? Math.max(
+            ...offerBids.map((element) => {
+              return element.price;
+            })
+          )
+        : 0,
+    bidLowestPrice:
+      offerBids.length > 0
+        ? Math.min(
+            ...offerBids.map((element) => {
+              return element.price;
+            })
+          )
+        : 0,
+    offerTitle: offerTitle,
+    offerStatus: offerStatus,
+  };
+
+  const offerInfoProps: OfferInfoProps = {
+    offerDescription,
+    offerOwnerName,
+    offerOwnerSurname,
+    offerOwnerRating,
+    offerOwnerStatus,
+    offerCategories,
+    offerImageUrls,
+  };
+
+  const offerBidListProps: OfferBidListProps = {
+    bidList: offerBids,
+  };
   return (
     <Grid
       container
@@ -38,9 +151,9 @@ export function OfferPageContent() {
           marginBottom: 10,
         }}
       >
-        <OfferHeader></OfferHeader>
-        <OfferInfo></OfferInfo>
-        <OfferBidList></OfferBidList>
+        <OfferHeader {...offerHeaderProps}></OfferHeader>
+        <OfferInfo {...offerInfoProps}></OfferInfo>
+        <OfferBidList {...offerBidListProps}></OfferBidList>
         <OfferBidCreationForm></OfferBidCreationForm>
       </Card>
     </Grid>

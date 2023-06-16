@@ -1,7 +1,6 @@
 export interface OfferHeaderProps {
-  bidStatus: boolean;
-  bidDescription: string;
-  bidTitle: string;
+  offerStatus: string;
+  offerTitle: string;
   bidLowestPrice: number;
   bidHighestPrice: number;
 }

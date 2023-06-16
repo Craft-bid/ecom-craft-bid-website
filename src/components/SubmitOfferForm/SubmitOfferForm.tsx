@@ -47,7 +47,7 @@ export function SubmitOfferForm() {
     if (Object.keys(errors).length === 0) {
       setIsFormValid(true);
     }
-};
+  };
 
   const formSxObj = { backgroundColor: '#F5FBFB', width: '55rem', minHeight: 1400, borderRadius: 10 };
   const fetchUrl = '../src/templates/CreateOfferContent/testCategories.json';

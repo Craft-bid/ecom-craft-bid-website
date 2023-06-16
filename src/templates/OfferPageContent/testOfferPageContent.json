@@ -1,6 +1,6 @@
 {
     "id": 1,
-    "title": "title",
+    "title": "Creation of a new Numidium",
     "ended": false,
     "expirationDate": "2019-12-22T00:00:00.000+0000",
     "creationDate": "2019-12-12T00:00:00.000+0000",
@@ -16,10 +16,10 @@
             "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla euismod, nisl eget aliquam ultricies, nunc nisl aliquet nunc, vitae aliquam",
             "creationDate": "2019-12-13T00:00:00.000+0000",
             "daysToDeliver": 10,
-            "bidderName": "bidderName",
-            "bidderSurname": "bidderSurname",
-            "bidderCity": "bidderCity",
-            "bidderCountry": "bidderCountry",
+            "bidderName": "James",
+            "bidderSurname": "Hammond",
+            "bidderCity": "Manchester",
+            "bidderCountry": "United Kingdom",
             "bidderRating": 4.5,
             "photoURL": "https://picsum.photos/600/400",
             "UserID": 1
@@ -33,6 +33,26 @@
         {
             "id": 2,
             "name": "Sit"
+        },
+        {
+            "id": 3,
+            "name": "Amet"
+        },
+        {
+            "id": 4,
+            "name": "Consectetur"
+        },
+        {
+            "id": 5,
+            "name": "Adipiscing"
+        },
+        {
+            "id": 6,
+            "name": "Elit"
+        },
+        {
+            "id": 7,
+            "name": "Nulla"
         }
     ],
     "advertiserId": 1, 

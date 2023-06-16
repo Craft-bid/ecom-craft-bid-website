@@ -6,7 +6,7 @@
   "country": "USA",
   "city": "Detroit",
   "verified": true,
-  "stars": false,
+  "stars": "4.5",
   "phoneNumber": 4.5,
   "email": "example@example.pl",
   "skills": [ "Woodworking", "Carpentry" ] ,

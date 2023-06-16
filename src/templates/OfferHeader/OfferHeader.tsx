@@ -1,5 +1,6 @@
 import { Divider, Grid, Typography } from '@mui/material';
 import { OfferHeaderProps } from './OfferHeader.types';
+import '@fontsource/libre-baskerville';
 
 export function OfferHeader(props: OfferHeaderProps) {
   const { bidHighestPrice, bidLowestPrice, offerStatus, offerTitle } = props;
@@ -15,20 +16,27 @@ export function OfferHeader(props: OfferHeaderProps) {
         <Grid item>
           <Typography
             style={{
-              fontFamily: 'Baskerville',
+              fontFamily: 'Libre Baskerville',
               fontWeight: 'Regular',
-              fontSize: '24px',
+              fontSize: '36px',
               letterSpacing: '0.15px',
+              textTransform: 'uppercase',
             }}
           >
             {offerTitle}
           </Typography>
         </Grid>
-        <Grid item>
+        <Grid
+          item
+          display={'flex'}
+          alignItems={'center'}
+          justifyContent={'center'}
+          flexDirection={'row'}
+        >
           {offerStatus === 'Open' ? (
-            <div style={{ backgroundColor: 'green', width: '10px', height: '10px', borderRadius: '50%' }} />
+            <div style={{ backgroundColor: 'green', width: '10px', height: '10px', borderRadius: '50%', marginRight: '10px' }} />
           ) : (
-            <div style={{ backgroundColor: 'red', width: '10px', height: '10px', borderRadius: '50%' }} />
+            <div style={{ backgroundColor: 'red', width: '10px', height: '10px', borderRadius: '50%', marginRight: '10px' }} />
           )}
           <Typography
             style={{
@@ -36,6 +44,7 @@ export function OfferHeader(props: OfferHeaderProps) {
               fontWeight: 'Regular',
               fontSize: '24px',
               letterSpacing: '0.15px',
+              textTransform: 'uppercase',
             }}
           >
             {offerStatus}
@@ -50,11 +59,11 @@ export function OfferHeader(props: OfferHeaderProps) {
               letterSpacing: '0.15px',
             }}
           >
-            {bidLowestPrice} - {bidHighestPrice}
+            {bidLowestPrice}$ - {bidHighestPrice}$
           </Typography>
         </Grid>
       </Grid>
-      <Divider />
+      <Divider sx={{ marginTop: 2 }} />
     </Grid>
   );
 }

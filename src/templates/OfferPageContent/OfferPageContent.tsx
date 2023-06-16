@@ -78,6 +78,8 @@ export function OfferPageContent() {
             setOfferOwnerName(neededUser.name);
             setOfferOwnerSurname(neededUser.surname);
             setOfferOwnerId(neededUser.id);
+            console.log(neededUser.stars);
+            console.log(Number(neededUser.stars));
             setOfferOwnerRating(Number(neededUser.stars));
             setOfferOwnerStatus(neededUser.verified ? 'Verified' : 'Not verified');
           })

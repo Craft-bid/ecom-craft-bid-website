@@ -1,4 +1,4 @@
-import { Grid, Typography, Rating, useMediaQuery, useTheme, Button } from '@mui/material';
+import { Grid, Typography, Rating, Button } from '@mui/material';
 import axios from 'axios';
 import { BidDTO } from '../../common/types/Bid.types';
 import { OfferBidListProps } from './OfferBidList.types';
@@ -6,8 +6,6 @@ import { OfferBidListProps } from './OfferBidList.types';
 export function OfferBidList(props: OfferBidListProps) {
   const { bidList, isOwner, listingId } = props;
   const pageLength = bidList.length;
-  const theme = useTheme();
-  const isTabletOrMobile = useMediaQuery(theme.breakpoints.down('desktop'));
 
   const handleAccept = (bidId: number) => {
     // Perform PUT request to the specified URL with the bidId

@@ -1,8 +1,11 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { SearchBar } from '../SearchBar/SearchBar';
 import { HeroSectionProps } from './HeroSection.types';
+import { useNavigate } from 'react-router-dom';
+
 export function HeroSection(props: HeroSectionProps) {
   const { image, imageHeight, title, hasSearchBar, isMiddleVariant } = props;
+  const navigate = useNavigate();
   const gridSxObj = {
     backgroundImage: `url(${image})`,
     backgroundRepeat: 'no-repeat',
@@ -63,7 +66,13 @@ export function HeroSection(props: HeroSectionProps) {
               sx={{ alignItems: 'center', display: 'flex', justifyContent: 'center', flexDirection: 'column' }}
             >
               <Typography style={textStyleObj}>{title}</Typography>
-              {hasSearchBar && <SearchBar />}
+              {hasSearchBar && (
+                <SearchBar
+                  handleSearch={(param) => {
+                    navigate(`/offers`);
+                  }}
+                />
+              )}
             </Box>
           </Grid>
 

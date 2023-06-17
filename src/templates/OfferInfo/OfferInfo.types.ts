@@ -1,9 +1,9 @@
-import { Category } from '../HomePageContent/HomePageContent.types';
+import { Tag } from '../../common/types/Tag.types';
 
 export interface OfferInfoProps {
   offerDescription: string;
   offerImageUrls: string[];
-  offerCategories: Category[];
+  offerCategories: Tag[];
   offerOwnerName: string;
   offerOwnerSurname: string;
   offerOwnerStatus: string;

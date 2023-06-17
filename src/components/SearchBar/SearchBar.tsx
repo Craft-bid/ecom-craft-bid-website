@@ -1,10 +1,11 @@
 import { Button, TextField } from '@mui/material';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import SearchIcon from '@mui/icons-material/Search';
 import InputAdornment from '@mui/material/InputAdornment';
 import styles from './SearchBar.module.scss';
+import { SearchBarProps } from './SearchBar.types';
 
-export function SearchBar() {
+export function SearchBar({ handleSearch }: SearchBarProps) {
   const [searchValue, setSearchValue] = useState('');
 
   const inputStyle = {
@@ -13,7 +14,16 @@ export function SearchBar() {
   };
 
   const handleClickShowSearch: () => void = () => {
-    return console.log('search');
+    console.log('searchValue', searchValue);
+    if (handleSearch !== undefined) {
+      handleSearch(searchValue);
+    }
+  };
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === 'Enter') {
+      handleClickShowSearch();
+    }
   };
 
   return (
@@ -21,9 +31,9 @@ export function SearchBar() {
       value={searchValue}
       fullWidth={true}
       onChange={(event) => {
-        console.log(event.target.value);
         return setSearchValue(event.target.value);
       }}
+      onKeyPress={handleKeyPress}
       InputLabelProps={{ shrink: false }}
       InputProps={{
         style: inputStyle,

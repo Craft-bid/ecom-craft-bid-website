@@ -2,38 +2,77 @@ import { Card, Checkbox, FormControlLabel, FormGroup, Grid, TextField, Typograph
 import { Field, Formik } from 'formik';
 import '@fontsource/roboto';
 import '@fontsource/montserrat';
+import { FilterParams, FilterParamsProps } from '../../templates/OfferListPageContent/FilterParams.types';
+import { getTags } from '../../services/tagService';
+import { Tag } from '../../common/types/Tag.types';
+import { useEffect, useState } from 'react';
 
-export function FilterContainer() {
+export function FilterContainer({ ...props }: FilterParamsProps) {
   const checkboxStyle = {
     color: 'rgba(0, 0, 0, 0.6)',
   };
+  const [categories, setCategories] = useState<Tag[]>([]);
+  useEffect(() => {
+    getTags()
+      .then((res) => {
+        setCategories(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
+  interface InitVals {
+    [key: string]: boolean | string | number;
+  }
+  const initVals: InitVals = {
+    min: '',
+    max: '',
+    fullTime: false,
+    partTime: false,
+    polish: false,
+    english: false,
+    russian: false,
+  };
+  categories.forEach((category) => {
+    initVals[category.name] = false;
+  });
+  const { filter, handleFilterChange } = props;
   return (
     <Formik
       enableReinitialize
       validateOnMount={true}
       validateOnChange={true}
       validateOnBlur={true}
-      initialValues={{
-        min: '',
-        max: '',
-        fullTime: false,
-        partTime: false,
-        metalworking: false,
-        CNCOperating: false,
-        machining: false,
-        polish: false,
-        english: false,
-        russian: false,
-      }}
+      initialValues={initVals}
       onSubmit={(values) => {
-        console.log(values);
+        const tags = [];
+        for (const [key, value] of Object.entries(values)) {
+          if (value === true) {
+            tags.push(key);
+          }
+        }
+
+        const newFilter: FilterParams = {
+          title: filter.title,
+          advetiserSurname: filter.advetiserSurname,
+          winnerName: filter.winnerName,
+          tags: tags,
+          priceFrom: Number(values.min),
+          priceTo: Number(values.max),
+          pageable: {
+            pageNumber: filter.pageable.pageNumber,
+            pageSize: filter.pageable.pageSize,
+          },
+        };
+        handleFilterChange(newFilter);
       }}
     >
-      {({ handleSubmit }) => {
+      {({ handleSubmit, handleChange }) => {
         return (
           <form
-            onChange={(event) => {
-              handleSubmit(event);
+            onChange={(e) => {
+              handleChange(e);
+              handleSubmit();
             }}
           >
             <Card sx={{ width: 400, height: 850, backgroundColor: '#F5FBFB' }}>
@@ -117,26 +156,18 @@ export function FilterContainer() {
                     Type:
                   </Typography>
                   <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Field
-                          name='fullTime'
-                          type='checkbox'
-                          as={Checkbox}
-                        />
-                      }
-                      style={checkboxStyle}
+                    <Field
+                      type='checkbox'
+                      name='fullTime'
+                      as={FormControlLabel}
+                      control={<Checkbox />}
                       label='Full time'
                     />
-                    <FormControlLabel
-                      control={
-                        <Field
-                          name='partTime'
-                          type='checkbox'
-                          as={Checkbox}
-                        />
-                      }
-                      style={checkboxStyle}
+                    <Field
+                      type='checkbox'
+                      name='partTime'
+                      as={FormControlLabel}
+                      control={<Checkbox />}
                       label='Part time'
                     />
                   </FormGroup>
@@ -153,39 +184,18 @@ export function FilterContainer() {
                     Skill required:
                   </Typography>
                   <FormGroup>
-                    <FormControlLabel
-                      control={
+                    {categories.map((category) => {
+                      return (
                         <Field
-                          name='metalworking'
                           type='checkbox'
-                          as={Checkbox}
+                          name={category.name}
+                          key={category.id}
+                          as={FormControlLabel}
+                          control={<Checkbox />}
+                          label={category.name}
                         />
-                      }
-                      style={checkboxStyle}
-                      label='Metalworking'
-                    />
-                    <FormControlLabel
-                      control={
-                        <Field
-                          name='CNCOperating'
-                          type='checkbox'
-                          as={Checkbox}
-                        />
-                      }
-                      style={checkboxStyle}
-                      label='CNC Operating'
-                    />
-                    <FormControlLabel
-                      control={
-                        <Field
-                          name='machining'
-                          type='checkbox'
-                          as={Checkbox}
-                        />
-                      }
-                      style={checkboxStyle}
-                      label='Machining'
-                    />
+                      );
+                    })}
                   </FormGroup>
                 </Grid>
                 <Grid item>
@@ -200,37 +210,25 @@ export function FilterContainer() {
                     Languages:
                   </Typography>
                   <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <Field
-                          name='english'
-                          type='checkbox'
-                          as={Checkbox}
-                        />
-                      }
-                      style={checkboxStyle}
+                    <Field
+                      type='checkbox'
+                      name='english'
+                      as={FormControlLabel}
+                      control={<Checkbox />}
                       label='English'
                     />
-                    <FormControlLabel
-                      control={
-                        <Field
-                          name='polish'
-                          type='checkbox'
-                          as={Checkbox}
-                        />
-                      }
-                      style={checkboxStyle}
+                    <Field
+                      type='checkbox'
+                      name='polish'
+                      as={FormControlLabel}
+                      control={<Checkbox />}
                       label='Polish'
                     />
-                    <FormControlLabel
-                      control={
-                        <Field
-                          name='russian'
-                          type='checkbox'
-                          as={Checkbox}
-                        />
-                      }
-                      style={checkboxStyle}
+                    <Field
+                      type='checkbox'
+                      name='russian'
+                      as={FormControlLabel}
+                      control={<Checkbox />}
                       label='Russian'
                     />
                   </FormGroup>

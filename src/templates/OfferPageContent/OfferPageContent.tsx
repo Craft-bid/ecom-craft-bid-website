@@ -2,8 +2,9 @@
 import { Card, Grid } from '@mui/material';
 import { useContext, useEffect, useState } from 'react';
 import { BidDTO } from '../../common/types/Bid.types';
+import { OfferDTO } from '../../common/types/OfferDTO.types';
+import { Tag } from '../../common/types/Tag.types';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
-import { Category } from '../HomePageContent/HomePageContent.types';
 import { OfferBidCreationForm } from '../OfferBidCreationForm/OfferBidCreationForm';
 import { OfferBidList } from '../OfferBidList/OfferBidList';
 import { OfferBidListProps } from '../OfferBidList/OfferBidList.types';
@@ -13,20 +14,6 @@ import { OfferHeaderProps } from '../OfferHeader/OfferHeader.types';
 import { OfferInfo } from '../OfferInfo/OfferInfo';
 import { OfferInfoProps } from '../OfferInfo/OfferInfo.types';
 import { UserContentProps } from '../UserContent/UserContent.types';
-
-type OfferDTO = {
-  id: number;
-  title: string;
-  ended: boolean;
-  expirationDate: Date;
-  creationDate: Date;
-  description: string;
-  photos: string[];
-  bids: BidDTO[];
-  tags: Category[];
-  advertiserId: number;
-  winnerId: number;
-};
 
 export function OfferPageContent() {
   //Get offer status, offer title, offer description, get category
@@ -43,7 +30,7 @@ export function OfferPageContent() {
   const [offerOwnerRating, setOfferOwnerRating] = useState<number>(0);
   const [offerOwnerStatus, setOfferOwnerStatus] = useState<string>('');
   const [offerImageUrls, setOfferImageUrls] = useState<string[]>([]);
-  const [offerCategories, setOfferCategories] = useState<Category[]>([]);
+  const [offerCategories, setOfferCategories] = useState<Tag[]>([]);
   const [offerBids, setOfferBids] = useState<BidDTO[]>([]);
 
   const userContext = useContext(AuthenticationContext);

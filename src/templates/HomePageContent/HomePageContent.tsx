@@ -3,6 +3,7 @@ import CardContent from '@mui/material/CardContent';
 import { useEffect, useState } from 'react';
 import { getTags } from '../../services/tagService';
 import { Tag } from '../../common/types/Tag.types';
+import { Link } from 'react-router-dom';
 
 export function HomePageContent() {
   const [categories, setCategories] = useState<Tag[]>([]);
@@ -168,6 +169,21 @@ export function HomePageContent() {
               })}
           </CardContent>
         </Card>
+        <Typography variant={'h2'}>Submit your own offer once you have an account.</Typography>
+        <Grid
+          item
+          container
+          justifyContent={'center'}
+          alignItems={'center'}
+        >
+          <Card sx={{ maxWidth: 600, borderRadius: 10 }}>
+            <CardContent>
+              <Link to={'/submit_offer'}>
+                <Typography sx={subHeadingSxObj}>Click here to submit your offer.</Typography>
+              </Link>
+            </CardContent>
+          </Card>
+        </Grid>
       </Grid>
     </Grid>
   );

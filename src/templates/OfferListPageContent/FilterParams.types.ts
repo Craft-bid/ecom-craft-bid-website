@@ -3,8 +3,8 @@ export interface FilterParams {
   advetiserSurname: string;
   winnerName: string;
   tags: string[];
-  priceFrom: number;
-  priceTo: number;
+  minPrice: number;
+  maxPrice: number;
   pageable: {
     pageNumber: number;
     pageSize: number;

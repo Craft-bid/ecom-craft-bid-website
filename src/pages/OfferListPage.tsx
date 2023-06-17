@@ -21,8 +21,8 @@ export function OfferListPage() {
     advetiserSurname: '',
     winnerName: '',
     tags: [],
-    priceFrom: 0,
-    priceTo: 0,
+    minPrice: 0,
+    maxPrice: 0,
     pageable: {
       pageNumber: 0,
       pageSize: 10,

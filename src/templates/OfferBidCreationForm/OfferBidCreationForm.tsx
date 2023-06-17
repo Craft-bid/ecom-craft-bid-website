@@ -1,10 +1,17 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, TextField, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Formik, Field, Form, FormikErrors } from 'formik';
+
+type CreateDataDto = {
+  description: string;
+  money: string;
+  days: string;
+};
 export function OfferBidCreationForm() {
-  const handleSubmit = (values) => {
-    const listingId = 'your_listing_id'; // Replace with the actual listing ID
-    const url = `http://localhost:8080/api/v1/public/${listingId}/bids`;
+  const handleSubmit = (values: CreateDataDto) => {
+    // const listingId = 'your_listing_id'; // Replace with the actual listing ID
+    // const url = `http://localhost:8080/api/v1/public/${listingId}/bids`;
 
     // Perform your POST request using the values
     // For brevity, I'll just log the values to the console

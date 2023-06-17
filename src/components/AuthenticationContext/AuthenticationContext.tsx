@@ -9,6 +9,7 @@ export const AuthenticationContext = createContext<AuthenticationContextProps | 
 export function AuthenticationContextProvider({ children }: AuthenticationContextProviderProps) {
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [name, setName] = useState<string | null>(null);
+  const [id, setId] = useState<number | null>(1);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
@@ -21,6 +22,8 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
         // User is authenticated
         setAuthenticated(true);
         setName(decodedToken.sub);
+        //TODO: set actual ID from a different endpoint/or from decoded token
+        setId(1);
       }
     } else {
       // User is not authenticated
@@ -33,6 +36,8 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
     setAuthenticated,
     name,
     setName,
+    id,
+    setId,
   };
 
   return <AuthenticationContext.Provider value={value}>{children}</AuthenticationContext.Provider>;

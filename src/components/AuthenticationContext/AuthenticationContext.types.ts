@@ -9,4 +9,6 @@ export interface AuthenticationContextProps {
   setAuthenticated: Dispatch<SetStateAction<boolean>>;
   name: string | null;
   setName: Dispatch<SetStateAction<string | null>>;
+  id: number | null;
+  setId: Dispatch<SetStateAction<number | null>>;
 }

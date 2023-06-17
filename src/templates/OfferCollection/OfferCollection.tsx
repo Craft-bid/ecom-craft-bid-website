@@ -2,8 +2,9 @@ import { Card, Grid, Typography } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { OfferCard } from '../../components/OfferCard/OfferCard';
 import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
-import { FilterParams, FilterParamsProps } from '../OfferListContent/FilterParams.types';
+import { FilterParams, FilterParamsProps } from '../OfferListPageContent/FilterParams.types';
 import axios from 'axios';
+import { OfferDTO } from '../../common/types/OfferDTO.types';
 
 export function OfferCollection({ filter, handleFilterChange }: FilterParamsProps) {
   const fetchUrl = 'http://localhost:8080/api/v1/public/listings/search';
@@ -40,18 +41,18 @@ export function OfferCollection({ filter, handleFilterChange }: FilterParamsProp
     };
     console.log(toBackend);
     await axios
-      .get(addQueryParams(fetchUrl, toBackend))
+      .get<OfferDTO>(addQueryParams(fetchUrl, toBackend))
       .then((res) => {
         console.log(res.data);
         return res.data;
       })
-      .then((data: []) => {
-        const newData: OfferCardProps[] = data.map((offer: any) => {
+      .then((data) => {
+        const newData: OfferCardProps[] = data.map((offer: OfferDTO) => {
           return {
-            title: offer.title as string,
-            description: offer.description as string,
+            title: offer.title,
+            description: offer.description,
             avgBid: 100,
-            bids: offer.bids.length as number,
+            bids: offer.bids.length,
             image: (offer.photo[0] as string) || 'https://source.unsplash.com/random',
           };
         });

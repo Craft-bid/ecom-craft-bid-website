@@ -9,7 +9,7 @@ import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { OfferListPageContent } from '../templates/OfferListPageContent/OfferListPageContent';
 import { useState } from 'react';
-import { FilterParams, FilterParamsProps } from '../templates/OfferListContent/FilterParams.types';
+import { FilterParams, FilterParamsProps } from '../templates/OfferListPageContent/FilterParams.types';
 
 export function OfferListPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();

@@ -2,15 +2,16 @@ import { Card, Checkbox, FormControlLabel, FormGroup, Grid, TextField, Typograph
 import { Field, Formik } from 'formik';
 import '@fontsource/roboto';
 import '@fontsource/montserrat';
-import { FilterParams, FilterParamsProps } from '../../templates/OfferListContent/FilterParams.types';
-import { TagDTO, getTags } from '../../services/offerService';
+import { FilterParams, FilterParamsProps } from '../../templates/OfferListPageContent/FilterParams.types';
+import { getTags } from '../../services/tagService';
+import { Tag } from '../../common/types/Tag.types';
 import { useEffect, useState } from 'react';
 
 export function FilterContainer({ ...props }: FilterParamsProps) {
   const checkboxStyle = {
     color: 'rgba(0, 0, 0, 0.6)',
   };
-  const [categories, setCategories] = useState<TagDTO[]>([]);
+  const [categories, setCategories] = useState<Tag[]>([]);
   useEffect(() => {
     getTags()
       .then((res) => {

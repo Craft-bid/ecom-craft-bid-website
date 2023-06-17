@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Card, Grid } from '@mui/material';
+import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
 import { BidDTO } from '../../common/types/Bid.types';
 import { OfferDTO } from '../../common/types/OfferDTO.types';
@@ -55,11 +56,13 @@ export function OfferPageContent() {
       throw new Error('Invalid ID');
     }
     //url will be used later on when we have the backend
-    fetch('../src/templates/OfferPageContent/testOfferPageContent.json')
+    axios
+      .get<OfferDTO>(`http://localhost:8080/api/v1/public/listings/${urlId}`)
       .then((response) => {
-        return response.json();
+        return response.data;
       })
       .then((data: OfferDTO) => {
+        console.log(data);
         setOfferOwnerId(data.advertiserId);
         setOfferStatus(data.ended ? 'Closed' : 'Open');
         setOfferTitle(data.title);
@@ -68,17 +71,13 @@ export function OfferPageContent() {
         setOfferCategories(data.tags);
         setOfferBids(data.bids);
         setOfferId(data.id);
-        fetch('../src/templates/OfferPageContent/testUsers.json')
+        axios
+          .get<UserContentProps>(`http://localhost:8080/api/v1/public/users/${data.advertiserId}`)
           .then((response) => {
-            return response.json();
+            console.log(response.data);
+            return response.data;
           })
-          .then((userData: UserContentProps[]) => {
-            const neededUser = userData.find((element) => {
-              return element.id === data.advertiserId;
-            });
-            if (!neededUser) {
-              throw new Error('User not found');
-            }
+          .then((neededUser: UserContentProps) => {
             setOfferOwnerName(neededUser.name);
             setOfferOwnerSurname(neededUser.surname);
             setOfferOwnerId(neededUser.id);

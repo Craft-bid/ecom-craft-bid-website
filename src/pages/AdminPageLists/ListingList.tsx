@@ -16,7 +16,6 @@ export const ListingList = () => {
             <ChipField source='id' />
           </SingleFieldList>
         </ArrayField>
-        <TextField source='tags' />
         <TextField source='advertiserId' />
         <TextField
           source='winnerId'

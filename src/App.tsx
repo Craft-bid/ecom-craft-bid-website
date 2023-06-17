@@ -66,7 +66,7 @@ export function App() {
         element={<OfferPage />}
       />
       <Route
-        path='/admin'
+        path='/admin/*'
         element={<AdminPage />}
       />
     </Routes>

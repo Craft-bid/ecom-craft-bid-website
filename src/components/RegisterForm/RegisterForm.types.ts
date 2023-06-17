@@ -1,5 +1,5 @@
 export type RegisterFormValues = {
-  login: string;
+  name: string;
   email: string;
   password: string;
   repeatPassword: string;

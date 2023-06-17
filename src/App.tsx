@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Route, Routes } from 'react-router-dom';
 import { HomePage } from './pages/HomePage';
 import { CreateOfferPage } from './pages/CreateOfferPage';
@@ -56,7 +57,7 @@ export function App() {
         element={<OfferListPage></OfferListPage>}
       />
       <Route
-        path='/user'
+        path='/user/:id'
         element={<UserPage />}
       />
       <Route

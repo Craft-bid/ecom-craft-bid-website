@@ -8,9 +8,10 @@ import { Tag } from '../../common/types/Tag.types';
 import { useEffect, useState } from 'react';
 
 export function FilterContainer({ ...props }: FilterParamsProps) {
-  const checkboxStyle = {
-    color: 'rgba(0, 0, 0, 0.6)',
-  };
+  // const checkboxStyle = {
+  //   color: 'rgba(0, 0, 0, 0.6)',
+  // };
+
   const [categories, setCategories] = useState<Tag[]>([]);
   useEffect(() => {
     getTags()

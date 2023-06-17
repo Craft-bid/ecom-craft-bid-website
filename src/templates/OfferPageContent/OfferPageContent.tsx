@@ -62,6 +62,7 @@ export function OfferPageContent() {
         return response.data;
       })
       .then((data: OfferDTO) => {
+        console.log(data);
         setOfferOwnerId(data.advertiserId);
         setOfferStatus(data.ended ? 'Closed' : 'Open');
         setOfferTitle(data.title);
@@ -73,6 +74,7 @@ export function OfferPageContent() {
         axios
           .get<UserContentProps>(`http://localhost:8080/api/v1/public/users/${data.advertiserId}`)
           .then((response) => {
+            console.log(response.data);
             return response.data;
           })
           .then((neededUser: UserContentProps) => {

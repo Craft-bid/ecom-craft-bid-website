@@ -69,7 +69,7 @@ export function HeroSection(props: HeroSectionProps) {
               {hasSearchBar && (
                 <SearchBar
                   handleSearch={(param) => {
-                    navigate(`/offers`);
+                    navigate(`/offers?search=${encodeURIComponent(param)}`);
                   }}
                 />
               )}

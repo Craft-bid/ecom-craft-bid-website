@@ -8,9 +8,11 @@ import { FilterParams, FilterParamsProps } from './FilterParams.types';
 import { SearchBarProps } from '../../components/SearchBar/SearchBar.types';
 import axios from 'axios';
 import { OfferDTO } from '../../common/types/OfferDTO.types';
+import { useNavigate } from 'react-router-dom';
 
 export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const { filter, handleFilterChange } = props;
+  const navigate = useNavigate();
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
@@ -65,7 +67,7 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
             ownerId: offer.advertiserId,
             title: offer.title,
             description: offer.description,
-            avgBid: 100,
+            avgBid: offer.avgBid,
             bids: offer.bids.length,
             image: offer.photos[0] || 'https://source.unsplash.com/random',
           };
@@ -79,12 +81,21 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   };
 
   useEffect(() => {
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchValue = queryParams.get('search') || '';
+
+    filter.title = searchValue;
     console.log(filter);
     void getListing(filter);
   }, [filter]);
 
   const handleSearch = (searchText: string) => {
-    const newFilter = { ...filter, title: searchText };
+    navigate(`/offers?search=${searchText}`);
+    //this function changes the url param on search submit
+    const queryParams = new URLSearchParams(window.location.search);
+    const searchValue = queryParams.get('search') || '';
+
+    const newFilter = { ...filter, title: searchValue };
     handleFilterChange(newFilter);
   };
   const searchBarProps: SearchBarProps = {

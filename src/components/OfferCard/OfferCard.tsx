@@ -79,6 +79,7 @@ export function OfferCard(prop: OfferCardProps) {
               fontFamily='Montserrat'
               fontSize={20}
               lineHeight={'24px'}
+              marginTop={4}
             >
               {description}
             </Typography>

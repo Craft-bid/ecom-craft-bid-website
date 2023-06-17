@@ -1,3 +1,5 @@
+import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
+
 export interface UserContentProps {
   id: number;
   image: string;
@@ -14,4 +16,5 @@ export interface UserContentProps {
   joined: Date;
   workedIn: number;
   customerSatisfaction: number;
+  offerCardProps: OfferCardProps[];
 }

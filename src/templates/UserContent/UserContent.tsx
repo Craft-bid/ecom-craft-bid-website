@@ -4,7 +4,9 @@ import { UserContentProps } from './UserContent.types';
 import '@fontsource/montserrat';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StarIcon from '@mui/icons-material/Star';
+import { OfferCollection } from '../OfferCollection/OfferCollection';
 export function UserContent(props: UserContentProps) {
+  const { offerCardProps } = props;
   const data = [
     {
       label: props.verified ? (
@@ -241,6 +243,17 @@ export function UserContent(props: UserContentProps) {
             );
           })}
         </Grid>
+      </Grid>
+      <Grid
+        mobile={12}
+        item
+        container
+        flexWrap={'nowrap'}
+      >
+        {' '}
+        <OfferCollection offerCardProps={offerCardProps.filter( (element) => {
+          
+        })}></OfferCollection>
       </Grid>
     </Grid>
   );

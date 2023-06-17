@@ -1,5 +1,4 @@
 import { Card, Grid, Typography } from '@mui/material';
-import { useEffect, useState } from 'react';
 import { OfferCard } from '../../components/OfferCard/OfferCard';
 import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
 import { FilterParams, FilterParamsProps } from '../OfferListPageContent/FilterParams.types';
@@ -68,6 +67,10 @@ export function OfferCollection({ filter, handleFilterChange }: FilterParamsProp
     console.log(filter);
     void getListing(filter);
   }, [filter]);
+import { OfferCollectionProps } from './OfferCollection.types';
+
+export function OfferCollection(props: OfferCollectionProps) {
+  const { offerCardProps } = props;
 
   return (
     <Card sx={{ width: 1080, height: 'auto', backgroundColor: '#F5FBFB', paddingBottom: 8 }}>

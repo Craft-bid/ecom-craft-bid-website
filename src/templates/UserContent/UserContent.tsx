@@ -7,12 +7,25 @@ import StarIcon from '@mui/icons-material/Star';
 import { OfferCollection } from '../OfferCollection/OfferCollection';
 import React, { useContext } from 'react';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
+import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
 
 export function UserContent(props: UserContentProps) {
-  const { offerCardProps } = props;
+  const { aboutMe, averageRating, city, country, email, id, image, joined, listings, name, phoneNumber, stars, surname, verified, workedIn } = props;
+
+  const offerCardProps: OfferCardProps[] = listings.map((listing) => {
+    return {
+      id: listing.id,
+      title: listing.title,
+      description: listing.description,
+      bids: listing.bids.length,
+      ownerId: listing.advertiserId,
+      avgBid: listing.avgBid,
+      image: listing.photos[0] || 'https://source.unsplash.com/random',
+    };
+  });
   const data = [
     {
-      label: props.verified ? (
+      label: verified ? (
         <>
           <Icon
             component={VerifiedUserIcon}
@@ -31,27 +44,27 @@ export function UserContent(props: UserContentProps) {
             component={StarIcon}
             style={{ verticalAlign: 'middle', marginRight: '8px' }}
           />
-          {props.stars}
+          {stars}
           {'/5'}
         </>
       ),
     },
     {
-      label: `Phone Number: ${props.phoneNumber}`,
+      label: `Phone Number: ${phoneNumber}`,
     },
     {
-      label: `Email: ${props.email}`,
+      label: `Email: ${email}`,
     },
   ];
   const stats = [
     {
-      label: `${props.name} has joined in ${props.joined.toLocaleString('default', { month: 'long' })},${props.joined.getFullYear()}`,
+      label: `${name} has joined in ${joined.toLocaleString('default', { month: 'long' })},${joined.getFullYear()}`,
     },
     {
-      label: `${props.name} has worked in ${props.workedIn} jobs`,
+      label: `${name} has worked in ${workedIn} jobs`,
     },
     {
-      label: `${props.name} has ${props.customerSatisfaction}% customer satisfaction`,
+      label: `${name} has an average rating of ${averageRating}`,
     },
   ];
 
@@ -59,7 +72,7 @@ export function UserContent(props: UserContentProps) {
   if (!context) {
     throw new Error('AuthenticationContext is null');
   }
-  const isOwner = props.id === context.id;
+  const isOwner = id === context.id;
 
   return (
     <Grid
@@ -94,7 +107,7 @@ export function UserContent(props: UserContentProps) {
             overflow={'hidden'}
           >
             <img
-              src={props.image}
+              src={image}
               style={{ objectFit: 'cover', width: '100%', height: '100%' }}
               alt='offer'
             />
@@ -117,7 +130,7 @@ export function UserContent(props: UserContentProps) {
               fontStyle={'normal'}
               fontWeight={400}
             >
-              {props.name} {props.surname}, {props.country}, {props.city}
+              {name} {surname}, {country}, {city}
             </Typography>
           </Grid>
           <Grid
@@ -146,48 +159,6 @@ export function UserContent(props: UserContentProps) {
               );
             })}
           </Grid>
-          <Grid
-            item
-            container
-            flexDirection={'column'}
-            mobile={12}
-            flexWrap={'nowrap'}
-          >
-            <Grid item>
-              <Typography
-                fontFamily={'Montserrat'}
-                fontSize={30}
-                fontStyle={'normal'}
-                fontWeight={400}
-              >
-                Skills:
-              </Typography>
-            </Grid>
-            <Grid
-              item
-              container
-              flexDirection={'row'}
-              spacing={2}
-            >
-              {props.skills.map((skill) => {
-                return (
-                  <Grid
-                    item
-                    key={skill}
-                  >
-                    <Typography
-                      fontFamily={'Montserrat'}
-                      fontSize={22}
-                      fontStyle={'normal'}
-                      fontWeight={400}
-                    >
-                      {skill}
-                    </Typography>
-                  </Grid>
-                );
-              })}
-            </Grid>
-          </Grid>
         </Grid>
       </Grid>
       <Grid
@@ -209,7 +180,7 @@ export function UserContent(props: UserContentProps) {
           fontStyle={'normal'}
           fontWeight={400}
         >
-          {props.aboutMe}
+          {aboutMe}
         </Typography>
       </Grid>
       <Grid

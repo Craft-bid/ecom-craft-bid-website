@@ -13,4 +13,5 @@ export type OfferDTO = {
   tags: Tag[];
   advertiserId: number;
   winnerId: number;
+  avgBid: number;
 };

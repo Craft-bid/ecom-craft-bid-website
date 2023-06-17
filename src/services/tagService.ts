@@ -9,6 +9,6 @@ export const getTags = async () => {
       return response.data;
     })
     .catch(() => {
-      throw new Error('Error while fetching tags.');
+      throw new Error(`Error while fetching tags.`);
     });
 };

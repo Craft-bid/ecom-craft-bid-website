@@ -41,7 +41,7 @@ export function OfferCollection({ filter, handleFilterChange }: FilterParamsProp
     };
     console.log(toBackend);
     await axios
-      .get<OfferDTO>(addQueryParams(fetchUrl, toBackend))
+      .get<OfferDTO[]>(addQueryParams(fetchUrl, toBackend))
       .then((res) => {
         console.log(res.data);
         return res.data;
@@ -49,11 +49,12 @@ export function OfferCollection({ filter, handleFilterChange }: FilterParamsProp
       .then((data) => {
         const newData: OfferCardProps[] = data.map((offer: OfferDTO) => {
           return {
+            id: offer.id,
             title: offer.title,
             description: offer.description,
             avgBid: 100,
             bids: offer.bids.length,
-            image: (offer.photo[0] as string) || 'https://source.unsplash.com/random',
+            image: offer.photos[0] || 'https://source.unsplash.com/random',
           };
         });
 

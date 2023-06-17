@@ -1,8 +1,11 @@
 import { Box, Grid, Typography } from '@mui/material';
 import { OfferCardProps } from './OfferCard.types';
 import '@fontsource/montserrat';
+import { useNavigate } from 'react-router-dom';
 
 export function OfferCard(prop: OfferCardProps) {
+  const navigate = useNavigate();
+  const { avgBid, bids, description, id, image, title } = prop;
   return (
     <Box
       borderBottom={1}
@@ -23,6 +26,9 @@ export function OfferCard(prop: OfferCardProps) {
         height={1}
         flexWrap={'nowrap'}
         columnSpacing={4}
+        onClick={() => {
+          navigate(`/offer/${id}`);
+        }}
       >
         <Grid
           item
@@ -35,7 +41,7 @@ export function OfferCard(prop: OfferCardProps) {
             bgcolor={'red'}
           >
             <img
-              src={prop.image}
+              src={image}
               alt='offer'
               width={'100%'}
               height={'100%'}
@@ -61,7 +67,7 @@ export function OfferCard(prop: OfferCardProps) {
               fontWeight={'bold'}
               fontSize={24}
             >
-              {prop.title}
+              {title}
             </Typography>
           </Grid>
           <Grid
@@ -74,7 +80,7 @@ export function OfferCard(prop: OfferCardProps) {
               fontSize={20}
               lineHeight={'24px'}
             >
-              {prop.description}
+              {description}
             </Typography>
           </Grid>
         </Grid>
@@ -95,7 +101,7 @@ export function OfferCard(prop: OfferCardProps) {
             fontWeight={'bold'}
             lineHeight={'24px'}
           >
-            Avg. Bid: {prop.avgBid}$
+            Avg. Bid: {avgBid}$
           </Typography>
           <Typography
             fontFamily='Montserrat'
@@ -103,7 +109,7 @@ export function OfferCard(prop: OfferCardProps) {
             fontWeight={'500'}
             lineHeight={'24px'}
           >
-            {prop.bids} bids
+            {bids} bids
           </Typography>
         </Grid>
       </Grid>

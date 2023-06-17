@@ -1,11 +1,9 @@
 import React from 'react';
-import { Admin, AuthProvider, ListGuesser, Resource, UserIdentity } from 'react-admin';
+import { Admin, Resource } from 'react-admin';
 import dataProvider from '../services/dataProvider';
 import { ListingList } from './AdminPageLists/ListingList';
-import { loginUser } from '../services/authService';
-import { LoginFormDTO } from '../components/LoginForm/LoginForm.types';
-import jwt_decode from 'jwt-decode';
 import { authProvider } from '../services/authProvider';
+import { UserList } from './AdminPageLists/UserList';
 
 export function AdminPage() {
   const dataProvider2 = dataProvider('http://localhost:8080/api/v1/admin');
@@ -17,7 +15,7 @@ export function AdminPage() {
     >
       <Resource
         name='users'
-        list={ListGuesser}
+        list={UserList}
       />
       <Resource
         name='listings'

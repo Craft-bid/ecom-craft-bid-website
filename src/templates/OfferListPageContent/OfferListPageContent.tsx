@@ -52,8 +52,13 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
     const toBackend: QueryParams = {
       title: params.title,
       tagNames: params.tags,
+      ...(params.minPrice !== 0 && { minPrice: params.minPrice }),
+      ...(params.maxPrice !== 0 && { maxPrice: params.maxPrice }),
     };
+
+    console.log('toback');
     console.log(toBackend);
+    console.log(addQueryParams(fetchUrl, toBackend));
     await axios
       .get<OfferDTO[]>(addQueryParams(fetchUrl, toBackend))
       .then((res) => {

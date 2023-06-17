@@ -58,8 +58,8 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
           advetiserSurname: filter.advetiserSurname,
           winnerName: filter.winnerName,
           tags: tags,
-          priceFrom: Number(values.min),
-          priceTo: Number(values.max),
+          minPrice: Number(values.min),
+          maxPrice: Number(values.max),
           pageable: {
             pageNumber: filter.pageable.pageNumber,
             pageSize: filter.pageable.pageSize,

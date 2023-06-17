@@ -1,11 +1,13 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Card, Grid } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BidDTO } from '../../common/types/Bid.types';
+import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 import { Category } from '../HomePageContent/HomePageContent.types';
 import { OfferBidCreationForm } from '../OfferBidCreationForm/OfferBidCreationForm';
 import { OfferBidList } from '../OfferBidList/OfferBidList';
 import { OfferBidListProps } from '../OfferBidList/OfferBidList.types';
+import { OfferControlForm } from '../OfferControlForm/OfferControlForm';
 import { OfferHeader } from '../OfferHeader/OfferHeader';
 import { OfferHeaderProps } from '../OfferHeader/OfferHeader.types';
 import { OfferInfo } from '../OfferInfo/OfferInfo';
@@ -31,6 +33,7 @@ export function OfferPageContent() {
   //Also get seller name and surname, his id(needs to link to his profile), all ratings of the seller, seller status(verified, not verified))
   //Also get all bidders, their names, surnames, ratings, pictures, status(verified, not verified), their bids
 
+  const [offerId, setOfferId] = useState<number>(0);
   const [offerStatus, setOfferStatus] = useState<string>('');
   const [offerTitle, setOfferTitle] = useState<string>('');
   const [offerDescription, setOfferDescription] = useState<string>('');
@@ -43,27 +46,41 @@ export function OfferPageContent() {
   const [offerCategories, setOfferCategories] = useState<Category[]>([]);
   const [offerBids, setOfferBids] = useState<BidDTO[]>([]);
 
+  const userContext = useContext(AuthenticationContext);
+
+  if (!userContext) {
+    throw new Error('AuthenticationContext is null');
+  }
+
+  const { id } = userContext;
+  const userId = id ? id : -1;
+  console.log(`id${userId}`);
+  console.log(`offer${offerOwnerId}`);
+  const isOwner = id === offerOwnerId;
+
   useEffect(() => {
     //our url is /offer/:id
     //get id from url
     const pathname = window.location.pathname;
     const rightPartIndex = 1;
-    const id = Number(pathname.split('/offer/')[rightPartIndex]); // Extract the ID from the URL
-    if (isNaN(id)) {
+    const urlId = Number(pathname.split('/offer/')[rightPartIndex]); // Extract the ID from the URL
+    if (isNaN(urlId)) {
       throw new Error('Invalid ID');
     }
-
+    //url will be used later on when we have the backend
     fetch('../src/templates/OfferPageContent/testOfferPageContent.json')
       .then((response) => {
         return response.json();
       })
       .then((data: OfferDTO) => {
+        setOfferOwnerId(data.advertiserId);
         setOfferStatus(data.ended ? 'Closed' : 'Open');
         setOfferTitle(data.title);
         setOfferDescription(data.description);
         setOfferImageUrls(data.photos);
         setOfferCategories(data.tags);
         setOfferBids(data.bids);
+        setOfferId(data.id);
         fetch('../src/templates/OfferPageContent/testUsers.json')
           .then((response) => {
             return response.json();
@@ -82,6 +99,10 @@ export function OfferPageContent() {
             console.log(Number(neededUser.stars));
             setOfferOwnerRating(Number(neededUser.stars));
             setOfferOwnerStatus(neededUser.verified ? 'Verified' : 'Not verified');
+            //If user is logged in, check if he is the owner of the offer
+            if (id === neededUser.id) {
+              //If he is, he can't bid, and he can accept the bid
+            }
           })
           .catch((error) => {
             throw error;
@@ -90,7 +111,7 @@ export function OfferPageContent() {
       .catch((error) => {
         throw error;
       });
-  }, []);
+  }, [id]);
 
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
@@ -129,6 +150,8 @@ export function OfferPageContent() {
 
   const offerBidListProps: OfferBidListProps = {
     bidList: offerBids,
+    isOwner: isOwner,
+    listingId: offerId,
   };
   return (
     <Grid
@@ -156,7 +179,7 @@ export function OfferPageContent() {
         <OfferHeader {...offerHeaderProps}></OfferHeader>
         <OfferInfo {...offerInfoProps}></OfferInfo>
         <OfferBidList {...offerBidListProps}></OfferBidList>
-        <OfferBidCreationForm></OfferBidCreationForm>
+        {isOwner ? <OfferControlForm></OfferControlForm> : <OfferBidCreationForm></OfferBidCreationForm>}
       </Card>
     </Grid>
   );

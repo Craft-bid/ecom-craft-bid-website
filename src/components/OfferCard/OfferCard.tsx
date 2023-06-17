@@ -1,4 +1,4 @@
-import { Box, Grid, Typography } from '@mui/material';
+import { Box, Card, Grid, Typography } from '@mui/material';
 import { OfferCardProps } from './OfferCard.types';
 import '@fontsource/montserrat';
 import { useNavigate } from 'react-router-dom';
@@ -11,9 +11,7 @@ export function OfferCard(prop: OfferCardProps) {
       borderBottom={1}
       borderColor='black'
       borderTop={1}
-      width={1000}
-      height={280}
-      margin='auto'
+      width={'100%'}
       marginTop={5}
       paddingBottom={4}
       paddingTop={4}
@@ -35,18 +33,13 @@ export function OfferCard(prop: OfferCardProps) {
           height={1}
           mobile={4}
         >
-          <Box
-            width={1}
-            height={1}
-            bgcolor={'red'}
-          >
+          <Card sx={{ width: 1, height: 1, padding: 0 }}>
             <img
               src={image}
               alt='offer'
-              width={'100%'}
-              height={'100%'}
+              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
             />
-          </Box>
+          </Card>
         </Grid>
         <Grid
           item

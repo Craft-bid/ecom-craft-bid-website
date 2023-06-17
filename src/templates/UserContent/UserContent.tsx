@@ -56,9 +56,14 @@ export function UserContent(props: UserContentProps) {
       label: `Email: ${email}`,
     },
   ];
+  const date = new Date(joined);
+
+  const fullYear = date.getFullYear();
+  const month = date.getMonth();
+
   const stats = [
     {
-      label: `${name} has joined in ${joined.toLocaleString('default', { month: 'long' })},${joined.getFullYear()}`,
+      label: `${name} has joined in ${month}/${fullYear}`,
     },
     {
       label: `${name} has worked in ${workedIn} jobs`,
@@ -77,12 +82,14 @@ export function UserContent(props: UserContentProps) {
   return (
     <Grid
       maxWidth={1480}
-      height={'100%'}
+      height={'auto'}
       minHeight={'500px'}
       container
       bgcolor='#FAFDFD'
       borderRadius={10}
       padding={2}
+      marginTop={4}
+      marginBottom={6}
       flexDirection={'column'}
       flexWrap={'nowrap'}
       spacing={2}
@@ -92,27 +99,22 @@ export function UserContent(props: UserContentProps) {
         item
         container
         maxHeight={'40%'}
-        height={'100%'}
+        height={'auto'}
         flexDirection={'row'}
         flexWrap={'nowrap'}
       >
-        <Grid
-          item
-          mobile={2}
+        <Box
+          width={1}
+          height={1}
+          borderRadius={5}
+          overflow={'hidden'}
         >
-          <Box
-            width={1}
-            height={1}
-            borderRadius={5}
-            overflow={'hidden'}
-          >
-            <img
-              src={image}
-              style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-              alt='offer'
-            />
-          </Box>
-        </Grid>
+          <img
+            src={image}
+            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
+            alt='offer'
+          />
+        </Box>
         <Grid
           item
           container

@@ -9,39 +9,46 @@ import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { UserContent } from '../templates/UserContent/UserContent';
 import { UserContentProps } from '../templates/UserContent/UserContent.types';
-import { useState } from 'react';
-
-const profilePageProps: UserContentProps = {
-  id: 1,
-  image: 'https://picsum.photos/150/150',
-  name: 'Jack',
-  surname: 'Smith',
-  country: 'USA',
-  city: 'Detroid',
-  verified: true,
-  stars: '4.5',
-  phoneNumber: '123 456 789',
-  email: 'example@example.pl',
-  skills: ['skill1', 'skill2', 'skill3'],
-  aboutMe:
-    'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras semper risus ac elementum sollicitudin. Nullam ac eros eu quam euismod congue. Praesent interdum quam in nisi euismod, a convallis ligula imperdiet. Phasellus dapibus sit amet massa nec tempor. Class aptent  taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Etiam ultrices molestie pellentesque. Nulla diam mauris, porta porta gravida non, ultrices in urna. Nulla nec nunc egestas enim sodales convallis eu vel justo.',
-  joined: new Date(),
-  workedIn: 5,
-  customerSatisfaction: 95,
-};
+import { useEffect, useState } from 'react';
+import axios from 'axios';
 
 export function UserPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
   const [openStatusModal, setOpenStatusModal] = useState(false);
   const [statusModalMessage, setStatusModalMessage] = useState('');
+  const [profilePageProps, setProfilePageProps] = useState<UserContentProps>();
 
   const handleCloseStatusModal = () => {
     setOpenStatusModal(false);
   };
 
+  const getContent = async () => {
+    const pathname = window.location.pathname;
+    const rightPartIndex = 1;
+    const urlId = Number(pathname.split('/user/')[rightPartIndex]); // Extract the ID from the URL
+    if (isNaN(urlId)) {
+      throw new Error('Invalid ID');
+    }
+    await axios
+      .get<UserContentProps>(`http://localhost:8080/api/v1/public/users/${urlId}`)
+      .then((res) => {
+        console.log(res.data);
+        return res.data;
+      })
+      .then((data) => {
+        setProfilePageProps(data);
+      })
+      .catch((error) => {
+        throw error;
+      });
+  };
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
+
+  useEffect(() => {
+    void getContent();
+  }, []);
 
   function renderPopup() {
     const formProps: FormProps = {
@@ -65,28 +72,16 @@ export function UserPage() {
     <Grid
       container
       justifyContent={'space-between'}
-      height={'100vh'}
+      height={'auto'}
       minWidth={'100%'}
       flexDirection={'column'}
       flexWrap={'nowrap'}
       alignItems={'center'}
       sx={homePageSxObj}
     >
-      <Grid
-        minWidth={'100%'}
-        item
-      >
-        <Header {...headerProps} />
-      </Grid>
-      <Grid item>
-        <UserContent {...profilePageProps} />
-      </Grid>
-      <Grid
-        item
-        minWidth={'100%'}
-      >
-        <Footer />
-      </Grid>
+      <Header {...headerProps} />
+      {profilePageProps && <UserContent {...profilePageProps} />}
+      <Footer />
       {showPopup && renderPopup()}
       <Dialog
         open={openStatusModal}

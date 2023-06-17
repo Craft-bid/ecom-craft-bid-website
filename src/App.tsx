@@ -12,6 +12,8 @@ import { UserPage } from './pages/UserPage';
 import axios from 'axios';
 import { useEffect } from 'react';
 import { OfferPage } from './pages/OfferPage';
+import { DecodedToken } from './common/types/JWTResponse.types';
+import jwtDecode from 'jwt-decode';
 
 export function App() {
   useEffect(() => {
@@ -19,9 +21,14 @@ export function App() {
     const interceptor = axios.interceptors.request.use(
       (config) => {
         const token = localStorage.getItem('token');
-        if (token) {
+        if (!token) {
+          return config;
+        }
+        const decodedToken = jwtDecode<DecodedToken>(token);
+        if (decodedToken && decodedToken.exp > Date.now() / 1000) {
           config.headers.Authorization = `Bearer ${token}`;
         }
+
         return config;
       },
       (error) => {

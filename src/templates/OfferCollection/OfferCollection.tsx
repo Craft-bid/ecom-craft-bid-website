@@ -36,31 +36,26 @@ export function OfferCollection(props: OfferCollectionProps) {
   } else {
     return (
       <Grid
-        container
-        spacing={2}
-        sx={{ width: 1080, paddingBottom: 8 }}
+        display={'flex'}
+        width={'100%'}
+        height={'auto'}
+        justifyContent={'center'}
+        alignItems={'center'}
+        flexDirection={'column'}
+        marginBottom={4}
       >
-        <Grid
-          item
-          mobile={12}
+        <Typography
+          variant='h4'
+          sx={{ fontFamily: 'Montserrat', fontSize: 48 }}
         >
-          <Typography
-            variant='h4'
-            sx={{ fontFamily: 'Montserrat', fontSize: 48 }}
-          >
-            {title}
-          </Typography>
-        </Grid>
+          {title}
+        </Typography>
         {offerCardProps.map((offerCardProp, index) => {
           return (
-            <Grid
-              item
-              mobile={12}
-              tablet={6}
+            <OfferCard
               key={index}
-            >
-              <OfferCard {...offerCardProp} />
-            </Grid>
+              {...offerCardProp}
+            />
           );
         })}
       </Grid>

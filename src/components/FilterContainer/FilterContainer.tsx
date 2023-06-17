@@ -79,14 +79,17 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
             <Card sx={{ width: 400, height: 850, backgroundColor: '#F5FBFB' }}>
               <Grid
                 container
-                justifyContent={'space-around'}
+                justifyContent={'flex-start'}
                 alignContent={'left'}
                 flexDirection={'column'}
                 height={'100%'}
                 flexWrap={'nowrap'}
                 padding={2}
               >
-                <Grid item>
+                <Grid
+                  item
+                  marginTop={3}
+                >
                   <Typography
                     style={{
                       fontFamily: 'Montserrat',
@@ -98,7 +101,10 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                     Filter by:
                   </Typography>
                 </Grid>
-                <Grid item>
+                <Grid
+                  item
+                  marginTop={3}
+                >
                   <Typography
                     style={{
                       fontFamily: 'Montserrat',
@@ -114,6 +120,7 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                     flexWrap={'nowrap'}
                     justifyContent={'space-between'}
                     alignItems={'center'}
+                    marginTop={3}
                   >
                     <Grid
                       item
@@ -145,7 +152,10 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                     </Grid>
                   </Grid>
                 </Grid>
-                <Grid item>
+                <Grid
+                  item
+                  marginTop={4}
+                >
                   <Typography
                     style={{
                       fontFamily: 'Montserrat',
@@ -154,35 +164,7 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                       fontSize: 24,
                     }}
                   >
-                    Type:
-                  </Typography>
-                  <FormGroup>
-                    <Field
-                      type='checkbox'
-                      name='fullTime'
-                      as={FormControlLabel}
-                      control={<Checkbox />}
-                      label='Full time'
-                    />
-                    <Field
-                      type='checkbox'
-                      name='partTime'
-                      as={FormControlLabel}
-                      control={<Checkbox />}
-                      label='Part time'
-                    />
-                  </FormGroup>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    style={{
-                      fontFamily: 'Montserrat',
-                      fontStyle: 'normal',
-                      fontWeight: '400',
-                      fontSize: 24,
-                    }}
-                  >
-                    Skill required:
+                    Tags:
                   </Typography>
                   <FormGroup>
                     {categories.map((category) => {
@@ -197,41 +179,6 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                         />
                       );
                     })}
-                  </FormGroup>
-                </Grid>
-                <Grid item>
-                  <Typography
-                    style={{
-                      fontFamily: 'Montserrat',
-                      fontStyle: 'normal',
-                      fontWeight: '400',
-                      fontSize: 24,
-                    }}
-                  >
-                    Languages:
-                  </Typography>
-                  <FormGroup>
-                    <Field
-                      type='checkbox'
-                      name='english'
-                      as={FormControlLabel}
-                      control={<Checkbox />}
-                      label='English'
-                    />
-                    <Field
-                      type='checkbox'
-                      name='polish'
-                      as={FormControlLabel}
-                      control={<Checkbox />}
-                      label='Polish'
-                    />
-                    <Field
-                      type='checkbox'
-                      name='russian'
-                      as={FormControlLabel}
-                      control={<Checkbox />}
-                      label='Russian'
-                    />
                   </FormGroup>
                 </Grid>
               </Grid>

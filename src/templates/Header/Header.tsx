@@ -19,7 +19,7 @@ export function Header(props: HeaderProps) {
     throw new Error('AuthenticationContext is null');
   }
 
-  const { isAuthenticated, name } = context;
+  const { isAuthenticated, name, id } = context;
 
   const onSignOutClick = () => {
     localStorage.removeItem('token');
@@ -31,7 +31,10 @@ export function Header(props: HeaderProps) {
   };
 
   const onUserClick = () => {
-    navigate('/user');
+    if (!id) {
+      throw new Error('User ID is null');
+    }
+    navigate(`/user/${id}`);
   };
   return (
     <AppBar position='sticky'>

@@ -4,7 +4,12 @@ import { UserContentProps } from './UserContent.types';
 import '@fontsource/montserrat';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StarIcon from '@mui/icons-material/Star';
+import { OfferCollection } from '../OfferCollection/OfferCollection';
+import React, { useContext } from 'react';
+import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
+
 export function UserContent(props: UserContentProps) {
+  const { offerCardProps } = props;
   const data = [
     {
       label: props.verified ? (
@@ -49,6 +54,13 @@ export function UserContent(props: UserContentProps) {
       label: `${props.name} has ${props.customerSatisfaction}% customer satisfaction`,
     },
   ];
+
+  const context = useContext(AuthenticationContext);
+  if (!context) {
+    throw new Error('AuthenticationContext is null');
+  }
+  const isOwner = props.id === context.id;
+
   return (
     <Grid
       maxWidth={1480}
@@ -241,6 +253,20 @@ export function UserContent(props: UserContentProps) {
             );
           })}
         </Grid>
+        {isOwner && (
+          <OfferCollection
+            offerCardProps={
+              offerCardProps
+                ? offerCardProps.filter((element) => {
+                    return element.ownerId === context.id;
+                  })
+                : []
+            }
+            bgColor={'#FAFDFD'}
+            title={'My offers'}
+            isCardVariant={false}
+          ></OfferCollection>
+        )}
       </Grid>
     </Grid>
   );

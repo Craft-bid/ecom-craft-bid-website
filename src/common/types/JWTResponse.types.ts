@@ -3,7 +3,8 @@ export type JWTResponse = {
 };
 
 export type DecodedToken = {
-  sub: string;
-  iat: number;
+  email: string;
   exp: number;
+  iat: number;
+  role: string;
 };

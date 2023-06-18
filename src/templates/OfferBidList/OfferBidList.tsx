@@ -1,6 +1,6 @@
 import { Grid, Typography, Rating, Button } from '@mui/material';
 import axios from 'axios';
-import { BidDTO } from '../../common/types/Bid.types';
+import { BidDTO } from '../../common/types/DTOs.types';
 import { OfferBidListProps } from './OfferBidList.types';
 
 export function OfferBidList(props: OfferBidListProps) {

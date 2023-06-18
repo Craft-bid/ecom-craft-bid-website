@@ -2,23 +2,18 @@
 import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, TextField, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Formik, Field, Form, FormikErrors } from 'formik';
-import { addBid, createBidDTO } from '../../services/offerService';
+import { addBid } from '../../services/offerService';
 import { OfferBidProps } from './OfferBidCreationForm.types';
-import { add } from 'date-fns';
+import { CreateBidDTO } from '../../common/types/DTOs.types';
 
-type CreateDataDto = {
-  description: string;
-  money: string;
-  days: string;
-};
 export function OfferBidCreationForm({ ...props }: OfferBidProps) {
-  const handleSubmit = (values: CreateDataDto) => {
-    const newBid: createBidDTO = {
+  const handleSubmit = (values: { description: string; money: string; days: string }) => {
+    const newBid: CreateBidDTO = {
       description: values.description,
       price: Number(values.money),
       daysToDeliver: Number(values.days),
-      listingId: props.listingId,
-      bidderId: props.bidderId,
+      listingId: String(props.listingId),
+      bidderId: String(props.bidderId),
     };
     void addBid(newBid);
   };

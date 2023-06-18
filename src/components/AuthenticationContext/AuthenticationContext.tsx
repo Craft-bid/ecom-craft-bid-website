@@ -25,9 +25,13 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
         setAuthenticated(true);
         setName(decodedToken.email);
         //TODO: set actual ID from a different endpoint/or from decoded token
-        void getId(token).then((newid) => {
-          return setId(newid);
-        });
+        getId(token)
+          .then((newid) => {
+            setId(newid);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     } else {
       // User is not authenticated

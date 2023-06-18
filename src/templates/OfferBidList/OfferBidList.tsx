@@ -1,34 +1,25 @@
 import { Grid, Typography, Rating, Button } from '@mui/material';
-import axios from 'axios';
 import { BidDTO } from '../../common/types/DTOs.types';
 import { OfferBidListProps } from './OfferBidList.types';
+import { updateOffer } from '../../services/offerService';
+import { UpdateOfferDTO } from '../../common/types/DTOs.types';
 
 export function OfferBidList(props: OfferBidListProps) {
   const { bidList, isOwner, listingId } = props;
   const pageLength = bidList.length;
 
-  const handleAccept = (bidId: number) => {
-    // Perform PUT request to the specified URL with the bidId
-    // Replace the placeholder URL and userId with actual values
-
-    // Get userId from bidList using bidId
-    const userId = bidList.find((bid) => {
-      return bid.id === bidId;
-    })?.id;
-
+  const handleAccept = (userId: number) => {
     if (!userId) {
       throw new Error('User id not found');
     }
-    axios
-      .put(`http://localhost:8080/api/v1/private/${listingId}/winner/${userId}`)
-      .then((response) => {
-        // Handle response
-        console.log(response);
-      })
-      .catch((error) => {
-        // Handle error
-        console.log(error);
-      });
+    const update: UpdateOfferDTO = {
+      ended: true,
+      winnerId: String(userId),
+    };
+    console.log(userId);
+    void updateOffer(listingId, update).then(() => {
+      window.location.reload();
+    });
   };
 
   return (
@@ -109,7 +100,7 @@ export function OfferBidList(props: OfferBidListProps) {
                     width: 1,
                   }}
                   onClick={() => {
-                    return handleAccept(bid.id);
+                    return handleAccept(bid.bidderId);
                   }}
                 >
                   Accept

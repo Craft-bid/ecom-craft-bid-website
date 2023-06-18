@@ -1,25 +1,19 @@
 import { Accordion, AccordionSummary, Typography, AccordionDetails, Grid, TextField, FormControlLabel, Checkbox, Button } from '@mui/material';
-import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Form, Formik, Field, FormikErrors } from 'formik';
+import { updateOffer } from '../../services/offerService';
 import { UpdateOfferDTO } from '../../common/types/DTOs.types';
-export function OfferControlForm() {
-  const handleSubmit = async (values: UpdateOfferDTO) => {
-    const listingId = 'your_listing_id'; // Replace with the actual listing ID
-    const url = `http://localhost:8080/api/v1/private/listings/${listingId}`;
 
-    const updateData = {
+export function OfferControlForm(props: { listingid: number }) {
+  const handleSubmit = async (values: { title: string; description: string; ended: boolean }) => {
+    const update: UpdateOfferDTO = {
       title: values.title,
       description: values.description,
       ended: values.ended,
     };
-
-    try {
-      await axios.patch(url, updateData);
-      console.log('Listing updated successfully');
-    } catch (error) {
-      console.error('Failed to update listing', error);
-    }
+    await updateOffer(props.listingid, update).then(() => {
+      window.location.reload();
+    });
   };
 
   const validate = (values: { title: string; description: string; ended: boolean }) => {
@@ -59,7 +53,7 @@ export function OfferControlForm() {
           validate={validate}
           onSubmit={handleSubmit}
         >
-          {({ values, errors, setFieldValue }) => {
+          {({ errors }) => {
             return (
               <Form>
                 <Grid
@@ -100,16 +94,11 @@ export function OfferControlForm() {
                     item
                     mobile={12}
                   >
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={values.ended}
-                          onChange={(event) => {
-                            return setFieldValue('endedStatus', event.target.checked);
-                          }}
-                          name='endedStatus'
-                        />
-                      }
+                    <Field
+                      type='checkbox'
+                      name='ended'
+                      as={FormControlLabel}
+                      control={<Checkbox />}
                       label='Ended Status'
                     />
                   </Grid>

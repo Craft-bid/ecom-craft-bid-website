@@ -1,4 +1,4 @@
-import { ArrayField, ChipField, Datagrid, List, ReferenceField, SingleFieldList, TextField } from 'react-admin';
+import { ArrayField, ChipField, Datagrid, List, SingleFieldList, TextField } from 'react-admin';
 
 export const ListingList = () => {
   return (

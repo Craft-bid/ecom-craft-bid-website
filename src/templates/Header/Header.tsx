@@ -100,7 +100,7 @@ export function Header(props: HeaderProps) {
                   color='inherit'
                   onClick={isAuthenticated ? onUserClick : onSignUpClick}
                 >
-                  {isAuthenticated ? name?.substring(4).concat('...') : 'SIGN UP'}
+                  {isAuthenticated ? name?.substring(0, 4).concat('...') : 'SIGN UP'}
                 </Button>
               </Grid>
             </>

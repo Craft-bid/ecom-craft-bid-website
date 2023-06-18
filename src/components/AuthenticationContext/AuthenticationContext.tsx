@@ -15,13 +15,14 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
     const token = localStorage.getItem('token');
     const decodedToken = token ? jwtDecode<DecodedToken>(token) : null;
 
+    console.log(decodedToken);
     if (token && decodedToken) {
       // Check if token is expired
       const currentTimestamp = Date.now() / 1000; // Current timestamp in seconds
-      if (decodedToken.sub && decodedToken.exp && decodedToken.exp > currentTimestamp) {
+      if (decodedToken.email && decodedToken.exp && decodedToken.exp > currentTimestamp) {
         // User is authenticated
         setAuthenticated(true);
-        setName(decodedToken.sub);
+        setName(decodedToken.email);
         //TODO: set actual ID from a different endpoint/or from decoded token
         setId(1);
       }

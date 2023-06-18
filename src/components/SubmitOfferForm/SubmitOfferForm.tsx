@@ -1,10 +1,13 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Autocomplete, Button, Card, Chip, Grid, TextField, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useState, useEffect, FormEvent } from 'react';
+import { useState, useEffect, FormEvent, useContext } from 'react';
 import { Category } from '../../templates/HomePageContent/HomePageContent.types';
 import { CustomUploadDropzone } from '../CustomUploadDropzone/CustomUploadDropzone';
 import { SubmitFormErrors } from './SubmitOfferForm.types';
+import { addOffer, addOfferDTO, addPhoto, addTags, updateOffer, updateOfferDTO } from '../../services/offerService';
+import { AuthenticationContext } from '../AuthenticationContext/AuthenticationContext';
+import axios from 'axios';
 
 export function SubmitOfferForm() {
   const [date, setDate] = useState<Date | null>(new Date());
@@ -19,6 +22,7 @@ export function SubmitOfferForm() {
   const [isFormValid, setIsFormValid] = useState(false);
   const [formErrors, setFormErrors] = useState({} as SubmitFormErrors);
 
+  const context = useContext(AuthenticationContext);
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -47,6 +51,48 @@ export function SubmitOfferForm() {
     if (Object.keys(errors).length === 0) {
       setIsFormValid(true);
     }
+    const { isAuthenticated, name, id } = context;
+    if (!isAuthenticated) {
+      throw new Error('User is not authenticated');
+    }
+    const offer: addOfferDTO = {
+      title: title,
+      description: description,
+      advertiserId: id,
+    };
+
+    axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
+
+    addOffer(offer)
+      .then((ret) => {
+        const updatedOffer: updateOfferDTO = {
+          expirationDate: date,
+        };
+        updateOffer(ret.id, updatedOffer)
+          .then((ret2) => {
+            addTags(ret.id, selectedCategories)
+              .then((ret3) => {
+                if (file) {
+                  addPhoto(ret.id, file)
+                    .then((ret4) => {
+                      console.log(ret4);
+                    })
+                    .catch((error) => {
+                      console.error("Couldn't add photo");
+                    });
+                }
+              })
+              .catch((error) => {
+                console.error("Couldn't add tags");
+              });
+          })
+          .catch((error) => {
+            console.error("Couldn't update offer");
+          });
+      })
+      .catch((error) => {
+        console.error("Couldn't add offer");
+      });
   };
 
   const formSxObj = { backgroundColor: '#F5FBFB', width: '55rem', minHeight: 1400, borderRadius: 10 };
@@ -229,4 +275,7 @@ export function SubmitOfferForm() {
       </form>
     </Card>
   );
+}
+function jwt_decode(arg0: string) {
+  throw new Error('Function not implemented.');
 }

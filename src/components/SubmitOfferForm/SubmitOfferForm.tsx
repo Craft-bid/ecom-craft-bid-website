@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Autocomplete, Button, Card, Chip, Grid, TextField, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useState, FormEvent, useContext } from 'react';
+import { useState, useEffect, FormEvent, useContext } from 'react';
 import { CustomUploadDropzone } from '../CustomUploadDropzone/CustomUploadDropzone';
 import { SubmitFormErrors } from './SubmitOfferForm.types';
 import { addOffer, addPhoto, addTags, updateOffer } from '../../services/offerService';
 import { AuthenticationContext } from '../AuthenticationContext/AuthenticationContext';
 import { Tag } from '../../common/types/Tag.types';
 import { AddOfferDTO, UpdateOfferDTO } from '../../common/types/DTOs.types';
+import { getTags } from '../../services/tagService';
 
 export function SubmitOfferForm() {
   const [date, setDate] = useState<Date | null>(new Date());
@@ -17,10 +18,20 @@ export function SubmitOfferForm() {
   const [description, setDescription] = useState<string>('');
   const [minBudget, setMinBudget] = useState<number>(0);
   const [maxBudget, setMaxBudget] = useState<number>(0);
-  const [categories] = useState<Tag[]>([]);
+  const [categories, setCategories] = useState<Tag[]>([]);
 
   const [isFormValid, setIsFormValid] = useState(false);
   const [formErrors, setFormErrors] = useState({} as SubmitFormErrors);
+
+  useEffect(() => {
+    getTags()
+      .then((res) => {
+        setCategories(res);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
+  }, []);
 
   const context = useContext(AuthenticationContext);
   if (!context) {

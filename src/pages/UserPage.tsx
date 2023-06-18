@@ -8,7 +8,7 @@ import { Footer } from '../templates/Footer/Footer';
 import { Header } from '../templates/Header/Header';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { UserContent } from '../templates/UserContent/UserContent';
-import { UserContentProps } from '../templates/UserContent/UserContent.types';
+import { UserDTO } from '../common/types/DTOs.types';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
@@ -16,7 +16,7 @@ export function UserPage() {
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
   const [openStatusModal, setOpenStatusModal] = useState(false);
   const [statusModalMessage, setStatusModalMessage] = useState('');
-  const [profilePageProps, setProfilePageProps] = useState<UserContentProps>();
+  const [profilePageProps, setProfilePageProps] = useState<UserDTO>();
 
   const handleCloseStatusModal = () => {
     setOpenStatusModal(false);
@@ -30,7 +30,7 @@ export function UserPage() {
       throw new Error('Invalid ID');
     }
     await axios
-      .get<UserContentProps>(`http://localhost:8080/api/v1/public/users/${urlId}`)
+      .get<UserDTO>(`http://localhost:8080/api/v1/public/users/${urlId}`)
       .then((res) => {
         console.log(res.data);
         return res.data;

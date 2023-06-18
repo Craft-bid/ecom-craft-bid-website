@@ -2,8 +2,8 @@
 import { Card, Grid } from '@mui/material';
 import axios from 'axios';
 import { useContext, useEffect, useState } from 'react';
-import { BidDTO } from '../../common/types/Bid.types';
-import { OfferDTO } from '../../common/types/OfferDTO.types';
+import { BidDTO } from '../../common/types/DTOs.types';
+import { OfferDTO } from '../../common/types/DTOs.types';
 import { Tag } from '../../common/types/Tag.types';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 import { OfferBidCreationForm } from '../OfferBidCreationForm/OfferBidCreationForm';
@@ -14,7 +14,7 @@ import { OfferHeader } from '../OfferHeader/OfferHeader';
 import { OfferHeaderProps } from '../OfferHeader/OfferHeader.types';
 import { OfferInfo } from '../OfferInfo/OfferInfo';
 import { OfferInfoProps } from '../OfferInfo/OfferInfo.types';
-import { UserContentProps } from '../UserContent/UserContent.types';
+import { UserDTO } from '../../common/types/DTOs.types';
 import { OfferBidProps } from '../OfferBidCreationForm/OfferBidCreationForm.types';
 
 export function OfferPageContent() {
@@ -73,12 +73,12 @@ export function OfferPageContent() {
         setOfferBids(data.bids);
         setOfferId(data.id);
         axios
-          .get<UserContentProps>(`http://localhost:8080/api/v1/public/users/${data.advertiserId}`)
+          .get<UserDTO>(`http://localhost:8080/api/v1/public/users/${data.advertiserId}`)
           .then((response) => {
             console.log(response.data);
             return response.data;
           })
-          .then((neededUser: UserContentProps) => {
+          .then((neededUser: UserDTO) => {
             setOfferOwnerName(neededUser.name);
             setOfferOwnerSurname(neededUser.surname);
             setOfferOwnerId(neededUser.id);

@@ -2,15 +2,9 @@ import { Accordion, AccordionSummary, Typography, AccordionDetails, Grid, TextFi
 import axios from 'axios';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Form, Formik, Field, FormikErrors } from 'formik';
-
-type UpdateDataDto = {
-  title: string;
-  description: string;
-  ended: boolean;
-};
-
+import { UpdateOfferDTO } from '../../common/types/DTOs.types';
 export function OfferControlForm() {
-  const handleSubmit = async (values: UpdateDataDto) => {
+  const handleSubmit = async (values: UpdateOfferDTO) => {
     const listingId = 'your_listing_id'; // Replace with the actual listing ID
     const url = `http://localhost:8080/api/v1/private/listings/${listingId}`;
 

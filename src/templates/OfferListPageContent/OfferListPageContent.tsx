@@ -7,8 +7,9 @@ import { useEffect, useState } from 'react';
 import { FilterParams, FilterParamsProps } from './FilterParams.types';
 import { SearchBarProps } from '../../components/SearchBar/SearchBar.types';
 import axios from 'axios';
-import { OfferDTO } from '../../common/types/OfferDTO.types';
+import { OfferDTO } from '../../common/types/DTOs.types';
 import { useNavigate } from 'react-router-dom';
+import { QueryParams } from '../../common/types/Filter.types';
 
 export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const { filter, handleFilterChange } = props;
@@ -18,13 +19,6 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   };
 
   const fetchUrl = 'http://localhost:8080/api/v1/public/listings/search';
-
-  type Pageable = {
-    pageNumber: number;
-    pageSize: number;
-  };
-
-  type QueryParams = Record<string, string | string[] | number | number[] | boolean | boolean[] | Pageable>;
 
   const [offerCardProps, setOfferCardProps] = useState<OfferCardProps[]>([]);
 

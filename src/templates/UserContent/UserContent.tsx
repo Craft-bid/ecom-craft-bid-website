@@ -1,6 +1,5 @@
 import { Grid, Icon, Typography } from '@mui/material';
 import { Box } from '@mui/system';
-import { UserContentProps } from './UserContent.types';
 import '@fontsource/montserrat';
 import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StarIcon from '@mui/icons-material/Star';
@@ -8,8 +7,9 @@ import { OfferCollection } from '../OfferCollection/OfferCollection';
 import React, { useContext } from 'react';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
+import { UserDTO } from '../../common/types/DTOs.types';
 
-export function UserContent(props: UserContentProps) {
+export function UserContent(props: UserDTO) {
   const { aboutMe, averageRating, city, country, email, id, image, joined, listings, name, phoneNumber, stars, surname, verified, workedIn } = props;
 
   const offerCardProps: OfferCardProps[] = listings.map((listing) => {

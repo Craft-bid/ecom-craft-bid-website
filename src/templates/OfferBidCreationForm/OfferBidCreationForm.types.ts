@@ -9,3 +9,8 @@ export type LoginFormErrors = Partial<Record<keyof OfferBidCreationFormValues, s
 export type LoginFormDTO = OfferBidCreationFormValues & {
   ListingId: string;
 };
+
+export type OfferBidProps = {
+  listingId: number;
+  bidderId: number;
+};

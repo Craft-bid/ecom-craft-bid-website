@@ -47,3 +47,10 @@ export const loginUser = async (user: LoginFormDTO) => {
     }
   }
 };
+
+export const getId = async (token: string): Promise<number> => {
+  return await axios.post<number>('http://localhost:8080/api/v1/public/users/myId', token).then((response) => {
+    console.log(response.data);
+    return response.data;
+  });
+};

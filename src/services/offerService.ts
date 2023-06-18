@@ -34,6 +34,13 @@ export type Offer = {
   winnerId?: string;
 };
 
+export type createBidDTO = {
+  price: number;
+  description: string;
+  daysToDeliver: number;
+  bidderId: string;
+  listingId: string;
+};
 export const addOffer = async (listing: addOfferDTO): Promise<Offer> => {
   return await axios
     .post<Offer>('http://localhost:8080/api/v1/private/listings', listing)
@@ -78,4 +85,10 @@ export const addPhoto = async (listingid: number, photo: File): Promise<Offer> =
       console.log(response.data);
       return response.data;
     });
+};
+
+export const addBid = async (bid: createBidDTO) => {
+  await axios.post('http://localhost:8080/api/v1/private/bids', bid).then((response) => {
+    console.log(response.data);
+  });
 };

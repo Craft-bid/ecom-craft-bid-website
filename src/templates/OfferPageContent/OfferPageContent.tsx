@@ -170,7 +170,7 @@ export function OfferPageContent() {
         <OfferHeader {...offerHeaderProps}></OfferHeader>
         <OfferInfo {...offerInfoProps}></OfferInfo>
         <OfferBidList {...offerBidListProps}></OfferBidList>
-        {isOwner ? <OfferControlForm></OfferControlForm> : <OfferBidCreationForm {...bidProps}></OfferBidCreationForm>}
+        {isOwner ? <OfferControlForm listingid={offerId}></OfferControlForm> : <OfferBidCreationForm {...bidProps}></OfferBidCreationForm>}
       </Card>
     </Grid>
   );

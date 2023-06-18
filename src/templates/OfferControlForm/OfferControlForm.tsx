@@ -53,7 +53,7 @@ export function OfferControlForm(props: { listingid: number }) {
           validate={validate}
           onSubmit={handleSubmit}
         >
-          {({ values, errors, setFieldValue }) => {
+          {({ errors }) => {
             return (
               <Form>
                 <Grid
@@ -94,16 +94,11 @@ export function OfferControlForm(props: { listingid: number }) {
                     item
                     mobile={12}
                   >
-                    <FormControlLabel
-                      control={
-                        <Checkbox
-                          checked={values.ended}
-                          onChange={(event) => {
-                            return setFieldValue('endedStatus', event.target.checked);
-                          }}
-                          name='endedStatus'
-                        />
-                      }
+                    <Field
+                      type='checkbox'
+                      name='ended'
+                      as={FormControlLabel}
+                      control={<Checkbox />}
                       label='Ended Status'
                     />
                   </Grid>

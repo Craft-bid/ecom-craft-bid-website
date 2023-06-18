@@ -10,6 +10,8 @@ import { Tag } from '../../common/types/Tag.types';
 import { AddOfferDTO, UpdateOfferDTO } from '../../common/types/DTOs.types';
 import { getTags } from '../../services/tagService';
 
+import { useNavigate } from 'react-router-dom';
+
 export function SubmitOfferForm() {
   const [date, setDate] = useState<Date | null>(new Date());
   const [selectedCategories, setSelectedCategories] = useState<Tag[]>([]);
@@ -22,6 +24,7 @@ export function SubmitOfferForm() {
 
   const [isFormValid, setIsFormValid] = useState(false);
   const [formErrors, setFormErrors] = useState({} as SubmitFormErrors);
+  const navigate = useNavigate();
 
   useEffect(() => {
     getTags()
@@ -61,6 +64,7 @@ export function SubmitOfferForm() {
     if (!date) {
       throw new Error('Date is null');
     }
+
     // Add additional validation logic as needed
     if (!isAuthenticated) {
       throw new Error('User is not authenticated');
@@ -70,7 +74,6 @@ export function SubmitOfferForm() {
     }
     // Update the form errors state
     setFormErrors(errors);
-
     // If no errors, set form validity to true
     if (Object.keys(errors).length === 0) {
       setIsFormValid(true);
@@ -98,6 +101,7 @@ export function SubmitOfferForm() {
                   addPhoto(ret.id, file)
                     .then((ret4) => {
                       console.log(ret4);
+                      navigate(`/offer/${ret4.id}`);
                     })
                     .catch((error) => {
                       console.error(`Couldn't add photo\n${JSON.stringify(error)}`);

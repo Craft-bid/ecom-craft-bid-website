@@ -31,10 +31,10 @@ export function RegisterForm(props: FormProps) {
       validateOnChange={true}
       validateOnBlur={true}
       validate={validate}
-      initialValues={{ login: '', email: '', password: '', repeatPassword: '' }}
+      initialValues={{ name: '', email: '', password: '', repeatPassword: '' }}
       onSubmit={(values: RegisterFormValues, { setSubmitting }: FormikHelpers<RegisterFormValues>) => {
         const dto: RegisterFormDTO = {
-          login: values.login,
+          name: values.name,
           email: values.email,
           password: values.password,
         };
@@ -98,13 +98,13 @@ export function RegisterForm(props: FormProps) {
                 >
                   <Field
                     as={TextField}
-                    label='Login'
+                    label='Name'
                     sx={{
                       width: 1,
                       backgroundColor: 'white',
                     }}
-                    type='login'
-                    name='login'
+                    type='name'
+                    name='name'
                     required
                   />
                 </Grid>

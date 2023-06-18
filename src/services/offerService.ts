@@ -41,6 +41,7 @@ export type createBidDTO = {
   bidderId: string;
   listingId: string;
 };
+
 export const addOffer = async (listing: addOfferDTO): Promise<Offer> => {
   return await axios
     .post<Offer>('http://localhost:8080/api/v1/private/listings', listing)
@@ -92,3 +93,4 @@ export const addBid = async (bid: createBidDTO) => {
     console.log(response.data);
   });
 };
+

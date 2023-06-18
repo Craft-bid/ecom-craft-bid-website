@@ -2,20 +2,25 @@
 import { Accordion, AccordionDetails, AccordionSummary, Button, Grid, TextField, Typography } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Formik, Field, Form, FormikErrors } from 'formik';
+import { addBid, createBidDTO } from '../../services/offerService';
+import { OfferBidProps } from './OfferBidCreationForm.types';
+import { add } from 'date-fns';
 
 type CreateDataDto = {
   description: string;
   money: string;
   days: string;
 };
-export function OfferBidCreationForm() {
+export function OfferBidCreationForm({ ...props }: OfferBidProps) {
   const handleSubmit = (values: CreateDataDto) => {
-    // const listingId = 'your_listing_id'; // Replace with the actual listing ID
-    // const url = `http://localhost:8080/api/v1/public/${listingId}/bids`;
-
-    // Perform your POST request using the values
-    // For brevity, I'll just log the values to the console
-    console.log(values);
+    const newBid: createBidDTO = {
+      description: values.description,
+      price: Number(values.money),
+      daysToDeliver: Number(values.days),
+      listingId: props.listingId,
+      bidderId: props.bidderId,
+    };
+    void addBid(newBid);
   };
 
   const validate = (

@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from 'react';
 import { AuthenticationContextProps, AuthenticationContextProviderProps } from './AuthenticationContext.types';
 import jwtDecode from 'jwt-decode';
 import { DecodedToken } from '../../common/types/JWTResponse.types';
+import { getId } from '../../services/authService';
 
 export const AuthenticationContext = createContext<AuthenticationContextProps | null>(null);
 
@@ -24,7 +25,9 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
         setAuthenticated(true);
         setName(decodedToken.email);
         //TODO: set actual ID from a different endpoint/or from decoded token
-        setId(1);
+        void getId(token).then((newid) => {
+          return setId(newid);
+        });
       }
     } else {
       // User is not authenticated

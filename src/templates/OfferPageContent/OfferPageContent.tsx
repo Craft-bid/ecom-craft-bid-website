@@ -15,6 +15,7 @@ import { OfferHeaderProps } from '../OfferHeader/OfferHeader.types';
 import { OfferInfo } from '../OfferInfo/OfferInfo';
 import { OfferInfoProps } from '../OfferInfo/OfferInfo.types';
 import { UserContentProps } from '../UserContent/UserContent.types';
+import { OfferBidProps } from '../OfferBidCreationForm/OfferBidCreationForm.types';
 
 export function OfferPageContent() {
   //Get offer status, offer title, offer description, get category
@@ -139,6 +140,10 @@ export function OfferPageContent() {
     isOwner: isOwner,
     listingId: offerId,
   };
+  const bidProps: OfferBidProps = {
+    listingId: offerId,
+    bidderId: userId,
+  };
   return (
     <Grid
       container
@@ -165,7 +170,7 @@ export function OfferPageContent() {
         <OfferHeader {...offerHeaderProps}></OfferHeader>
         <OfferInfo {...offerInfoProps}></OfferInfo>
         <OfferBidList {...offerBidListProps}></OfferBidList>
-        {isOwner ? <OfferControlForm></OfferControlForm> : <OfferBidCreationForm></OfferBidCreationForm>}
+        {isOwner ? <OfferControlForm></OfferControlForm> : <OfferBidCreationForm {...bidProps}></OfferBidCreationForm>}
       </Card>
     </Grid>
   );

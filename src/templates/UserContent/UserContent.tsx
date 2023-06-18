@@ -5,12 +5,19 @@ import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import StarIcon from '@mui/icons-material/Star';
 import { OfferCollection } from '../OfferCollection/OfferCollection';
 import React, { useContext } from 'react';
+import userImage from '../../assets/user.png';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
 import { UserDTO } from '../../common/types/DTOs.types';
 
 export function UserContent(props: UserDTO) {
   const { aboutMe, averageRating, city, country, email, id, image, joined, listings, name, phoneNumber, stars, surname, verified, workedIn } = props;
+
+  const context = useContext(AuthenticationContext);
+  if (!context) {
+    throw new Error('AuthenticationContext is null');
+  }
+  const isOwner = id === context.id;
 
   const offerCardProps: OfferCardProps[] = listings.map((listing) => {
     return {
@@ -38,19 +45,22 @@ export function UserContent(props: UserDTO) {
       ),
     },
     {
-      label: (
-        <>
-          <Icon
-            component={StarIcon}
-            style={{ verticalAlign: 'middle', marginRight: '8px' }}
-          />
-          {stars}
-          {'/5'}
-        </>
-      ),
+      label:
+        stars && stars !== 'null' ? (
+          <>
+            <Icon
+              component={StarIcon}
+              style={{ verticalAlign: 'middle', marginRight: '8px' }}
+            />
+            {stars}
+            {'/5'}
+          </>
+        ) : (
+          `No rating available`
+        ),
     },
     {
-      label: `Phone Number: ${phoneNumber}`,
+      label: `Phone Number: ${phoneNumber || 'Not provided'}`,
     },
     {
       label: `Email: ${email}`,
@@ -63,21 +73,15 @@ export function UserContent(props: UserDTO) {
 
   const stats = [
     {
-      label: `${name} has joined in ${month}/${fullYear}`,
+      label: `${isOwner ? 'You have' : `${name} has`} joined in ${month}/${fullYear}`,
     },
     {
-      label: `${name} has worked in ${workedIn} jobs`,
+      label: `${isOwner ? 'You have' : `${name} has`} worked in ${workedIn} jobs`,
     },
     {
-      label: `${name} has an average rating of ${averageRating}`,
+      label: `${isOwner ? 'You have' : `${name} has`} an average rating of ${averageRating}`,
     },
   ];
-
-  const context = useContext(AuthenticationContext);
-  if (!context) {
-    throw new Error('AuthenticationContext is null');
-  }
-  const isOwner = id === context.id;
 
   return (
     <Grid
@@ -94,6 +98,15 @@ export function UserContent(props: UserDTO) {
       flexWrap={'nowrap'}
       spacing={2}
     >
+      <Typography
+        fontFamily={'Montserrat'}
+        fontSize={60}
+        fontStyle={'normal'}
+        fontWeight={300}
+        textAlign={'center'}
+      >
+        {isOwner ? 'Welcome to your profile!' : `${name}'s profile`}
+      </Typography>
       <Grid
         mobile={12}
         item
@@ -104,43 +117,37 @@ export function UserContent(props: UserDTO) {
         flexWrap={'nowrap'}
       >
         <Box
-          width={1}
-          height={1}
           borderRadius={5}
           overflow={'hidden'}
         >
-          <img
-            src={image}
-            style={{ objectFit: 'cover', width: '100%', height: '100%' }}
-            alt='offer'
-          />
+          {image ? (
+            <img
+              src={image}
+              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+              alt='offer'
+            />
+          ) : (
+            <img
+              src={userImage}
+              style={{ maxWidth: '100%', maxHeight: '100%', objectFit: 'contain' }}
+              alt='offer'
+            />
+          )}
         </Box>
         <Grid
           item
           container
           flexDirection={'column'}
-          flexWrap={'nowrap'}
-          marginLeft={4}
+          gap={6}
         >
           <Grid
             item
-            mobile={12}
-          >
-            <Typography
-              fontFamily={'Montserrat'}
-              fontSize={34}
-              fontStyle={'normal'}
-              fontWeight={400}
-            >
-              {name} {surname}, {country}, {city}
-            </Typography>
-          </Grid>
-          <Grid
-            item
             container
-            flexDirection={'row'}
+            flexDirection={'column'}
             justifyContent={'space-between'}
             mobile={12}
+            width={'auto'}
+            marginLeft={2}
           >
             {data.map((item, index) => {
               return (
@@ -151,7 +158,7 @@ export function UserContent(props: UserDTO) {
                   <Typography
                     noWrap
                     fontFamily={'Montserrat'}
-                    fontSize={20}
+                    fontSize={24}
                     fontStyle={'normal'}
                     fontWeight={400}
                   >
@@ -161,28 +168,77 @@ export function UserContent(props: UserDTO) {
               );
             })}
           </Grid>
+          <Grid
+            item
+            mobile={12}
+            container
+            justifyContent={'space-between'}
+            flexDirection={'column'}
+          >
+            <Typography
+              fontFamily={'Montserrat'}
+              fontSize={24}
+              fontStyle={'normal'}
+              fontWeight={400}
+            >
+              Name: {name ? name : 'Not provided.'}
+            </Typography>
+            <Typography
+              fontFamily={'Montserrat'}
+              fontSize={24}
+              fontStyle={'normal'}
+              fontWeight={400}
+            >
+              Surname: {surname ? surname : 'Not provided.'}
+            </Typography>
+            <Typography
+              fontFamily={'Montserrat'}
+              fontSize={24}
+              fontStyle={'normal'}
+              fontWeight={400}
+            >
+              Country: {country ? country : 'Not provided.'}
+            </Typography>
+            <Typography
+              fontFamily={'Montserrat'}
+              fontSize={24}
+              fontStyle={'normal'}
+              fontWeight={400}
+            >
+              City: {city ? city : 'Not provided.'}
+            </Typography>
+          </Grid>
         </Grid>
       </Grid>
       <Grid
         item
         mobile={12}
         container
+        flexDirection={'column'}
+        marginBottom={2}
+        marginTop={2}
       >
         <Typography
           fontFamily={'Montserrat'}
-          fontSize={32}
+          fontSize={48}
           fontStyle={'normal'}
           fontWeight={400}
+          textAlign={'center'}
         >
-          About me
+          About {isOwner ? 'you' : `me`}
         </Typography>
         <Typography
           fontFamily={'Montserrat'}
           fontSize={20}
           fontStyle={'normal'}
           fontWeight={400}
+          marginTop={1}
         >
-          {aboutMe}
+          {aboutMe
+            ? aboutMe
+            : `Unfortunately, ${isOwner ? 'you have' : `${name} has`} provided no description about ${
+                isOwner ? `your` : `their`
+              } past activities or skills.`}
         </Typography>
       </Grid>
       <Grid
@@ -190,23 +246,25 @@ export function UserContent(props: UserDTO) {
         mobile={12}
         maxHeight={'25%'}
         container
+        flexDirection={'column'}
       >
-        <Grid item>
-          <Typography
-            fontFamily={'Montserrat'}
-            fontSize={32}
-            fontStyle={'normal'}
-            fontWeight={400}
-          >
-            Statistics
-          </Typography>
-        </Grid>
+        <Typography
+          fontFamily={'Montserrat'}
+          fontSize={48}
+          fontStyle={'normal'}
+          fontWeight={400}
+          textAlign={'center'}
+        >
+          Statistics
+        </Typography>
         <Grid
           item
           container
           flexDirection={'row'}
           flexWrap={'nowrap'}
           justifyContent={'space-between'}
+          marginTop={1}
+          marginBottom={4}
         >
           {stats.map((item, index) => {
             return (
@@ -236,7 +294,7 @@ export function UserContent(props: UserDTO) {
                 : []
             }
             bgColor={'#FAFDFD'}
-            title={'My offers'}
+            title={'Your offers'}
             isCardVariant={false}
           ></OfferCollection>
         )}

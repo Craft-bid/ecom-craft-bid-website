@@ -73,6 +73,7 @@ export function UserPage() {
       container
       justifyContent={'space-between'}
       height={'auto'}
+      minHeight={'100vh'}
       minWidth={'100%'}
       flexDirection={'column'}
       flexWrap={'nowrap'}

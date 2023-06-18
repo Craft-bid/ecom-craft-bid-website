@@ -1,12 +1,15 @@
 import { Grid, Typography, Rating, Button } from '@mui/material';
 import { BidDTO } from '../../common/types/DTOs.types';
 import { OfferBidListProps } from './OfferBidList.types';
+import userImage from '../../assets/user.png';
 import { updateOffer } from '../../services/offerService';
 import { UpdateOfferDTO } from '../../common/types/DTOs.types';
+import { useNavigate } from 'react-router-dom';
 
 export function OfferBidList(props: OfferBidListProps) {
   const { bidList, isOwner, listingId } = props;
   const pageLength = bidList.length;
+  const navigate = useNavigate();
 
   const handleAccept = (userId: number) => {
     if (!userId) {
@@ -49,6 +52,9 @@ export function OfferBidList(props: OfferBidListProps) {
               boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
             }}
             container
+            onClick={() => {
+              navigate(`/user/${bid.bidderId}`);
+            }}
           >
             <Grid
               item
@@ -57,13 +63,29 @@ export function OfferBidList(props: OfferBidListProps) {
               alignItems={'center'}
               width={'100%'}
             >
-              <img
-                src={bid.photoURL}
-                width={180}
-                height={180}
-                style={{ borderRadius: '10px', boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)' }}
-                alt='bidder'
-              ></img>
+              {bid.photoURL ? (
+                <img
+                  src={bid.photoURL}
+                  alt='offer'
+                  style={{
+                    maxWidth: '160px',
+                    maxHeight: '160px',
+                    objectFit: 'contain',
+                    borderRadius: '10px',
+                  }}
+                ></img>
+              ) : (
+                <img
+                  src={userImage}
+                  alt='offer'
+                  style={{
+                    maxWidth: '160px',
+                    maxHeight: '160px',
+                    objectFit: 'contain',
+                    borderRadius: '10px',
+                  }}
+                ></img>
+              )}
 
               <Typography
                 fontFamily={'Montserrat'}
@@ -71,7 +93,10 @@ export function OfferBidList(props: OfferBidListProps) {
                 fontWeight={300}
                 textAlign={'center'}
               >
-                {bid.bidderName} {bid.bidderSurname}, {bid.bidderCountry}, {bid.bidderCity}
+                {bid.bidderName}
+                {bid.bidderCountry ? `${bid.bidderSurname},` : bid.bidderSurname}
+                {bid.bidderCity ? `${bid.bidderCountry},` : bid.bidderCountry}
+                {bid.bidderCity}
               </Typography>
               {/* center if mobile */}
 

@@ -1,7 +1,8 @@
 import { AuthProvider, UserIdentity } from 'react-admin';
 import { loginUser } from '../services/authService';
 import { LoginFormDTO } from '../components/LoginForm/LoginForm.types';
-import jwt_decode from 'jwt-decode';
+import jwtDecode from 'jwt-decode';
+import { DecodedToken } from '../common/types/JWTResponse.types';
 
 export const authProvider: AuthProvider = {
   login: ({ username, password }) => {
@@ -10,12 +11,12 @@ export const authProvider: AuthProvider = {
       email: username,
       password: password,
     };
-    return loginUser(loginDTO).then((response) => {
+    return loginUser(loginDTO).then(() => {
       const token = localStorage.getItem('token');
       if (!token) {
         throw new Error('Token not found');
       }
-      const { email, role } = jwt_decode(token);
+      const { role } = jwtDecode<DecodedToken>(token);
       if (role !== 'ADMIN') {
         throw new Error('Unauthorized user!');
       }
@@ -27,12 +28,16 @@ export const authProvider: AuthProvider = {
   },
   getIdentity: () => {
     try {
-      const { email, role } = jwt_decode(localStorage.getItem('token'));
+      const token = localStorage.getItem('token');
+      if (!token) {
+        throw new Error('Token not found');
+      }
+      const decodedToken = jwtDecode<DecodedToken>(token);
       const ret: UserIdentity = {
-        fullName: email,
-        id: email,
+        fullName: decodedToken.email,
+        id: decodedToken.email,
         avatar: '',
-        role: role,
+        role: decodedToken.role,
       };
       return Promise.resolve(ret);
     } catch (error) {
@@ -45,8 +50,8 @@ export const authProvider: AuthProvider = {
       localStorage.removeItem('token');
       return Promise.reject({ message: false });
     }
-    const { email, role } = jwt_decode(token);
-    return role === 'ADMIN' ? Promise.resolve() : Promise.reject({ message: false });
+    const decodedToken = jwtDecode<DecodedToken>(token);
+    return decodedToken.role === 'ADMIN' ? Promise.resolve() : Promise.reject({ message: false });
   },
   checkError: (error) => {
     const status = error.status;

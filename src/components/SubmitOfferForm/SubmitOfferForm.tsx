@@ -1,28 +1,33 @@
 /* eslint-disable @typescript-eslint/no-magic-numbers */
 import { Autocomplete, Button, Card, Chip, Grid, TextField, Typography } from '@mui/material';
 import { DatePicker } from '@mui/x-date-pickers';
-import { useState, useEffect, FormEvent, useContext } from 'react';
-import { Category } from '../../templates/HomePageContent/HomePageContent.types';
+import { useState, FormEvent, useContext } from 'react';
 import { CustomUploadDropzone } from '../CustomUploadDropzone/CustomUploadDropzone';
 import { SubmitFormErrors } from './SubmitOfferForm.types';
-import { addOffer, addOfferDTO, addPhoto, addTags, updateOffer, updateOfferDTO } from '../../services/offerService';
+import { addOffer, addPhoto, addTags, updateOffer } from '../../services/offerService';
 import { AuthenticationContext } from '../AuthenticationContext/AuthenticationContext';
-import axios from 'axios';
+import { Tag } from '../../common/types/Tag.types';
+import { AddOfferDTO, UpdateOfferDTO } from '../../common/types/DTOs.types';
 
 export function SubmitOfferForm() {
   const [date, setDate] = useState<Date | null>(new Date());
-  const [selectedCategories, setSelectedCategories] = useState<Category[]>([]);
+  const [selectedCategories, setSelectedCategories] = useState<Tag[]>([]);
   const [title, setTitle] = useState<string>('');
   const [file, setFile] = useState<File | undefined>();
   const [description, setDescription] = useState<string>('');
   const [minBudget, setMinBudget] = useState<number>(0);
   const [maxBudget, setMaxBudget] = useState<number>(0);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories] = useState<Tag[]>([]);
 
   const [isFormValid, setIsFormValid] = useState(false);
   const [formErrors, setFormErrors] = useState({} as SubmitFormErrors);
 
   const context = useContext(AuthenticationContext);
+  if (!context) {
+    throw new Error('AuthenticationContext is null');
+  }
+  const { isAuthenticated, id } = context;
+
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -42,74 +47,66 @@ export function SubmitOfferForm() {
     if (minBudget >= maxBudget) {
       errors.budget = 'Min budget must be less than max budget';
     }
+    if (!date) {
+      throw new Error('Date is null');
+    }
     // Add additional validation logic as needed
-
+    if (!isAuthenticated) {
+      throw new Error('User is not authenticated');
+    }
+    if (!id) {
+      throw new Error('User id is null');
+    }
     // Update the form errors state
     setFormErrors(errors);
 
     // If no errors, set form validity to true
     if (Object.keys(errors).length === 0) {
       setIsFormValid(true);
+    } else {
+      setIsFormValid(false);
+      return;
     }
-    const { isAuthenticated, name, id } = context;
-    if (!isAuthenticated) {
-      throw new Error('User is not authenticated');
-    }
-    const offer: addOfferDTO = {
+
+    const offer: AddOfferDTO = {
       title: title,
       description: description,
-      advertiserId: id,
+      advertiserId: String(id),
     };
-
-    axios.defaults.headers.common.Authorization = `Bearer ${localStorage.getItem('token')}`;
 
     addOffer(offer)
       .then((ret) => {
-        const updatedOffer: updateOfferDTO = {
-          expirationDate: date,
+        const updatedOffer: UpdateOfferDTO = {
+          expirationDate: date.toISOString(),
         };
         updateOffer(ret.id, updatedOffer)
-          .then((ret2) => {
+          .then(() => {
             addTags(ret.id, selectedCategories)
-              .then((ret3) => {
+              .then(() => {
                 if (file) {
                   addPhoto(ret.id, file)
                     .then((ret4) => {
                       console.log(ret4);
                     })
                     .catch((error) => {
-                      console.error("Couldn't add photo");
+                      console.error(`Couldn't add photo\n${JSON.stringify(error)}`);
                     });
                 }
               })
               .catch((error) => {
-                console.error("Couldn't add tags");
+                console.error(`Couldn't add tags\n${JSON.stringify(error)}`);
               });
           })
           .catch((error) => {
-            console.error("Couldn't update offer");
+            console.error(`Couldn't update offer\n${JSON.stringify(error)}`);
           });
       })
       .catch((error) => {
-        console.error("Couldn't add offer");
+        console.error(`Couldn't add offer\n${JSON.stringify(error)}`);
       });
   };
 
   const formSxObj = { backgroundColor: '#F5FBFB', width: '55rem', minHeight: 1400, borderRadius: 10 };
-  const fetchUrl = '../src/templates/CreateOfferContent/testCategories.json';
-
-  useEffect(() => {
-    fetch(fetchUrl)
-      .then((res) => {
-        return res.json();
-      })
-      .then((data: []) => {
-        return setCategories(data);
-      })
-      .catch((error) => {
-        throw error;
-      });
-  }, []);
 
   return (
     <Card sx={formSxObj}>
@@ -275,7 +272,4 @@ export function SubmitOfferForm() {
       </form>
     </Card>
   );
-}
-function jwt_decode(arg0: string) {
-  throw new Error('Function not implemented.');
 }

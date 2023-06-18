@@ -13,12 +13,13 @@ export type BidDTO = {
   creationDate: Date;
   daysToDeliver: number;
   bidderName: string;
+
   bidderSurname: string;
   bidderCountry: string;
   bidderCity: string;
   bidderRating: number;
   photoURL: string;
-  UserID: number;
+  bidderId: number;
 };
 
 export type OfferDTO = {
@@ -62,13 +63,13 @@ export type AddOfferDTO = {
 };
 
 export type UpdateOfferDTO = {
-  title: string;
-  description: string;
-  ended: boolean;
-  winnerId: string;
-  advertiserId: string;
-  expirationDate: string;
-  creationDate: string;
+  title?: string;
+  description?: string;
+  ended?: boolean;
+  winnerId?: string;
+  advertiserId?: string;
+  expirationDate?: string;
+  creationDate?: string;
 };
 
 export type CreateBidDTO = {

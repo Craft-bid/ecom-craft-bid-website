@@ -3,4 +3,5 @@ export type SubmitFormErrors = {
   description?: string;
   categories?: string;
   budget?: string;
+  date?: string;
 };

@@ -1,4 +1,4 @@
-import { BidDTO } from '../../common/types/Bid.types';
+import { BidDTO } from '../../common/types/DTOs.types';
 
 export interface OfferBidListProps {
   bidList: BidDTO[];

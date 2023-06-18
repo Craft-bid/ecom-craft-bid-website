@@ -1,19 +1,18 @@
 import { Grid, Typography, Rating, Button } from '@mui/material';
-import axios from 'axios';
 import { BidDTO } from '../../common/types/DTOs.types';
 import { OfferBidListProps } from './OfferBidList.types';
-import { updateOffer, updateOfferDTO } from '../../services/offerService';
+import { updateOffer } from '../../services/offerService';
+import { UpdateOfferDTO } from '../../common/types/DTOs.types';
 
 export function OfferBidList(props: OfferBidListProps) {
   const { bidList, isOwner, listingId } = props;
   const pageLength = bidList.length;
 
   const handleAccept = (userId: number) => {
-
     if (!userId) {
       throw new Error('User id not found');
     }
-    const update: updateOfferDTO = {
+    const update: UpdateOfferDTO = {
       ended: true,
       winnerId: String(userId),
     };

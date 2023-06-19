@@ -15,7 +15,13 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
       listingId: String(props.listingId),
       bidderId: String(props.bidderId),
     };
-    void addBid(newBid);
+    addBid(newBid)
+      .then(() => {
+        window.location.reload();
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const validate = (
@@ -62,7 +68,7 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
           validate={validate}
           onSubmit={handleSubmit}
         >
-          {({ values, errors }) => {
+          {({ errors }) => {
             return (
               <Form>
                 <Grid
@@ -127,12 +133,6 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
                     >
                       Submit
                     </Button>
-                  </Grid>
-                  <Grid
-                    item
-                    mobile={12}
-                  >
-                    <pre>{JSON.stringify(values, null, 2)}</pre>
                   </Grid>
                 </Grid>
               </Form>

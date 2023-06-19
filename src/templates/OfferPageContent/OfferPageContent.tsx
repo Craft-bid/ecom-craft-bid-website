@@ -46,7 +46,9 @@ export function OfferPageContent() {
   console.log(`id${userId}`);
   console.log(`offer${offerOwnerId}`);
   const isOwner = id === offerOwnerId;
-
+  const offerContainsUserBid = offerBids.some((bid) => {
+    return bid.bidderId === userId;
+  });
   useEffect(() => {
     //our url is /offer/:id
     //get id from url
@@ -170,7 +172,11 @@ export function OfferPageContent() {
         <OfferHeader {...offerHeaderProps}></OfferHeader>
         <OfferInfo {...offerInfoProps}></OfferInfo>
         <OfferBidList {...offerBidListProps}></OfferBidList>
-        {isOwner ? <OfferControlForm listingid={offerId}></OfferControlForm> : <OfferBidCreationForm {...bidProps}></OfferBidCreationForm>}
+        {isOwner ? (
+          <OfferControlForm listingid={offerId}></OfferControlForm>
+        ) : (
+          !offerContainsUserBid && <OfferBidCreationForm {...bidProps}></OfferBidCreationForm>
+        )}
       </Card>
     </Grid>
   );

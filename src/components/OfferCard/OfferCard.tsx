@@ -118,7 +118,7 @@ export function OfferCard(prop: OfferCardProps) {
             fontWeight={'bold'}
             lineHeight={'24px'}
           >
-            {t('offerListPage.avgBid')}: {avgBid}$
+            {t('offerListPage.avgBid')}: {avgBid.toFixed(2)}$
           </Typography>
           <Typography
             fontFamily='Montserrat'

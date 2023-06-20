@@ -1,0 +1,9 @@
+{
+    "header"   : "REGISTER",
+    "name": "Name",
+    "email": "Email",
+    "password": "Password",
+    "repeatPassword": "Repeat Password",
+    "button": "Register",
+    "close": "Close"
+}

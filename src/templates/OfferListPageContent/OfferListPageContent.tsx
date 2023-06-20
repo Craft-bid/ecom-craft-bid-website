@@ -10,8 +10,10 @@ import axios from 'axios';
 import { OfferDTO } from '../../common/types/DTOs.types';
 import { useNavigate } from 'react-router-dom';
 import { QueryParams } from '../../common/types/Filter.types';
+import { useTranslation } from 'react-i18next';
 
 export function OfferListPageContent({ ...props }: FilterParamsProps) {
+  const { t } = useTranslation();
   const { filter, handleFilterChange } = props;
   const navigate = useNavigate();
   const homePageSxObj = {
@@ -101,7 +103,7 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
     handleSearch,
   };
 
-  const offerCollectionProps = { offerCardProps: offerCardProps, bgColor: '#F5FDFD', isCardVariant: true, title: 'Offers' };
+  const offerCollectionProps = { offerCardProps: offerCardProps, bgColor: '#F5FDFD', isCardVariant: true, title: t('offerListPage.offers') };
   return (
     <Grid
       container

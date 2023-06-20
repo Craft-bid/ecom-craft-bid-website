@@ -5,8 +5,10 @@ import '@fontsource/roboto';
 import { PasswordInput } from '../PasswordInput/PasswordInput';
 import { loginUser } from '../../services/authService';
 import { FormProps } from '../../common/types/FormProps.types';
+import { useTranslation } from 'react-i18next';
 
 export function LoginForm(props: FormProps) {
+  const { t } = useTranslation();
   const { setOpenStatusModal, setStatusModalMessage, onClose } = props;
   const theme = useTheme();
   const minLength = 1;
@@ -86,7 +88,7 @@ export function LoginForm(props: FormProps) {
                       letterSpacing: '1.25px',
                     }}
                   >
-                    SIGN IN
+                    {String(t('loginForm.header'))}
                   </Typography>
                 </Grid>
                 <Grid
@@ -95,7 +97,7 @@ export function LoginForm(props: FormProps) {
                 >
                   <Field
                     as={TextField}
-                    label='Email'
+                    label={String(t('loginForm.email'))}
                     sx={{
                       width: 1,
                       backgroundColor: 'white',
@@ -111,7 +113,7 @@ export function LoginForm(props: FormProps) {
                 >
                   <PasswordInput
                     name='password'
-                    label='Password'
+                    label={String(t('loginForm.button'))}
                   />
                 </Grid>
                 <Grid
@@ -130,7 +132,7 @@ export function LoginForm(props: FormProps) {
                     }}
                     disabled={!isValid || isSubmitting}
                   >
-                    Login
+                    {t('loginForm.button')}
                   </Button>
 
                   <Button
@@ -142,7 +144,7 @@ export function LoginForm(props: FormProps) {
                     }}
                     onClick={onClose}
                   >
-                    Close
+                    {t('loginForm.close')}
                   </Button>
                 </Grid>
               </Grid>

@@ -1,0 +1,17 @@
+{
+    "heroPrompt" :"Znajdź najbardziej ci pasującą ofertę",
+    "skillsHeader": "Chcesz wykorzystać swoje umiejętności?",
+
+    "browseHeader": "Przeglądaj oferty",
+    "browseDesc" : "Odnalezienie oferty, mogącej cię zainteresować nie jest trudne",
+    
+    "payHeader" : "Bezpiecznie otrzymuj wynagrodzenie",
+    "payDesc" : "Mamy dedykowany zespół do sprawdzenia, czy wszystko przebiega zgodnie z planem",
+    
+    "costHeader" : "Dołączenie do nas jest darmowe",
+    "costDesc" : "Nasza strona jest darmowa. Nie pobieramy żadnych opłat za korzystanie z niej",
+
+    "categoriesHeader" :"Sprawdź nasze kategorie.",
+    "submitHeader" : "Dodaj swoją ofertę, jak już masz konto",
+    "submitLink": "Kliknij tu aby dodać ofertę"
+}

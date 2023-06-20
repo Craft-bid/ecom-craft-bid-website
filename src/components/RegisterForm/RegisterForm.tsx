@@ -5,8 +5,10 @@ import { PasswordInput } from '../PasswordInput/PasswordInput';
 import { RegisterFormDTO, RegisterFormErrors, RegisterFormValues } from './RegisterForm.types';
 import { registerUser } from '../../services/authService';
 import { FormProps } from '../../common/types/FormProps.types';
+import { useTranslation } from 'react-i18next';
 
 export function RegisterForm(props: FormProps) {
+  const { t } = useTranslation();
   const { setOpenStatusModal, setStatusModalMessage, onClose } = props;
   const theme = useTheme();
   const validate = (values: RegisterFormValues) => {
@@ -89,7 +91,7 @@ export function RegisterForm(props: FormProps) {
                       letterSpacing: '1.25px',
                     }}
                   >
-                    REGISTER
+                    {t('registerForm.header')}
                   </Typography>
                 </Grid>
                 <Grid
@@ -98,7 +100,7 @@ export function RegisterForm(props: FormProps) {
                 >
                   <Field
                     as={TextField}
-                    label='Name'
+                    label={t('registerForm.name')}
                     sx={{
                       width: 1,
                       backgroundColor: 'white',
@@ -114,7 +116,7 @@ export function RegisterForm(props: FormProps) {
                 >
                   <Field
                     as={TextField}
-                    label='E-mail'
+                    label={t('registerForm.email')}
                     sx={{
                       width: 1,
                       backgroundColor: 'white',
@@ -130,7 +132,7 @@ export function RegisterForm(props: FormProps) {
                 >
                   <PasswordInput
                     name='password'
-                    label='Password'
+                    label={String(t('registerForm.password'))}
                   />
                 </Grid>
                 <Grid
@@ -139,7 +141,7 @@ export function RegisterForm(props: FormProps) {
                 >
                   <PasswordInput
                     name='repeatPassword'
-                    label='Repeat password'
+                    label={String(t('registerForm.repeatPassword'))}
                   />
                 </Grid>
                 <Grid
@@ -163,7 +165,7 @@ export function RegisterForm(props: FormProps) {
                     }}
                     disabled={!isValid || isSubmitting}
                   >
-                    Register
+                    {t('registerForm.button')}
                   </Button>
 
                   <Button
@@ -175,7 +177,7 @@ export function RegisterForm(props: FormProps) {
                     }}
                     onClick={onClose}
                   >
-                    Close
+                    {t('registerForm.close')}
                   </Button>
                 </Grid>
               </Grid>

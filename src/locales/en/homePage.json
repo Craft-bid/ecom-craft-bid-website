@@ -1,0 +1,17 @@
+{
+    "heroPrompt" : "Find the best suited offer for your skills",
+    "skillsHeader": "Looking to use your skills?",
+
+    "browseHeader": "Browse offers",
+    "browseDesc" : "It is very simple to find an interesting offer. Type in the keywords, and you will see a diverse array of jobs.",
+    
+    "payHeader" : "Get paid safely",
+    "payDesc" : "We have a dedicated support team and a payment system that ensures you receive your pay safely.",
+    
+    "costHeader" : "No cost to join",
+    "costDesc" : "Our website is free. It costs nothing to register, take a bid, and fulfill the client’s commission.",
+
+    "categoriesHeader" :"Check out our available categories.",
+    "submitHeader" : "Submit your own offer once you have an account.",
+    "submitLink": "Click here to submit your offer."
+}

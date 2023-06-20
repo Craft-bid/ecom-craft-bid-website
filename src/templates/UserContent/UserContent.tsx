@@ -9,8 +9,10 @@ import userImage from '../../assets/user.png';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
 import { UserDTO } from '../../common/types/DTOs.types';
+import { useTranslation } from 'react-i18next';
 
 export function UserContent(props: UserDTO) {
+  const { t } = useTranslation();
   const { aboutMe, averageRating, city, country, email, id, image, joined, listings, name, phoneNumber, stars, surname, verified, workedIn } = props;
 
   const context = useContext(AuthenticationContext);
@@ -294,7 +296,7 @@ export function UserContent(props: UserDTO) {
                 : []
             }
             bgColor={'#FAFDFD'}
-            title={'Your offers'}
+            title={t('offerListPage.offers')}
             isCardVariant={false}
           ></OfferCollection>
         )}

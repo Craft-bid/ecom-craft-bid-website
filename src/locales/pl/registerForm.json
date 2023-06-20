@@ -1,0 +1,9 @@
+{
+    "header"   : "REJESTRACJA",
+    "name": "Imię",
+    "email": "Email",
+    "password": "Hasło",
+    "repeatPassword": "Powtórz hasło",
+    "button": "Zarejestruj się",
+    "close": "Zamknij"
+}

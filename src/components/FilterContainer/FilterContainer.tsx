@@ -6,11 +6,13 @@ import { FilterParams, FilterParamsProps } from '../../templates/OfferListPageCo
 import { getTags } from '../../services/tagService';
 import { Tag } from '../../common/types/Tag.types';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function FilterContainer({ ...props }: FilterParamsProps) {
   // const checkboxStyle = {
   //   color: 'rgba(0, 0, 0, 0.6)',
   // };
+  const { t } = useTranslation();
 
   const [categories, setCategories] = useState<Tag[]>([]);
   useEffect(() => {
@@ -98,7 +100,7 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                       fontSize: 36,
                     }}
                   >
-                    Filter by:
+                    {t('offerListPage.containerTitle')}:
                   </Typography>
                 </Grid>
                 <Grid
@@ -113,7 +115,7 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                       fontSize: 24,
                     }}
                   >
-                    Price:
+                    {t('offerListPage.price')}:
                   </Typography>
                   <Grid
                     container
@@ -137,7 +139,7 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                       item
                       mobile={1}
                     >
-                      <Typography> To </Typography>
+                      <Typography> - </Typography>
                     </Grid>
                     <Grid
                       item
@@ -164,7 +166,7 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
                       fontSize: 24,
                     }}
                   >
-                    Tags:
+                    {t('offerListPage.tags')}:
                   </Typography>
                   <FormGroup>
                     {categories.map((category) => {

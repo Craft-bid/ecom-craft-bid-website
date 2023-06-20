@@ -6,8 +6,10 @@ import { HeaderProps } from './Header.types';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
+import { useTranslation } from 'react-i18next';
 
 export function Header(props: HeaderProps) {
+  const { t, i18n } = useTranslation();
   const { onSignInClick, onSignUpClick } = props;
   const theme = useTheme();
   const navigate = useNavigate();
@@ -78,8 +80,14 @@ export function Header(props: HeaderProps) {
                   }}
                   variant='text'
                   color='inherit'
+                  onClick={() => {
+                    const currentLanguage = i18n.language;
+                    const targetLanguage = currentLanguage === 'pl' ? 'en' : 'pl';
+                    localStorage.setItem('lng', targetLanguage);
+                    void i18n.changeLanguage(targetLanguage);
+                  }}
                 >
-                  ENGLISH
+                  {t('header.switchLanguage')}
                 </Button>
               </Grid>
               <Grid
@@ -100,7 +108,7 @@ export function Header(props: HeaderProps) {
                   color='inherit'
                   onClick={isAuthenticated ? onUserClick : onSignUpClick}
                 >
-                  {isAuthenticated ? name?.substring(0, 4).concat('...') : 'SIGN UP'}
+                  {isAuthenticated ? name?.substring(0, 4).concat('...') : t('header.signUp')}
                 </Button>
               </Grid>
             </>
@@ -123,7 +131,7 @@ export function Header(props: HeaderProps) {
               color='inherit'
               onClick={isAuthenticated ? onSignOutClick : onSignInClick}
             >
-              {isAuthenticated ? 'SIGN OUT' : 'SIGN IN'}
+              {isAuthenticated ? t('header.signOut') : t('header.signIn')}
             </Button>
           </Grid>
         </Grid>

@@ -4,8 +4,10 @@ import { useEffect, useState } from 'react';
 import { getTags } from '../../services/tagService';
 import { Tag } from '../../common/types/Tag.types';
 import { Link } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function HomePageContent() {
+  const { t } = useTranslation();
   const [categories, setCategories] = useState<Tag[]>([]);
 
   const homePageSxObj = {
@@ -53,7 +55,7 @@ export function HomePageContent() {
         paddingTop={10}
         paddingBottom={10}
       >
-        Looking to use the skills you have?
+        {t('homePage.skillsHeader')}
       </Typography>
       <Grid
         item
@@ -64,27 +66,21 @@ export function HomePageContent() {
       >
         <Card sx={{ maxWidth: 400, borderRadius: 10 }}>
           <CardContent>
-            <Typography sx={subHeadingSxObj}>Browse offers</Typography>
+            <Typography sx={subHeadingSxObj}>{t('homePage.browseHeader')}</Typography>
 
-            <Typography sx={cardContentSxObj}>
-              It is very simple to find an interesting offer. Type in the keywords, and you will see a diverse array of jobs.
-            </Typography>
+            <Typography sx={cardContentSxObj}>{t('homePage.browseDesc')}</Typography>
           </CardContent>
         </Card>
         <Card sx={{ maxWidth: 400, borderRadius: 10 }}>
           <CardContent>
-            <Typography sx={subHeadingSxObj}> Get paid safely </Typography>
-            <Typography sx={cardContentSxObj}>
-              We have a dedicated support team and a payment system that ensures you receive your pay safely.
-            </Typography>
+            <Typography sx={subHeadingSxObj}> {t('homePage.payHeader')}</Typography>
+            <Typography sx={cardContentSxObj}>{t('homePage.payDesc')}</Typography>
           </CardContent>
         </Card>
         <Card sx={{ maxWidth: 400, borderRadius: 10 }}>
           <CardContent>
-            <Typography sx={subHeadingSxObj}> No cost to join </Typography>
-            <Typography sx={cardContentSxObj}>
-              Our website is free. It costs nothing to register, take a bid, and fulfill the client’s commission.
-            </Typography>
+            <Typography sx={subHeadingSxObj}> {t('homePage.costHeader')} </Typography>
+            <Typography sx={cardContentSxObj}>{t('homePage.costDesc')}</Typography>
           </CardContent>
         </Card>
       </Grid>
@@ -93,7 +89,7 @@ export function HomePageContent() {
         paddingTop={10}
         paddingBottom={10}
       >
-        Check out our available categories.
+        {t('homePage.categoriesHeader')}
       </Typography>
 
       <Grid
@@ -169,7 +165,7 @@ export function HomePageContent() {
               })}
           </CardContent>
         </Card>
-        <Typography variant={'h2'}>Submit your own offer once you have an account.</Typography>
+        <Typography variant={'h2'}>{t('homePage.submitHeader')}</Typography>
         <Grid
           item
           container
@@ -179,7 +175,7 @@ export function HomePageContent() {
           <Card sx={{ maxWidth: 600, borderRadius: 10 }}>
             <CardContent>
               <Link to={'/submit_offer'}>
-                <Typography sx={subHeadingSxObj}>Click here to submit your offer.</Typography>
+                <Typography sx={subHeadingSxObj}>{t('homePage.submitLink')}</Typography>
               </Link>
             </CardContent>
           </Card>

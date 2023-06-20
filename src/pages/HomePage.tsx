@@ -12,8 +12,11 @@ import { LoginForm } from '../components/LoginForm/LoginForm';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { FormProps } from '../common/types/FormProps.types';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function HomePage() {
+  const { t } = useTranslation();
+
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
   const [openStatusModal, setOpenStatusModal] = useState(false);
   const [statusModalMessage, setStatusModalMessage] = useState('');
@@ -25,7 +28,7 @@ export function HomePage() {
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
     imageHeight: 400,
-    title: 'Find the best suited offer for your skills',
+    title: t('homePage.heroPrompt'),
     hasSearchBar: true,
     isMiddleVariant: false,
   };

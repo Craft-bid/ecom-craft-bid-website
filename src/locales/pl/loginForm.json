@@ -1,0 +1,7 @@
+{
+    "header"   : "LOGOWANIE",
+    "email": "Email",
+    "password": "Hasło",
+    "button": "Zaloguj",
+    "close": "Zamknij"
+}

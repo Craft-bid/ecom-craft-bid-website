@@ -1,0 +1,7 @@
+{
+    "header"   : "LOGIN",
+    "email": "Email",
+    "password": "Password",
+    "button": "Login",
+    "close": "Close"
+}

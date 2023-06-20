@@ -17,7 +17,6 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
     const token = localStorage.getItem('token');
     const decodedToken = token ? jwtDecode<DecodedToken>(token) : null;
 
-    console.log(decodedToken);
     if (token && decodedToken) {
       // Check if token is expired
       const currentTimestamp = Date.now() / 1000; // Current timestamp in seconds

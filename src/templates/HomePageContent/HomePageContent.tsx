@@ -14,7 +14,7 @@ export function HomePageContent() {
   if (!context) {
     throw new Error('AuthenticationContext is null');
   }
-  const { isAuthenticated, name, id } = context;
+  const { isAuthenticated } = context;
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
@@ -112,7 +112,7 @@ export function HomePageContent() {
                 return category.name;
               })
               .slice(startIndex, secondPartIndex)
-              .map((name, index) => {
+              .map((cat, index) => {
                 return (
                   <Typography
                     key={index}
@@ -120,7 +120,7 @@ export function HomePageContent() {
                     sx={cardContentSxObj}
                   >
                     {' '}
-                    {name}{' '}
+                    {cat}{' '}
                   </Typography>
                 );
               })}

@@ -24,8 +24,8 @@ export function OfferListPage() {
     minPrice: 0,
     maxPrice: 0,
     pageable: {
-      pageNumber: 0,
-      pageSize: 10,
+      page: 1,
+      size: 4,
     },
   });
   const handleFilterChange = (toSetfilter: FilterParams) => {

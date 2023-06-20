@@ -6,8 +6,8 @@ export interface FilterParams {
   minPrice: number;
   maxPrice: number;
   pageable: {
-    pageNumber: number;
-    pageSize: number;
+    page: number;
+    size: number;
   };
 }
 export interface FilterParamsProps {

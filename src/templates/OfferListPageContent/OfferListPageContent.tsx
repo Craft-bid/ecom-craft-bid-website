@@ -11,6 +11,7 @@ import { OfferDTO } from '../../common/types/DTOs.types';
 import { useNavigate } from 'react-router-dom';
 import { QueryParams } from '../../common/types/Filter.types';
 import { useTranslation } from 'react-i18next';
+import { OfferCollectionProps } from '../OfferCollection/OfferCollection.types';
 
 export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const { t } = useTranslation();
@@ -23,6 +24,7 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const fetchUrl = 'http://localhost:8080/api/v1/public/listings/search';
 
   const [offerCardProps, setOfferCardProps] = useState<OfferCardProps[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
 
   const addQueryParams = (url: string, params: QueryParams): string => {
     const urlParams = new URLSearchParams();
@@ -45,21 +47,25 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   };
 
   const getListing = async (params: FilterParams) => {
+    const nPageable = {
+      page: params.pageable.page,
+      size: params.pageable.size,
+    };
     const toBackend: QueryParams = {
       title: params.title,
       tagNames: params.tags,
+      pageable: nPageable,
       ...(params.minPrice !== 0 && { minPrice: params.minPrice }),
       ...(params.maxPrice !== 0 && { maxPrice: params.maxPrice }),
     };
 
-    console.log('toback');
+    toBackend.pageable.page = toBackend.pageable.page - 1;
     console.log(toBackend);
-    console.log(addQueryParams(fetchUrl, toBackend));
     await axios
       .get<OfferDTO[]>(addQueryParams(fetchUrl, toBackend))
       .then((res) => {
-        console.log(res.data);
-        return res.data;
+        setTotalPages(res.data.totalPages);
+        return res.data.content;
       })
       .then((data) => {
         const newData: OfferCardProps[] = data.map((offer: OfferDTO) => {
@@ -86,7 +92,6 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
     const searchValue = queryParams.get('search') || '';
 
     filter.title = searchValue;
-    console.log(filter);
     void getListing(filter);
   }, [filter]);
 
@@ -102,8 +107,16 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const searchBarProps: SearchBarProps = {
     handleSearch,
   };
+  const offerCollectionProps: OfferCollectionProps = {
+    offerCardProps: offerCardProps,
+    bgColor: '#F5FDFD',
+    isCardVariant: true,
+    title: t('offerListPage.offer'),
+    pages: totalPages,
+    currentPage: filter.pageable.page,
+    setFilter: handleFilterChange,
+  };
 
-  const offerCollectionProps = { offerCardProps: offerCardProps, bgColor: '#F5FDFD', isCardVariant: true, title: t('offerListPage.offers') };
   return (
     <Grid
       container

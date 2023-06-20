@@ -21,7 +21,6 @@ export function OfferBidList(props: OfferBidListProps) {
       ended: true,
       winnerId: String(userId),
     };
-    console.log(userId);
     void updateOffer(listingId, update).then(() => {
       window.location.reload();
     });

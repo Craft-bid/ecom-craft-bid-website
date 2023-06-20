@@ -1,15 +1,20 @@
 import { Card, Grid, Typography } from '@mui/material';
 import CardContent from '@mui/material/CardContent';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { getTags } from '../../services/tagService';
 import { Tag } from '../../common/types/Tag.types';
 import { Link } from 'react-router-dom';
 import { useTranslation } from 'react-i18next';
+import { AuthenticationContext } from '../../components/AuthenticationContext/AuthenticationContext';
 
 export function HomePageContent() {
   const { t } = useTranslation();
   const [categories, setCategories] = useState<Tag[]>([]);
-
+  const context = useContext(AuthenticationContext);
+  if (!context) {
+    throw new Error('AuthenticationContext is null');
+  }
+  const { isAuthenticated, name, id } = context;
   const homePageSxObj = {
     backgroundColor: '#E8F6F6',
   };
@@ -166,20 +171,22 @@ export function HomePageContent() {
           </CardContent>
         </Card>
         <Typography variant={'h2'}>{t('homePage.submitHeader')}</Typography>
-        <Grid
-          item
-          container
-          justifyContent={'center'}
-          alignItems={'center'}
-        >
-          <Card sx={{ maxWidth: 600, borderRadius: 10 }}>
-            <CardContent>
-              <Link to={'/submit_offer'}>
-                <Typography sx={subHeadingSxObj}>{t('homePage.submitLink')}</Typography>
-              </Link>
-            </CardContent>
-          </Card>
-        </Grid>
+        {isAuthenticated ? (
+          <Grid
+            item
+            container
+            justifyContent={'center'}
+            alignItems={'center'}
+          >
+            <Card sx={{ maxWidth: 600, borderRadius: 10 }}>
+              <CardContent>
+                <Link to={'/submit_offer'}>
+                  <Typography sx={subHeadingSxObj}>{t('homePage.submitLink')}</Typography>
+                </Link>
+              </CardContent>
+            </Card>
+          </Grid>
+        ) : null}
       </Grid>
     </Grid>
   );

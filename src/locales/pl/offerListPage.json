@@ -2,5 +2,8 @@
     "containerTitle"   : "Filtruj poprzez",
     "price"            : "Cena",
     "tags"             : "Tagi",
-    "offers": "Oferty"
+    "offers": "Oferty",
+    "noImage" : "Brak zdjęcia",
+    "bids": "licytacji",
+    "avgBid": "Śr. licytacja"
 }

@@ -2,5 +2,8 @@
     "containerTitle"   : "Filter by",
     "price": "Price",
     "tags": "Tags",
-    "offers": "Offers"
+    "offers": "Offers",
+    "noImage": "No image",
+    "bids": "bids",
+    "avgBid": "Avg bid"
 }

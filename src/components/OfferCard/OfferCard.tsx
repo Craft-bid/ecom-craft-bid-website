@@ -2,8 +2,10 @@ import { Box, Grid, Typography } from '@mui/material';
 import { OfferCardProps } from './OfferCard.types';
 import '@fontsource/montserrat';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function OfferCard(prop: OfferCardProps) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const { avgBid, bids, description, id, image, title } = prop;
   console.log(image);
@@ -56,7 +58,7 @@ export function OfferCard(prop: OfferCardProps) {
                   lineHeight={'24px'}
                   textAlign={'center'}
                 >
-                  No image
+                  {t('offerListPage.noImage')}
                 </Typography>
               </Box>
             )}
@@ -116,7 +118,7 @@ export function OfferCard(prop: OfferCardProps) {
             fontWeight={'bold'}
             lineHeight={'24px'}
           >
-            Avg. Bid: {avgBid}$
+            {t('offerListPage.avgBid')}: {avgBid}$
           </Typography>
           <Typography
             fontFamily='Montserrat'
@@ -124,7 +126,7 @@ export function OfferCard(prop: OfferCardProps) {
             fontWeight={'500'}
             lineHeight={'24px'}
           >
-            {bids} bids
+            {bids} {t('offerListPage.bids')}
           </Typography>
         </Grid>
       </Grid>

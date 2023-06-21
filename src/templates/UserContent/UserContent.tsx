@@ -40,10 +40,10 @@ export function UserContent(props: UserDTO) {
             component={VerifiedUserIcon}
             style={{ verticalAlign: 'middle', marginRight: '8px' }}
           />
-          {'CRAFT-BID verified user'}{' '}
+          {t('userPage.verifiedUser')}{' '}
         </>
       ) : (
-        'Not verified'
+        t('userPage.notVerifiedUser')
       ),
     },
     {
@@ -58,14 +58,14 @@ export function UserContent(props: UserDTO) {
             {'/5'}
           </>
         ) : (
-          `No rating available`
+          t('userPage.noRating')
         ),
     },
     {
-      label: `Phone Number: ${phoneNumber || 'Not provided'}`,
+      label: `${t('userPage.phoneNumber')}: ${phoneNumber || t('userPage.notProvided')}`,
     },
     {
-      label: `Email: ${email}`,
+      label: `${t('userPage.email')}: ${email}`,
     },
   ];
   const date = new Date(joined);
@@ -75,13 +75,19 @@ export function UserContent(props: UserDTO) {
 
   const stats = [
     {
-      label: `${isOwner ? 'You have' : `${name} has`} joined in ${month}/${fullYear}`,
+      label: `${isOwner ? t('userPage.statStart') : `${name} ${t('userPage.statStart1')}`} ${
+        isOwner ? t('userPage.joinedOwner') : t('userPage.joinedNotOwner')
+      } ${month}/${fullYear}`,
     },
     {
-      label: `${isOwner ? 'You have' : `${name} has`} worked in ${workedIn} jobs`,
+      label: `${isOwner ? t('userPage.statStart') : `${name} ${t('userPage.statStart1')}`} ${
+        isOwner ? t('userPage.workedInOwner') : t('userPage.workedInNotOwner')
+      } ${workedIn} ${t('userPage.jobs')}`,
     },
     {
-      label: `${isOwner ? 'You have' : `${name} has`} an average rating of ${averageRating}`,
+      label: `${isOwner ? t('userPage.statStart') : `${name} ${t('userPage.statStart1')}`} ${
+        isOwner ? t('userPage.avgRatingOwner') : t('userPage.avgRatingNotOwner')
+      } ${averageRating}`,
     },
   ];
 
@@ -107,7 +113,7 @@ export function UserContent(props: UserDTO) {
         fontWeight={300}
         textAlign={'center'}
       >
-        {isOwner ? 'Welcome to your profile!' : `${name}'s profile`}
+        {isOwner ? t('userPage.isOwnerWelcome') : `${t('userPage.isNotOwnerWelcomePostfix')} ${name}${t('userPage.isNotOwnerWelcomePostfix')}}`}
       </Typography>
       <Grid
         mobile={12}
@@ -183,7 +189,7 @@ export function UserContent(props: UserDTO) {
               fontStyle={'normal'}
               fontWeight={400}
             >
-              Name: {name ? name : 'Not provided.'}
+              {t('userPage.name')}: {name ? name : t('userPage.notProvided')}
             </Typography>
             <Typography
               fontFamily={'Montserrat'}
@@ -191,7 +197,7 @@ export function UserContent(props: UserDTO) {
               fontStyle={'normal'}
               fontWeight={400}
             >
-              Surname: {surname ? surname : 'Not provided.'}
+              {t('userPage.surname')}: {surname ? surname : t('userPage.notProvided')}
             </Typography>
             <Typography
               fontFamily={'Montserrat'}
@@ -199,7 +205,7 @@ export function UserContent(props: UserDTO) {
               fontStyle={'normal'}
               fontWeight={400}
             >
-              Country: {country ? country : 'Not provided.'}
+              {t('userPage.country')}: {country ? country : t('userPage.notProvided')}
             </Typography>
             <Typography
               fontFamily={'Montserrat'}
@@ -207,7 +213,7 @@ export function UserContent(props: UserDTO) {
               fontStyle={'normal'}
               fontWeight={400}
             >
-              City: {city ? city : 'Not provided.'}
+              {t('userPage.city')}: {city ? city : t('userPage.notProvided')}
             </Typography>
           </Grid>
         </Grid>
@@ -227,7 +233,7 @@ export function UserContent(props: UserDTO) {
           fontWeight={400}
           textAlign={'center'}
         >
-          About {isOwner ? 'you' : `me`}
+          {t('userPage.about')} {isOwner ? t('userPage.me') : t('userPage.them')}
         </Typography>
         <Typography
           fontFamily={'Montserrat'}
@@ -238,9 +244,8 @@ export function UserContent(props: UserDTO) {
         >
           {aboutMe
             ? aboutMe
-            : `Unfortunately, ${isOwner ? 'you have' : `${name} has`} provided no description about ${
-                isOwner ? `your` : `their`
-              } past activities or skills.`}
+            : ` ${t('userPage.unfortunately')}, 
+            ${isOwner ? t('userPage.unfortunatelyOwner') : t('userPage.unfortunatelyNotOwner')} ${t('userPage.unfortunatelyNoOwner')} `}
         </Typography>
       </Grid>
       <Grid
@@ -257,7 +262,7 @@ export function UserContent(props: UserDTO) {
           fontWeight={400}
           textAlign={'center'}
         >
-          Statistics
+          {t('userPage.statistics')}
         </Typography>
         <Grid
           item

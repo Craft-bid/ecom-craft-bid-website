@@ -1,10 +1,24 @@
 import { Card, Grid, Typography } from '@mui/material';
 import { OfferCard } from '../../components/OfferCard/OfferCard';
 import { OfferCollectionProps } from './OfferCollection.types';
+import { Pagination } from '@mui/material';
+import { ChangeEvent } from 'react';
+import { FilterParams } from '../OfferListPageContent/FilterParams.types';
 
 export function OfferCollection(props: OfferCollectionProps) {
-  const { offerCardProps, bgColor, title, isCardVariant } = props;
-
+  const { offerCardProps, bgColor, title, isCardVariant, pages, currentPage, setFilter } = props;
+  const handleChange = (event: ChangeEvent<unknown>, value: number) => {
+    console.log(value);
+    setFilter((prev: FilterParams) => {
+      return {
+        ...prev,
+        pageable: {
+          ...prev.pageable,
+          page: value,
+        },
+      };
+    });
+  };
   if (isCardVariant) {
     return (
       <Card sx={{ width: 1080, height: 'auto', backgroundColor: bgColor, paddingBottom: 8 }}>
@@ -31,6 +45,11 @@ export function OfferCollection(props: OfferCollectionProps) {
             ></OfferCard>
           );
         })}
+        <Pagination
+          page={currentPage}
+          count={pages}
+          onChange={handleChange}
+        />
       </Card>
     );
   } else {

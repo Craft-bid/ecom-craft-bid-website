@@ -1,3 +1,8 @@
+export interface FilterParamPageable {
+  page: number;
+  size: number;
+}
+
 export interface FilterParams {
   title: string;
   advetiserSurname: string;
@@ -5,10 +10,7 @@ export interface FilterParams {
   tags: string[];
   minPrice: number;
   maxPrice: number;
-  pageable: {
-    pageNumber: number;
-    pageSize: number;
-  };
+  pageable: FilterParamPageable;
 }
 export interface FilterParamsProps {
   handleFilterChange: (filter: FilterParams) => void;

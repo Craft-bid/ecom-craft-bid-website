@@ -8,7 +8,6 @@ export const addOffer = async (listing: AddOfferDTO): Promise<OfferDTO> => {
   return await axios
     .post<OfferDTO>('http://localhost:8080/api/v1/private/listings', listing)
     .then((response) => {
-      console.log(response.data);
       return response.data;
     })
     .catch((error: AxiosError) => {
@@ -24,14 +23,12 @@ export const addOffer = async (listing: AddOfferDTO): Promise<OfferDTO> => {
 
 export const updateOffer = async (listingid: number, listing: UpdateOfferDTO): Promise<OfferDTO> => {
   return await axios.patch<OfferDTO>(`http://localhost:8080/api/v1/private/listings/${listingid}`, listing).then((response) => {
-    console.log(response.data);
     return response.data;
   });
 };
 
 export const addTags = async (listingid: number, tags: Tag[]): Promise<OfferDTO> => {
   return await axios.post<OfferDTO>(`http://localhost:8080/api/v1/private/${listingid}/tags`, tags).then((response) => {
-    console.log(response.data);
     return response.data;
   });
 };
@@ -45,13 +42,11 @@ export const addPhoto = async (listingid: number, photo: File): Promise<OfferDTO
       },
     })
     .then((response) => {
-      console.log(response.data);
       return response.data;
     });
 };
 
 export const addBid = async (bid: CreateBidDTO) => {
   await axios.post('http://localhost:8080/api/v1/private/bids', bid).then((response) => {
-    console.log(response.data);
   });
 };

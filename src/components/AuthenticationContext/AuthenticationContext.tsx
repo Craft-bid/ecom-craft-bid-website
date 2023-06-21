@@ -11,12 +11,12 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
   const [isAuthenticated, setAuthenticated] = useState(false);
   const [name, setName] = useState<string | null>(null);
   const [id, setId] = useState<number | null>(1);
+  const [role, setRole] = useState<string | null>(null);
 
   useEffect(() => {
     const token = localStorage.getItem('token');
     const decodedToken = token ? jwtDecode<DecodedToken>(token) : null;
 
-    console.log(decodedToken);
     if (token && decodedToken) {
       // Check if token is expired
       const currentTimestamp = Date.now() / 1000; // Current timestamp in seconds
@@ -24,6 +24,7 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
         // User is authenticated
         setAuthenticated(true);
         setName(decodedToken.email);
+        setRole(decodedToken.role);
         //TODO: set actual ID from a different endpoint/or from decoded token
         getId(token)
           .then((newid) => {
@@ -46,6 +47,8 @@ export function AuthenticationContextProvider({ children }: AuthenticationContex
     setName,
     id,
     setId,
+    role,
+    setRole,
   };
 
   return <AuthenticationContext.Provider value={value}>{children}</AuthenticationContext.Provider>;

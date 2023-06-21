@@ -100,7 +100,6 @@ export function SubmitOfferForm() {
                 if (file) {
                   addPhoto(ret.id, file)
                     .then((ret4) => {
-                      console.log(ret4);
                       navigate(`/offer/${ret4.id}`);
                     })
                     .catch((error) => {

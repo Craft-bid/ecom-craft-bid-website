@@ -32,7 +32,6 @@ export function UserPage() {
     await axios
       .get<UserDTO>(`http://localhost:8080/api/v1/public/users/${urlId}`)
       .then((res) => {
-        console.log(res.data);
         return res.data;
       })
       .then((data) => {

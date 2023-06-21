@@ -8,7 +8,6 @@ export function OfferCard(prop: OfferCardProps) {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { avgBid, bids, description, id, image, title } = prop;
-  console.log(image);
   return (
     <Box
       borderBottom={1}

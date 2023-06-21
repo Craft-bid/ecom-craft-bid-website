@@ -21,7 +21,7 @@ export function Header(props: HeaderProps) {
     throw new Error('AuthenticationContext is null');
   }
 
-  const { isAuthenticated, name, id } = context;
+  const { isAuthenticated, name, id, role } = context;
 
   const onSignOutClick = () => {
     localStorage.removeItem('token');
@@ -37,6 +37,12 @@ export function Header(props: HeaderProps) {
       throw new Error('User ID is null');
     }
     navigate(`/user/${id}`);
+  };
+  const onAdminClick = () => {
+    if (!id) {
+      throw new Error('User ID is null');
+    }
+    navigate(`/admin`);
   };
   return (
     <AppBar position='sticky'>
@@ -90,6 +96,24 @@ export function Header(props: HeaderProps) {
                   {t('header.switchLanguage')}
                 </Button>
               </Grid>
+              {role === 'ADMIN' ? (
+                <Grid
+                  item
+                  minWidth={100}
+                  mobile={1}
+                >
+                  <Button
+                    sx={{
+                      minWidth: 100,
+                    }}
+                    variant='text'
+                    color='inherit'
+                    onClick={onAdminClick}
+                  >
+                    ADMIN
+                  </Button>
+                </Grid>
+              ) : null}
               <Grid
                 item
                 minWidth={100}

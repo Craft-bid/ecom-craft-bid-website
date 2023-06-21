@@ -5,7 +5,6 @@ export const getTags = async () => {
   return await axios
     .get<Tag[]>('http://localhost:8080/api/v1/public/tags')
     .then((response) => {
-      console.log(response);
       return response.data;
     })
     .catch(() => {

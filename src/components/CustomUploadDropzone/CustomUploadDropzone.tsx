@@ -11,7 +11,6 @@ export function CustomUploadDropzone(props: CustomUploadDropzoneProps) {
   const onDrop = useCallback(
     (files: File[]) => {
       // Do something with the files
-      console.log(files);
 
       if (files.length > 0) {
         onChange(files[0]);

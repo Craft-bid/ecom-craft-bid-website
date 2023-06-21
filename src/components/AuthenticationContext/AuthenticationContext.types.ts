@@ -11,4 +11,6 @@ export interface AuthenticationContextProps {
   setName: Dispatch<SetStateAction<string | null>>;
   id: number | null;
   setId: Dispatch<SetStateAction<number | null>>;
+  role: string | null;
+  setRole: Dispatch<SetStateAction<string | null>>;
 }

@@ -63,8 +63,8 @@ export function FilterContainer({ ...props }: FilterParamsProps) {
           minPrice: Number(values.min),
           maxPrice: Number(values.max),
           pageable: {
-            pageNumber: filter.pageable.pageNumber,
-            pageSize: filter.pageable.pageSize,
+            page: filter.pageable.page,
+            size: filter.pageable.size,
           },
         };
         handleFilterChange(newFilter);

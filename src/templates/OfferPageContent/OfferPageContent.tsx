@@ -43,8 +43,6 @@ export function OfferPageContent() {
 
   const { id } = userContext;
   const userId = id ? id : -1;
-  console.log(`id${userId}`);
-  console.log(`offer${offerOwnerId}`);
   const isOwner = id === offerOwnerId;
   const offerContainsUserBid = offerBids.some((bid) => {
     return bid.bidderId === userId;
@@ -65,7 +63,6 @@ export function OfferPageContent() {
         return response.data;
       })
       .then((data: OfferDTO) => {
-        console.log(data);
         setOfferOwnerId(data.advertiserId);
         setOfferStatus(data.ended ? 'Closed' : 'Open');
         setOfferTitle(data.title);
@@ -77,15 +74,12 @@ export function OfferPageContent() {
         axios
           .get<UserDTO>(`http://localhost:8080/api/v1/public/users/${data.advertiserId}`)
           .then((response) => {
-            console.log(response.data);
             return response.data;
           })
           .then((neededUser: UserDTO) => {
             setOfferOwnerName(neededUser.name);
             setOfferOwnerSurname(neededUser.surname);
             setOfferOwnerId(neededUser.id);
-            console.log(neededUser.stars);
-            console.log(Number(neededUser.stars));
             setOfferOwnerRating(Number(neededUser.stars));
             setOfferOwnerStatus(neededUser.verified ? 'Verified' : 'Not verified');
             //If user is logged in, check if he is the owner of the offer

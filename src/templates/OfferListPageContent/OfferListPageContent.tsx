@@ -4,13 +4,14 @@ import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { OfferCollection } from '../OfferCollection/OfferCollection';
 import { useEffect, useState } from 'react';
-import { FilterParams, FilterParamsProps } from './FilterParams.types';
+import { FilterParamPageable, FilterParams, FilterParamsProps } from './FilterParams.types';
 import { SearchBarProps } from '../../components/SearchBar/SearchBar.types';
 import axios from 'axios';
 import { OfferDTO } from '../../common/types/DTOs.types';
 import { useNavigate } from 'react-router-dom';
 import { QueryParams } from '../../common/types/Filter.types';
 import { useTranslation } from 'react-i18next';
+import { OfferCollectionProps } from '../OfferCollection/OfferCollection.types';
 
 export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const { t } = useTranslation();
@@ -23,15 +24,18 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const fetchUrl = 'http://localhost:8080/api/v1/public/listings/search';
 
   const [offerCardProps, setOfferCardProps] = useState<OfferCardProps[]>([]);
+  const [totalPages, setTotalPages] = useState(1);
 
   const addQueryParams = (url: string, params: QueryParams): string => {
     const urlParams = new URLSearchParams();
-
+    //TODO FIX THIS
     for (const [key, value] of Object.entries(params)) {
       if (value !== undefined && value !== '') {
         if (typeof value === 'object' && !Array.isArray(value)) {
           for (const [subKey, subValue] of Object.entries(value)) {
+            //TODO FIX THIS
             if (subValue !== undefined && subValue.toString() !== '') {
+              //TODO FIX THIS
               urlParams.append(subKey, subValue.toString());
             }
           }
@@ -45,22 +49,32 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   };
 
   const getListing = async (params: FilterParams) => {
+    const nPageable: FilterParamPageable = {
+      page: params.pageable.page,
+      size: params.pageable.size,
+    };
     const toBackend: QueryParams = {
       title: params.title,
       tagNames: params.tags,
+      pageable: nPageable,
       ...(params.minPrice !== 0 && { minPrice: params.minPrice }),
       ...(params.maxPrice !== 0 && { maxPrice: params.maxPrice }),
     };
 
-    console.log('toback');
+    const pageableRef = toBackend.pageable as FilterParamPageable;
+    pageableRef.page -= 1;
+
     console.log(toBackend);
-    console.log(addQueryParams(fetchUrl, toBackend));
+    //TODO FIX THIS
     await axios
+    //TODO FIX THIS
       .get<OfferDTO[]>(addQueryParams(fetchUrl, toBackend))
+      //TODO FIX THIS
       .then((res) => {
-        console.log(res.data);
-        return res.data;
+        setTotalPages(res.data.totalPages);
+        return res.data.content;
       })
+      //TODO FIX THIS
       .then((data) => {
         const newData: OfferCardProps[] = data.map((offer: OfferDTO) => {
           return {
@@ -86,7 +100,6 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
     const searchValue = queryParams.get('search') || '';
 
     filter.title = searchValue;
-    console.log(filter);
     void getListing(filter);
   }, [filter]);
 
@@ -102,8 +115,16 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   const searchBarProps: SearchBarProps = {
     handleSearch,
   };
+  const offerCollectionProps: OfferCollectionProps = {
+    offerCardProps: offerCardProps,
+    bgColor: '#F5FDFD',
+    isCardVariant: true,
+    title: t('offerListPage.offer'),
+    pages: totalPages,
+    currentPage: filter.pageable.page,
+    setFilter: handleFilterChange,
+  };
 
-  const offerCollectionProps = { offerCardProps: offerCardProps, bgColor: '#F5FDFD', isCardVariant: true, title: t('offerListPage.offers') };
   return (
     <Grid
       container

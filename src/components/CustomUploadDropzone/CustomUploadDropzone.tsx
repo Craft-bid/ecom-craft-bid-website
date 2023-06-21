@@ -4,8 +4,10 @@ import { CustomUploadDropzoneProps } from './CustomUploadDropzone.types';
 import { Typography } from '@mui/material';
 import { useCallback } from 'react';
 import { useDropzone } from 'react-dropzone';
+import { useTranslation } from 'react-i18next';
 
 export function CustomUploadDropzone(props: CustomUploadDropzoneProps) {
+  const { t } = useTranslation();
   const { value, onChange } = props;
 
   const onDrop = useCallback(
@@ -40,11 +42,16 @@ export function CustomUploadDropzone(props: CustomUploadDropzoneProps) {
       style={dropzoneStyle}
     >
       <input {...getInputProps()} />
-      <Typography>Drag and drop some files here, or click to select files</Typography>
-      <Typography fontSize={10}>Only *.jpeg and *.png images will be accepted</Typography>
+      <Typography>{t('misc.dropzonePrompt')}</Typography>
+      <Typography fontSize={10}>{t('misc.dropzoneAcceptedFiles')}</Typography>
       {/* Display the current value or a placeholder */}
-      {value && <Typography fontSize={14}> Selected file: {value.name} </Typography>}
-      {!value && <Typography fontSize={14}> No file selected</Typography>}
+      {value && (
+        <Typography fontSize={14}>
+          {' '}
+          {t('misc.dropzoneSelectedFile')}: {value.name}{' '}
+        </Typography>
+      )}
+      {!value && <Typography fontSize={14}> {t('misc.dropzoneNoSelectedFile')}</Typography>}
     </div>
   );
 }

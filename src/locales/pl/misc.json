@@ -1,0 +1,10 @@
+{
+    "successfullyRegistered": "Successfully registered!",
+    "successfullyLoggedIn": "Successfully logged in!",
+    "loginFailed": "Login failed!",
+    "registrationFailed": "Registration failed!",
+    "dropzonePrompt": "Drag and drop some files here, or click to select files",
+    "dropzoneAcceptedFiles": "Only *.jpeg and *.png images will be accepted",
+    "dropzoneSelectedFile": "Selected file",
+    "dropzoneNoSelectedFile": "No file selected"
+}

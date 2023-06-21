@@ -1,0 +1,10 @@
+{
+    "successfullyRegistered": "Rejestrowanie zakończone powodzeniem",
+    "successfullyLoggedIn": "Logowanie zakończone powodzeniem",
+    "loginFailed": "Logowanie nie powiodło się",
+    "registrationFailed": "Rejestracja nie powiodła się",
+    "dropzonePrompt": "Przeciągnij plik tutaj lub kliknij, aby wybrać",
+    "dropzoneAcceptedFiles": "Tylko pliki *.jpeg i *.png są akceptowane",
+    "dropzoneSelectedFile": "Wybrany plik",
+    "dropzoneNoSelectedFile": "Nie wybrano pliku"
+}

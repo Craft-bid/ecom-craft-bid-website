@@ -43,11 +43,11 @@ export function RegisterForm(props: FormProps) {
         registerUser(dto)
           .then(() => {
             setOpenStatusModal(true);
-            setStatusModalMessage('Successfully registered!.');
+            setStatusModalMessage(t('misc.successfullyRegistered'));
           })
           .catch(() => {
             setOpenStatusModal(true);
-            setStatusModalMessage('Error. Please try again later.');
+            setStatusModalMessage(t('misc.registrationFailed'));
           })
           .finally(() => {
             setSubmitting(false);

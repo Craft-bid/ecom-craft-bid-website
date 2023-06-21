@@ -12,8 +12,10 @@ import { Popup } from '../components/Popup/Popup';
 import { HeaderProps } from '../templates/Header/Header.types';
 import { FormProps } from '../common/types/FormProps.types';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export function CreateOfferPage() {
+  const { t } = useTranslation();
   const { handleClosePopup, handleSignUpClick, handleSignInClick, isRegisterForm, showPopup } = usePopup();
   const [openStatusModal, setOpenStatusModal] = useState(false);
   const [statusModalMessage, setStatusModalMessage] = useState('');
@@ -25,7 +27,7 @@ export function CreateOfferPage() {
   const heroSectionProps: HeroSectionProps = {
     image: heroImage,
     imageHeight: 400,
-    title: 'Submit your offer. Our team is ready to review your offer - submit it now and take the first step towards fulfilling your request.',
+    title: t('createOfferPage.heroPrompt'),
     hasSearchBar: false,
     isMiddleVariant: true,
   };

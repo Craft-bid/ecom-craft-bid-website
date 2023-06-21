@@ -11,8 +11,11 @@ import { AddOfferDTO, UpdateOfferDTO } from '../../common/types/DTOs.types';
 import { getTags } from '../../services/tagService';
 
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function SubmitOfferForm() {
+  const { t } = useTranslation();
+
   const [date, setDate] = useState<Date | null>(new Date());
   const [selectedCategories, setSelectedCategories] = useState<Tag[]>([]);
   const [title, setTitle] = useState<string>('');
@@ -50,16 +53,16 @@ export function SubmitOfferForm() {
 
     // Check if all required fields are filled
     if (!title.trim()) {
-      errors.title = 'Title is required';
+      errors.title = t('createOfferPage.errorTitle');
     }
     if (!description.trim()) {
-      errors.description = 'Description is required';
+      errors.description = t('createOfferPage.errorDescription');
     }
     if (selectedCategories.length === 0) {
-      errors.categories = 'At least one category must be selected';
+      errors.categories = t('createOfferPage.errorCategories');
     }
     if (minBudget >= maxBudget) {
-      errors.budget = 'Min budget must be less than max budget';
+      errors.budget = t('createOfferPage.errorBudget');
     }
     if (!date) {
       throw new Error('Date is null');
@@ -139,9 +142,9 @@ export function SubmitOfferForm() {
             textAlign={'center'}
             marginBottom={4}
           >
-            Submit your offer!
+            {t('createOfferPage.formTitle')}
           </Typography>
-          <Typography>Type in title</Typography>
+          <Typography>{t('createOfferPage.formTitlePrompt')}</Typography>
           <TextField
             value={title}
             onChange={(event) => {
@@ -149,19 +152,19 @@ export function SubmitOfferForm() {
             }}
             sx={{ width: '100%' }}
           ></TextField>
-          <Typography>Description</Typography>
+          <Typography>{t('createOfferPage.formDescription')}</Typography>
           <TextField
             multiline
             sx={{ width: '100%' }}
             rows={6}
             variant='outlined'
-            label='Description'
+            label={t('createOfferPage.formDescription')}
             value={description}
             onChange={(event) => {
               setDescription(event.target.value);
             }}
           ></TextField>
-          <Typography>Choose categories</Typography>
+          <Typography>{t('createOfferPage.formCategories')}</Typography>
           <Autocomplete
             multiple
             id='size-small-filled-multi'
@@ -192,13 +195,13 @@ export function SubmitOfferForm() {
                 <TextField
                   {...params}
                   variant='filled'
-                  label='Categories'
-                  placeholder='Enter categories'
+                  label={t('createOfferPage.formCategoriesPrompt')}
+                  placeholder={t('createOfferPage.formCategoriesPrompt')}
                 />
               );
             }}
           />
-          <Typography>Select your budget</Typography>
+          <Typography>{t('createOfferPage.formBudget')}</Typography>
           <Grid
             container
             width={'70%'}
@@ -223,15 +226,15 @@ export function SubmitOfferForm() {
               }}
             ></TextField>
           </Grid>
-          <Typography>Upload your files</Typography>
+          <Typography>{t('createOfferPage.formFiles')}</Typography>
           <CustomUploadDropzone
             value={file}
             onChange={setFile}
           />
-          <Typography>Choose deadline</Typography>
+          <Typography>{t('createOfferPage.formDeadline')}</Typography>
 
           <DatePicker
-            label='Select Date'
+            label={t('createOfferPage.formDeadlinePlaceholder')}
             value={date}
             onChange={(newValue) => {
               return setDate(newValue);
@@ -241,20 +244,30 @@ export function SubmitOfferForm() {
             fontSize={32}
             textAlign={'center'}
           >
-            Summary
+            {t('createOfferPage.formSummary')}
           </Typography>
-          <Typography>Title: {title}</Typography>
-          <Typography>Description: {description}</Typography>
           <Typography>
-            Categories:{' '}
+            {t('createOfferPage.title')}: {title}
+          </Typography>
+          <Typography>
+            {t('createOfferPage.description')}: {description}
+          </Typography>
+          <Typography>
+            {t('createOfferPage.categories')}:{' '}
             {selectedCategories.map((category) => {
               return category.name;
             })}
           </Typography>
-          <Typography>Min budget: {minBudget}</Typography>
-          <Typography>Max budget: {maxBudget}</Typography>
-          <Typography>Files:</Typography>
-          <Typography>Deadline: {String(date)}</Typography>
+          <Typography>
+            {t('createOfferPage.minBudget')}: {minBudget}
+          </Typography>
+          <Typography>
+            {t('createOfferPage.maxBudget')}: {maxBudget}
+          </Typography>
+          <Typography>{t('createOfferPage.files')}:</Typography>
+          <Typography>
+            {t('createOfferPage.deadline')}: {String(date)}
+          </Typography>
 
           {/* Display form errors */}
           {Object.keys(formErrors).map((fieldName) => {
@@ -272,16 +285,16 @@ export function SubmitOfferForm() {
           {isFormValid && (
             <div>
               {/* ... form summary ... */}
-              <Typography>Summary:</Typography>
+              <Typography>{t('createOfferPage.summary')}:</Typography>
               {/* ... display form summary data ... */}
 
               {/* Submit button */}
-              <Button type='submit'>Submit</Button>
+              <Button type='submit'>{t('createOfferPage.submit')}</Button>
             </div>
           )}
 
           {/* Render submit button if form is not valid */}
-          {!isFormValid && <Button type='submit'>Validate and Submit</Button>}
+          {!isFormValid && <Button type='submit'>{t('createOfferPage.validateAndSubmit')}</Button>}
         </Grid>
       </form>
     </Card>

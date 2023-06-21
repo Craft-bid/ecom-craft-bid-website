@@ -4,7 +4,7 @@ import { OfferCardProps } from '../../components/OfferCard/OfferCard.types';
 import { SearchBar } from '../../components/SearchBar/SearchBar';
 import { OfferCollection } from '../OfferCollection/OfferCollection';
 import { useEffect, useState } from 'react';
-import { FilterParams, FilterParamsProps } from './FilterParams.types';
+import { FilterParamPageable, FilterParams, FilterParamsProps } from './FilterParams.types';
 import { SearchBarProps } from '../../components/SearchBar/SearchBar.types';
 import axios from 'axios';
 import { OfferDTO } from '../../common/types/DTOs.types';
@@ -28,12 +28,14 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
 
   const addQueryParams = (url: string, params: QueryParams): string => {
     const urlParams = new URLSearchParams();
-
+    //TODO FIX THIS
     for (const [key, value] of Object.entries(params)) {
       if (value !== undefined && value !== '') {
         if (typeof value === 'object' && !Array.isArray(value)) {
           for (const [subKey, subValue] of Object.entries(value)) {
+            //TODO FIX THIS
             if (subValue !== undefined && subValue.toString() !== '') {
+              //TODO FIX THIS
               urlParams.append(subKey, subValue.toString());
             }
           }
@@ -47,7 +49,7 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
   };
 
   const getListing = async (params: FilterParams) => {
-    const nPageable = {
+    const nPageable: FilterParamPageable = {
       page: params.pageable.page,
       size: params.pageable.size,
     };
@@ -59,14 +61,20 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
       ...(params.maxPrice !== 0 && { maxPrice: params.maxPrice }),
     };
 
-    toBackend.pageable.page = toBackend.pageable.page - 1;
+    const pageableRef = toBackend.pageable as FilterParamPageable;
+    pageableRef.page -= 1;
+
     console.log(toBackend);
+    //TODO FIX THIS
     await axios
+    //TODO FIX THIS
       .get<OfferDTO[]>(addQueryParams(fetchUrl, toBackend))
+      //TODO FIX THIS
       .then((res) => {
         setTotalPages(res.data.totalPages);
         return res.data.content;
       })
+      //TODO FIX THIS
       .then((data) => {
         const newData: OfferCardProps[] = data.map((offer: OfferDTO) => {
           return {

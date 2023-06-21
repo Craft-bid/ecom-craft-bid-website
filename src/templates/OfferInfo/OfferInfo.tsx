@@ -1,7 +1,9 @@
 import { Divider, Grid, Typography, useMediaQuery, useTheme, Rating } from '@mui/material';
 import { OfferInfoProps } from './OfferInfo.types';
+import { useTranslation } from 'react-i18next';
 
 export function OfferInfo(props: OfferInfoProps) {
+  const { t } = useTranslation();
   const { offerDescription, offerImageUrls, offerOwnerName, offerOwnerRating, offerOwnerStatus, offerOwnerSurname, offerCategories } = props;
   const theme = useTheme();
   const isTabletOrMobile = useMediaQuery(theme.breakpoints.down('desktop'));
@@ -21,7 +23,7 @@ export function OfferInfo(props: OfferInfoProps) {
           marginRight={isTabletOrMobile ? 0 : '5%'}
         >
           <Typography sx={{ fontFamily: 'Libre Baskerville', fontWeight: 'Regular', fontSize: '24px', letterSpacing: '0.15px' }}>
-            Job description:
+            {t('offerPage.jobDescription')}:
           </Typography>
           <Typography
             marginTop={1}
@@ -66,8 +68,7 @@ export function OfferInfo(props: OfferInfoProps) {
             sx={{ letterSpacing: '0.15px' }}
             marginRight={1}
           >
-            {' '}
-            Categories:{' '}
+            {t('offerPage.categories')}:
           </Typography>
           <Typography
             fontFamily={'Montserrat'}
@@ -100,7 +101,7 @@ export function OfferInfo(props: OfferInfoProps) {
               sx={{ letterSpacing: '0.15px' }}
               marginRight={1}
             >
-              About the client:
+              {t('offerPage.aboutTheClient')}:
             </Typography>
           </Grid>
 

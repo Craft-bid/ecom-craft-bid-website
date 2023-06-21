@@ -1,0 +1,19 @@
+{
+    "acceptButton"    : "Accept",
+    "bidListHeader" : "Listing bids.",
+    "jobDescription" : "Job Description",
+    "categories": "Categories",
+    "aboutTheClient": "About the client",
+    "titleError": "Title is required",
+    "descriptionError": "Description is required",
+    "moneyError": "Money field is required",
+    "daysError": "Days field is required",
+    "formUpdateListing": "Update listing",
+    "description": "Description",
+    "title": "Title",
+    "money": "Money",
+    "days": "Days",
+    "submit": "Submit",
+    "endedStatus": "Ended",
+    "bidTitle": "Make a bid"
+}

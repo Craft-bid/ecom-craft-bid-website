@@ -1,0 +1,19 @@
+{
+    "acceptButton"    : "Akceptuj",
+    "bidListHeader" : "Lista ofert",
+    "jobDescription" : "Opis zlecenia",
+    "categories": "Kategorie",
+    "aboutTheClient": "O kliencie",
+    "titleError": "Tytuł jest wymagany",
+    "descriptionError": "Opis jest wymagany",
+    "moneyError": "Kwota jest wymagana",
+    "daysError": "Liczba dni jest wymagana",
+    "formUpdateListing": "Aktualizuj zlecenie",
+    "description": "Opis",
+    "title": "Tytuł",
+    "money": "Kwota",
+    "days": "Liczba dni",
+    "submit": "Zatwierdź",
+    "endedStatus": "Zakończone",
+    "bidTitle": "Złóż ofertę"
+}

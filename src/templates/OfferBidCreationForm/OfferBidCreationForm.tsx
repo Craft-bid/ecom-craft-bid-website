@@ -5,8 +5,10 @@ import { Formik, Field, Form, FormikErrors } from 'formik';
 import { addBid } from '../../services/offerService';
 import { OfferBidProps } from './OfferBidCreationForm.types';
 import { CreateBidDTO } from '../../common/types/DTOs.types';
+import { useTranslation } from 'react-i18next';
 
 export function OfferBidCreationForm({ ...props }: OfferBidProps) {
+  const { t } = useTranslation();
   const handleSubmit = (values: { description: string; money: string; days: string }) => {
     const newBid: CreateBidDTO = {
       description: values.description,
@@ -38,15 +40,15 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
     }> = {};
 
     if (!values.description) {
-      errors.description = 'Description is required';
+      errors.description = String(t('offerPage.descriptionError'));
     }
 
     if (!values.money) {
-      errors.money = 'Money field is required';
+      errors.money = String(t('offerPage.moneyError'));
     }
 
     if (!values.days) {
-      errors.days = 'Days to do task field is required';
+      errors.days = String(t('offerPage.daysError'));
     }
 
     return errors;
@@ -59,7 +61,7 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <Typography fontSize={32}>Make a bid</Typography>
+        <Typography fontSize={32}>{t('offerPage.bidTitle')}</Typography>
       </AccordionSummary>
       {/*Create form with a */}
       <AccordionDetails>
@@ -83,7 +85,7 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
                     <Field
                       as={TextField}
                       name='description'
-                      label='Description'
+                      label={t('offerPage.description')}
                       fullWidth
                       required
                       error={!!errors.description}
@@ -99,7 +101,7 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
                       as={TextField}
                       type='number'
                       name='money'
-                      label='Money'
+                      label={t('offerPage.money')}
                       fullWidth
                       required
                       error={!!errors.money}
@@ -115,7 +117,7 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
                       as={TextField}
                       type='number'
                       name='days'
-                      label='Days to do task'
+                      label={t('offerPage.days')}
                       fullWidth
                       required
                       error={!!errors.days}
@@ -131,7 +133,7 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
                       variant='contained'
                       color='primary'
                     >
-                      Submit
+                      {t('offerPage.submit')}
                     </Button>
                   </Grid>
                 </Grid>

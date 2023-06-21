@@ -113,7 +113,7 @@ export function LoginForm(props: FormProps) {
                 >
                   <PasswordInput
                     name='password'
-                    label={String(t('loginForm.button'))}
+                    label={String(t('loginForm.password'))}
                   />
                 </Grid>
                 <Grid

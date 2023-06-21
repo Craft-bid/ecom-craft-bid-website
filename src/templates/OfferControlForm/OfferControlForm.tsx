@@ -3,8 +3,9 @@ import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Form, Formik, Field, FormikErrors } from 'formik';
 import { updateOffer } from '../../services/offerService';
 import { UpdateOfferDTO } from '../../common/types/DTOs.types';
-
+import { useTranslation } from 'react-i18next';
 export function OfferControlForm(props: { listingid: number }) {
+  const { t } = useTranslation();
   const handleSubmit = async (values: { title: string; description: string; ended: boolean }) => {
     const update: UpdateOfferDTO = {
       title: values.title,
@@ -24,11 +25,11 @@ export function OfferControlForm(props: { listingid: number }) {
     }> = {};
 
     if (!values.title) {
-      errors.title = 'Title is required';
+      errors.title = String(t('offerPage.titleError'));
     }
 
     if (!values.description) {
-      errors.description = 'Description is required';
+      errors.description = String(t('offerPage.descriptionError'));
     }
 
     return errors;
@@ -41,7 +42,7 @@ export function OfferControlForm(props: { listingid: number }) {
         aria-controls='panel1a-content'
         id='panel1a-header'
       >
-        <Typography fontSize={32}>Update Listing</Typography>
+        <Typography fontSize={32}>{t('offerPage.formUpdateListing')}</Typography>
       </AccordionSummary>
       <AccordionDetails>
         <Formik
@@ -68,7 +69,7 @@ export function OfferControlForm(props: { listingid: number }) {
                     <Field
                       as={TextField}
                       name='title'
-                      label='Title'
+                      label={t('offerPage.title')}
                       fullWidth
                       required
                       error={!!errors.title}
@@ -83,7 +84,7 @@ export function OfferControlForm(props: { listingid: number }) {
                     <Field
                       as={TextField}
                       name='description'
-                      label='Description'
+                      label={t('offerPage.description')}
                       fullWidth
                       required
                       error={!!errors.description}
@@ -99,7 +100,7 @@ export function OfferControlForm(props: { listingid: number }) {
                       name='ended'
                       as={FormControlLabel}
                       control={<Checkbox />}
-                      label='Ended Status'
+                      label={t('offerPage.endedStatus')}
                     />
                   </Grid>
                   <Grid
@@ -111,7 +112,7 @@ export function OfferControlForm(props: { listingid: number }) {
                       variant='contained'
                       color='primary'
                     >
-                      Submit
+                      {t('offerPage.submit')}
                     </Button>
                   </Grid>
                 </Grid>

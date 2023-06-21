@@ -5,8 +5,10 @@ import userImage from '../../assets/user.png';
 import { updateOffer } from '../../services/offerService';
 import { UpdateOfferDTO } from '../../common/types/DTOs.types';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function OfferBidList(props: OfferBidListProps) {
+  const { t } = useTranslation();
   const { bidList, isOwner, listingId } = props;
   const pageLength = bidList.length;
   const navigate = useNavigate();
@@ -37,7 +39,7 @@ export function OfferBidList(props: OfferBidListProps) {
         fontSize={48}
         fontWeight={300}
       >
-        Listing bids. {pageLength}/{bidList.length}
+        {t('offerPage.bidListHeader')} {pageLength}/{bidList.length}
       </Typography>
       {/* Each card needs to have an accept button, if the user browsing this is the owner of the bid*/}
       {bidList.map((bid: BidDTO) => {
@@ -128,7 +130,7 @@ export function OfferBidList(props: OfferBidListProps) {
                     return handleAccept(bid.bidderId);
                   }}
                 >
-                  Accept
+                  {t('offerPage.acceptButton')}
                 </Button>
               )}
             </Grid>

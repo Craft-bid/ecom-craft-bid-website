@@ -12,6 +12,10 @@ import * as offerListPageEN from '../locales/en/offerListPage.json';
 import * as offerListPagePL from '../locales/pl/offerListPage.json';
 import * as offerPagePL from '../locales/pl/offerPage.json';
 import * as offerPageEN from '../locales/en/offerPage.json';
+import * as userPagePL from '../locales/pl/userPage.json';
+import * as userPageEN from '../locales/en/userPage.json';
+import * as createOfferPagePL from '../locales/pl/createOfferPage.json';
+import * as createOfferPageEN from '../locales/en/createOfferPage.json';
 
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
@@ -26,6 +30,8 @@ const resources = {
       registerForm: registerFormEN,
       offerListPage: offerListPageEN,
       offerPage: offerPageEN,
+      userPage: userPageEN,
+      createOfferPage: createOfferPageEN,
     },
   },
   pl: {
@@ -37,6 +43,8 @@ const resources = {
       registerForm: registerFormPL,
       offerListPage: offerListPagePL,
       offerPage: offerPagePL,
+      userPage: userPagePL,
+      createOfferPage: createOfferPagePL,
     },
   },
 };

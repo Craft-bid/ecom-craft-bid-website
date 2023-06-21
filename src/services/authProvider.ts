@@ -3,6 +3,8 @@ import { loginUser } from '../services/authService';
 import { LoginFormDTO } from '../components/LoginForm/LoginForm.types';
 import jwtDecode from 'jwt-decode';
 import { DecodedToken } from '../common/types/JWTResponse.types';
+import { useContext } from 'react';
+import { AuthenticationContext } from '../components/AuthenticationContext/AuthenticationContext';
 
 export const authProvider: AuthProvider = {
   login: ({ username, password }) => {
@@ -20,6 +22,7 @@ export const authProvider: AuthProvider = {
       if (role !== 'ADMIN') {
         throw new Error('Unauthorized user!');
       }
+
     });
   },
   logout: () => {

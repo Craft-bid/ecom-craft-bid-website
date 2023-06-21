@@ -67,7 +67,7 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
     console.log(toBackend);
     //TODO FIX THIS
     await axios
-    //TODO FIX THIS
+      //TODO FIX THIS
       .get<OfferDTO[]>(addQueryParams(fetchUrl, toBackend))
       //TODO FIX THIS
       .then((res) => {
@@ -119,7 +119,7 @@ export function OfferListPageContent({ ...props }: FilterParamsProps) {
     offerCardProps: offerCardProps,
     bgColor: '#F5FDFD',
     isCardVariant: true,
-    title: t('offerListPage.offer'),
+    title: t('offerListPage.containerTitle'),
     pages: totalPages,
     currentPage: filter.pageable.page,
     setFilter: handleFilterChange,

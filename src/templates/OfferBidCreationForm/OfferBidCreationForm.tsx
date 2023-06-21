@@ -136,6 +136,10 @@ export function OfferBidCreationForm({ ...props }: OfferBidProps) {
                       {t('offerPage.submit')}
                     </Button>
                   </Grid>
+                  <Grid
+                    item
+                    mobile={12}
+                  ></Grid>
                 </Grid>
               </Form>
             );
